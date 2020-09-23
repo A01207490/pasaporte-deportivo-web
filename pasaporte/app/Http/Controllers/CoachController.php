@@ -16,7 +16,23 @@ class CoachController extends Controller
     {
         //
         $coaches = Coach::paginate(10);
-        return view('coaches', ["coaches" => $coaches]);
+        return view('coaches.index', ["coaches" => $coaches]);
+    }
+
+    public function search()
+    {
+        //
+        //$coaches;
+        $coaches = collect($coaches);
+
+        $selected_coach = $coaches->filter(function ($value, $key) {
+            return data_get($value, 'mark') > 34;
+        });
+
+        $selected_coach = $selected_coach->all();
+
+        dd($passedstudents);
+        //return view('coaches', ["coaches" => $coaches]);
     }
 
     /**
