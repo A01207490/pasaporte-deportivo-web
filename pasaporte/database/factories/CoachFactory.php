@@ -9,6 +9,7 @@ $factory->define(Coach::class, function (Faker $faker) {
     return [
         //
         'coach_nombre' => $faker->name,
+        'coach_nomina' => $faker->randomNumber($nbDigits = 9, $strict = true),
         'coach_correo' => $faker->unique()->safeEmail,
     ];
 });

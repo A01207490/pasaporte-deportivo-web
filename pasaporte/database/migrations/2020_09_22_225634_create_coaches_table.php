@@ -15,6 +15,7 @@ class CreateCoachesTable extends Migration
     {
         Schema::create('coaches', function (Blueprint $table) {
             $table->bigIncrements('coach_id');
+            $table->string('coach_nomina');
             $table->string('coach_nombre');
             $table->string('coach_correo');
             $table->timestamps();
