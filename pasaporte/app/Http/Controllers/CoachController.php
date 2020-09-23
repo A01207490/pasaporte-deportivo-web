@@ -23,6 +23,7 @@ class CoachController extends Controller
     {
         //
         //$coaches;
+        /*
         $coaches = collect($coaches);
 
         $selected_coach = $coaches->filter(function ($value, $key) {
@@ -31,7 +32,7 @@ class CoachController extends Controller
 
         $selected_coach = $selected_coach->all();
 
-        dd($passedstudents);
+        dd($passedstudents);*/
         //return view('coaches', ["coaches" => $coaches]);
     }
 
@@ -43,6 +44,7 @@ class CoachController extends Controller
     public function create()
     {
         //
+        return view('coaches.create');
     }
 
     /**
@@ -54,6 +56,8 @@ class CoachController extends Controller
     public function store(Request $request)
     {
         //
+        dump(request()->all());
+        return view('coaches.created');
     }
 
     /**
