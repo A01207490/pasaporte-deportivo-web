@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get("/", "CoachController@index");
-
 Route::get("/coaches", "CoachController@index");
 Route::post("/coaches", "CoachController@store");
 Route::get("/coaches/create", "CoachController@create");
-Route::get("/coaches/{coach}/edit", "CoachController@create");
+Route::get("/coaches/{coach}/edit", "CoachController@edit");
+Route::put("/coaches/{coach}", "CoachController@update");
