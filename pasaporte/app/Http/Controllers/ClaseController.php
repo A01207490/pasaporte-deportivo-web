@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Clase;
+use App\Dia;
+use App\Coach;
 use Illuminate\Http\Request;
 
 class ClaseController extends Controller
@@ -38,7 +40,9 @@ class ClaseController extends Controller
      */
     public function create()
     {
-        return view('clases.create');
+        $dias = Dia::all();
+        $coaches = Coach::all();
+        return view('clases.create', compact('dias', 'coaches'));
     }
 
     /**
@@ -49,7 +53,17 @@ class ClaseController extends Controller
      */
     public function store(Request $request)
     {
-        Clase::create($this->validateClase());
+        $this->validateClase();
+        $clase = Clase::create(([
+            'clase_nombre' => $request->clase_nombre,
+            'clase_hora_inicio' => $request->clase_hora_inicio,
+            'clase_hora_fin' => $request->clase_hora_fin,
+            'coach_id' => $request->coach_id,
+        ]));
+
+        dump($request);
+        $clase->dias()->attach(request('dias'));
+
         return view('clases.success');
     }
 
@@ -98,21 +112,17 @@ class ClaseController extends Controller
         Clase::destroy($clase->id);
         return redirect('clases');
     }
-    public function validateCoach()
+    public function validateClase()
     {
         $rules = [
-            'coach_nombre' => ['required', 'string', 'regex:/[a-zA-Z]/'],
-            'coach_nomina' => ['required', 'min:9', 'max:9', 'regex:/L+[0-9]/'],
-            'coach_correo' => ['required', 'email', 'regex:/[a-zA-Z0-9._%+-]+@tec.mx/']
+            'clase_nombre' => ['required'],
+            'clase_hora_inicio' => ['required'],
+            'clase_hora_inicio' => ['required'],
+            'dias' => ['required'],
+            'coach_id' => ['required'],
         ];
         $custom_messages = [
             'required' => 'El campo :attribute es requerido.',
-            'email' => 'El campo debe de ser un correo electrónico.',
-            'coach_nomina.min' => 'La nómina debe de ser de exactamente 9 caracteres.',
-            'coach_nomina.max' => 'La nómina debe de ser de exactamente 9 caracteres.',
-            'coach_nomina.regex' => 'La nómina debe de tener el siguiente formato: LXXXXXXXX, donde X es un dígito.',
-            'coach_correo.regex' => 'El dominio del correo debe de ser @tec.mx',
-            'coach_nombre.regex' => 'El nombre solo puede tener letras'
         ];
         return request()->validate($rules, $custom_messages);
     }

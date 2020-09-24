@@ -43,14 +43,30 @@
             @enderror
         </div>
         <div class="form-group w-100">
-            <label>Hora de finalización</label>
-            <select class="custom-select" multiple>
-
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <label>Coach</label>
+            <select name='coach_id' class="custom-select">
+                @foreach($coaches as $coach)
+                <option value="{{$coach->id}}">{{$coach->coach_nombre}}</option>
+                @endforeach
             </select>
+            @error('coach')
+            <div class="alert alert-red p-1 mt-2">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="form-group w-100">
+            <label>Dias</label>
+            <select name='dias[]' class="custom-select" multiple>
+                @foreach($dias as $dia)
+                <option value="{{$dia->id}}">{{$dia->dia_nombre}}</option>
+                @endforeach
+            </select>
+            @error('dias')
+            <div class="alert alert-red p-1 mt-2">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Aceptar

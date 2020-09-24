@@ -16,7 +16,7 @@
         </div>
     </form>
     <div>
-        <a href="/clases/create">
+        <a href="{{route('clases.create')}}">
             <button class="btn btn-primary">
                 <img src="{{ asset('img/icons/add_circle.svg')}}" class="icon-white" alt="search">
                 Agregar

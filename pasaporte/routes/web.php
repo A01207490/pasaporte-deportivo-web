@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', "inicio");
+
 Route::get("/coaches", "CoachController@index")->name('coaches.index');
 Route::get("/coaches/{coach}/destroy", "CoachController@destroy")->name('coaches.destroy');
 Route::post("/coaches", "CoachController@store")->name('coaches.store');
@@ -24,8 +25,8 @@ Route::put("/coaches/{coach}", "CoachController@update")->name('coaches.update')
 
 Route::get("/clases", "ClaseController@index")->name('clases.index');
 Route::get("/clases/{clase}/destroy", "ClaseController@destroy")->name('clases.destroy');
-Route::post("/clases", "ClaseController@store");
-Route::get("/clases/create", "ClaseController@create");
+Route::post("/clases", "ClaseController@store")->name('clases.store');
+Route::get("/clases/create", "ClaseController@create")->name('clases.create');
 Route::get("/clases/{clase}", "ClaseController@show")->name('clases.show');
-Route::get("/clases/{clase}/edit", "ClaseController@edit");
-Route::put("/clases/{clase}", "ClaseController@update");
+Route::get("/clases/{clase}/edit", "ClaseController@edit")->name('clases.edit');
+Route::put("/clases/{clase}", "ClaseController@update")->name('clases.update');
