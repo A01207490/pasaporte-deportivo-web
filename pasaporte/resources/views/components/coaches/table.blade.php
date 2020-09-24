@@ -19,13 +19,14 @@
                         <img src="{{ asset('img/icons/edit.svg')}}" class="icon-white" alt="search" width="17px" height="17px">
                     </button>
                 </a>
-                <a href="/coaches/{{$coach['coach_id']}}/destroy" class="p-1">
-                    <button class="btn btn-primary btn-circle btn-sm">
-                        <img src="{{ asset('img/icons/delete.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
-                    </button>
-                </a>
+
+                <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-circle btn-sm">
+                    <img src="{{ asset('img/icons/delete.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
+                </button>
+
             </td>
         </tr>
+        <x-delete_modal :coach="$coach" />
         @endforeach
     </tbody>
 </table>

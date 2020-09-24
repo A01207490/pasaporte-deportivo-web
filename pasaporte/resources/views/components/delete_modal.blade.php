@@ -8,15 +8,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                ¿Desea eliminar el registro especificado?
+                ¿Desea borrar el registro?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Close
+                    Cancelar
                 </button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Aceptar
-                </button>
+                <a href="/coaches/{{$coach['coach_id']}}/destroy" class="p-1">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Aceptar
+                    </button>
+                </a>
             </div>
         </div>
     </div>
