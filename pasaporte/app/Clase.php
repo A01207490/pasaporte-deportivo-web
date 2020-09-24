@@ -12,4 +12,9 @@ class Clase extends Model
     {
         return $this->belongsTo(Coach::class);
     }
+
+    public function dias()
+    {
+        return $this->belongsToMany(Dia::class);
+    }
 }

@@ -15,7 +15,11 @@
             <td data-col-title="Nombre">{{ $clase->clase_nombre }}</td>
             <td data-col-title="Hora inicio">{{ $clase["clase_hora_inicio"] }}</td>
             <td data-col-title="Hora fin">{{ $clase["clase_hora_fin"] }}</td>
-            <td data-col-title="Días">{{ $clase["clase_dias"] }}</td>
+            <td data-col-title="Días">
+                @foreach($clase->dias as $dia)
+                {{ $dia->dia_nombre }}
+                @endforeach
+            </td>
             <td data-col-title="Coach">{{ $clase->coach->coach_nombre }}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
                 <a href="/clases/{{$clase['id']}}/edit" class="p-1">

@@ -4,7 +4,7 @@
     <h3>Catálogo de Clases</h3>
 </div>
 <div class="row p-2 d-flex justify-content-between align-items-center">
-    <form method="GET" action="/clases/search" class="d-flex justify-content-around align-items-center">
+    <form method="GET" action="/clases" class="d-flex justify-content-around align-items-center">
         @csrf
         <div>
             <input class="form-control" type="text" name="query" id="">

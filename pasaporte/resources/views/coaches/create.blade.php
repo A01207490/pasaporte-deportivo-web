@@ -9,7 +9,7 @@
 </style>
 <div class="row p-2 mt-2 d-flex justify-content-center align-items-center">
     <div class="bd-highlight">
-        <h3>Agregar coach</h3>
+        <h3>Agregar Coach</h3>
     </div>
 </div>
 <div class="row p-2 d-flex justify-content-center align-items-center">
