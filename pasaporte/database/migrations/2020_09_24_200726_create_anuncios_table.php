@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCoachesTable extends Migration
+class CreateAnunciosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateCoachesTable extends Migration
      */
     public function up()
     {
-        Schema::create('coaches', function (Blueprint $table) {
+        Schema::create('anuncios', function (Blueprint $table) {
             $table->id();
-            $table->string('coach_nomina');
-            $table->string('coach_nombre');
-            $table->string('coach_correo');
+            $table->string('anuncio_titulo');
+            $table->text('anuncio_cuerpo');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateCoachesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('coaches');
+        Schema::dropIfExists('anuncios');
     }
 }

@@ -14,15 +14,14 @@ class CreateClasesTable extends Migration
     public function up()
     {
         Schema::create('clases', function (Blueprint $table) {
-            $table->bigIncrements('clase_id');
+            $table->id();
             $table->string('clase_nombre');
             $table->time('clase_hora_inicio');
             $table->time('clase_hora_fin');
-            $table->set('clase_dias', ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']);
             $table->unsignedBigInteger('coach_id');
             $table->timestamps();
             $table->foreign('coach_id')
-                ->references('coach_id')
+                ->references('id')
                 ->on('coaches')
                 ->onDelete('cascade');
         });

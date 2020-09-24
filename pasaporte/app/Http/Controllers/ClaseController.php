@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Clase;
+use App\Dia;
+use App\Coach;
 use Illuminate\Http\Request;
 
 class ClaseController extends Controller
@@ -14,8 +16,12 @@ class ClaseController extends Controller
      */
     public function index()
     {
-        $clases = Clase::paginate(10);
-        return view('clases.index', ["clases" => $clases]);
+        if (request('query')) {
+            $clases = $this->search();
+        } else {
+            $clases = Clase::paginate(10);
+        }
+        return view('clases.index', compact('clases'));
     }
 
     public function search()
@@ -24,9 +30,8 @@ class ClaseController extends Controller
         $clases = Clase::where('clase_nombre', 'LIKE', $value)
             ->orWhere('clase_hora_inicio', 'LIKE', $value)
             ->orWhere('clase_hora_fin', 'LIKE', $value)
-            ->orWhere('clase_dias', 'LIKE', $value)
             ->paginate(10);
-        return view('clases.index', ["clases" => $clases]);
+        return $clases;
     }
     /**
      * Show the form for creating a new resource.
@@ -35,7 +40,9 @@ class ClaseController extends Controller
      */
     public function create()
     {
-        //
+        $dias = Dia::all();
+        $coaches = Coach::all();
+        return view('clases.create', compact('dias', 'coaches'));
     }
 
     /**
@@ -46,7 +53,15 @@ class ClaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validateClase();
+        $clase = Clase::create(([
+            'clase_nombre' => $request->clase_nombre,
+            'clase_hora_inicio' => $request->clase_hora_inicio,
+            'clase_hora_fin' => $request->clase_hora_fin,
+            'coach_id' => $request->coach_id,
+        ]));
+        $clase->dias()->attach(request('dias'));
+        return view('clases.success');
     }
 
     /**
@@ -91,7 +106,21 @@ class ClaseController extends Controller
      */
     public function destroy(Clase $clase)
     {
-        Clase::destroy($clase->clase_id);
+        Clase::destroy($clase->id);
         return redirect('clases');
+    }
+    public function validateClase()
+    {
+        $rules = [
+            'clase_nombre' => ['required'],
+            'clase_hora_inicio' => ['required'],
+            'clase_hora_inicio' => ['required'],
+            'dias' => ['required'],
+            'coach_id' => ['required'],
+        ];
+        $custom_messages = [
+            'required' => 'El campo :attribute es requerido.',
+        ];
+        return request()->validate($rules, $custom_messages);
     }
 }

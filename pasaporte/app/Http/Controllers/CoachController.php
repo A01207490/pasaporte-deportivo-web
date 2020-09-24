@@ -14,9 +14,12 @@ class CoachController extends Controller
      */
     public function index()
     {
-        //
-        $coaches = Coach::paginate(10);
-        return view('coaches.index', ["coaches" => $coaches]);
+        if (request('query')) {
+            $coaches = $this->search();
+        } else {
+            $coaches = Coach::paginate(10);
+        }
+        return view('coaches.index', compact('coaches'));
     }
 
     public function search()
@@ -26,7 +29,7 @@ class CoachController extends Controller
             ->orWhere('coach_nomina', 'LIKE', $value)
             ->orWhere('coach_correo', 'LIKE', $value)
             ->paginate(10);
-        return view('coaches.index', ["coaches" => $coaches]);
+        return $coaches;
     }
 
     /**
@@ -36,7 +39,6 @@ class CoachController extends Controller
      */
     public function create()
     {
-        //
         return view('coaches.create');
     }
 
@@ -48,7 +50,6 @@ class CoachController extends Controller
      */
     public function store(Request $request)
     {
-        //
         Coach::create($this->validateCoach());
         return view('coaches.success');
     }
@@ -73,7 +74,6 @@ class CoachController extends Controller
      */
     public function edit(Coach $coach)
     {
-        //
         return view('coaches.edit', compact('coach'));
     }
 
@@ -86,7 +86,6 @@ class CoachController extends Controller
      */
     public function update(Request $request, Coach $coach)
     {
-        //
         $coach->update($this->validateCoach());
         return view('coaches.success');
         //return redirect($coach->path());
@@ -100,14 +99,12 @@ class CoachController extends Controller
      */
     public function destroy(Coach $coach)
     {
-        //
-        Coach::destroy($coach->coach_id);
+        Coach::destroy($coach->id);
         return redirect('coaches');
     }
 
     public function validateCoach()
     {
-        //
         $rules = [
             'coach_nombre' => ['required', 'string', 'regex:/[a-zA-Z]/'],
             'coach_nomina' => ['required', 'min:9', 'max:9', 'regex:/L+[0-9]/'],

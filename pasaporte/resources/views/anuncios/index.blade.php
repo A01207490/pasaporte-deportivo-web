@@ -1,10 +1,10 @@
 @extends("layout")
 @section("content")
 <div class="row p-2 mt-2 d-flex justify-content-center align-items-center">
-    <h3>Coaches</h3>
+    <h3>Anuncios</h3>
 </div>
 <div class="row p-2 d-flex justify-content-between align-items-center">
-    <form method="GET" action="{{route('coaches.index')}}" class="d-flex justify-content-around align-items-center">
+    <form method="GET" action="{{route('anuncios.index')}}" class="d-flex justify-content-around align-items-center">
         @csrf
         <div>
             <input class="form-control" type="text" name="query" id="">
@@ -16,7 +16,7 @@
         </div>
     </form>
     <div>
-        <a href="{{route('coaches.create')}}">
+        <a href="{{route('anuncios.create')}}">
             <button class="btn btn-primary">
                 <img src="{{ asset('img/icons/add_circle.svg')}}" class="icon-white" alt="search">
                 Agregar
@@ -25,7 +25,7 @@
     </div>
 </div>
 <div class="row p-2 d-flex justify-content-center">
-    <x-coaches.table :coaches="$coaches" />
+    <x-anuncios.table :anuncios="$anuncios" />
 </div>
 
 @endsection

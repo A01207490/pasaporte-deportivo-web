@@ -8,13 +8,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($coaches as $coach)
+        @forelse($coaches as $coach)
         <tr>
             <td data-col-title="Nombre">{{ $coach["coach_nombre"] }}</td>
             <td data-col-title="Nómina">{{ $coach["coach_nomina"] }}</td>
             <td data-col-title="Correo">{{ $coach["coach_correo"] }}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
-                <a href="/coaches/{{$coach['coach_id']}}/edit" class="p-1">
+                <a href="{{route('coaches.edit', $coach)}}" class="p-1">
                     <button class="btn btn-primary btn-circle btn-sm">
                         <img src="{{ asset('img/icons/edit.svg')}}" class="icon-white" alt="search" width="17px" height="17px">
                     </button>
@@ -42,7 +42,7 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                             Cancelar
                         </button>
-                        <a href="/coaches/{{$coach['coach_id']}}/destroy" class="p-1">
+                        <a href="/coaches/{{$coach['id']}}/destroy" class="p-1">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 Aceptar
                             </button>
@@ -51,7 +51,11 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        <tr>
+            @empty
+            <td colspan="6" class="text-center" data-col-title="Nombre">No hay registros disponibles</td>
+        </tr>
+        @endforelse
     </tbody>
 </table>
 <div class="d-flex justify-content-center">

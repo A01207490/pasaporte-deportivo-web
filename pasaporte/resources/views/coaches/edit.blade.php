@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="row p-2 d-flex justify-content-center align-items-center">
-    <form method="POST" action="/coaches/{{$coach['coach_id']}}" class="col-10 col-md-5 d-flex flex-column justify-content-center align-items-center">
+    <form method="POST" action="{{route('coaches.update', $coach)}}" class="col-10 col-md-5 d-flex flex-column justify-content-center align-items-center">
         @csrf
         @method('PUT')
         <div class="form-group w-100">

@@ -14,7 +14,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     Cancelar
                 </button>
-                <a href="/coaches/{{$coach['coach_id']}}/destroy" class="p-1">
+                <a href="" class="p-1">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         Aceptar
                     </button>
