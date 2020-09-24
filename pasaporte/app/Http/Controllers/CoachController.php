@@ -15,25 +15,18 @@ class CoachController extends Controller
     public function index()
     {
         //
+
         $coaches = Coach::paginate(10);
+        //dump($coaches);
         return view('coaches.index', ["coaches" => $coaches]);
     }
 
     public function search()
     {
-        //
-        //$coaches;
-        /*
-        $coaches = collect($coaches);
-
-        $selected_coach = $coaches->filter(function ($value, $key) {
-            return data_get($value, 'mark') > 34;
-        });
-
-        $selected_coach = $selected_coach->all();
-
-        dd($passedstudents);*/
-        //return view('coaches', ["coaches" => $coaches]);
+        $value = request('query');
+        $coaches = Coach::where('coach_nombre', 'LIKE', '%' . $value . '%')->get();
+        dump($coaches);
+        return redirect('coaches');
     }
 
     /**
@@ -96,6 +89,7 @@ class CoachController extends Controller
         //
         $coach->update($this->validateCoach());
         return view('coaches.success');
+        //return redirect($coach->path());
     }
 
     /**
@@ -107,6 +101,8 @@ class CoachController extends Controller
     public function destroy(Coach $coach)
     {
         //
+        Coach::destroy($coach->coach_id);
+        return redirect('coaches');
     }
 
     public function validateCoach()
