@@ -1,7 +1,7 @@
 @extends("layout")
 @section("content")
 <div class="row p-2 mt-2 d-flex justify-content-center align-items-center">
-    <h3>Catálogo de Clases</h3>
+    <h3>Clases</h3>
 </div>
 <div class="row p-2 d-flex justify-content-between align-items-center">
     <form method="GET" action="/clases" class="d-flex justify-content-around align-items-center">

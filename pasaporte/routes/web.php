@@ -30,3 +30,11 @@ Route::get("/clases/create", "ClaseController@create")->name('clases.create');
 Route::get("/clases/{clase}", "ClaseController@show")->name('clases.show');
 Route::get("/clases/{clase}/edit", "ClaseController@edit")->name('clases.edit');
 Route::put("/clases/{clase}", "ClaseController@update")->name('clases.update');
+
+Route::get("/anuncios", "AnuncioController@index")->name('anuncios.index');
+Route::get("/anuncios/{anuncio}/destroy", "AnuncioController@destroy")->name('anuncios.destroy');
+Route::post("/anuncios", "AnuncioController@store")->name('anuncios.store');
+Route::get("/anuncios/create", "AnuncioController@create")->name('anuncios.create');
+Route::get("/anuncios/{anuncio}", "AnuncioController@show")->name('anuncios.show');
+Route::get("/anuncios/{anuncio}/edit", "AnuncioController@edit")->name('anuncios.edit');
+Route::put("/anuncios/{anuncio}", "AnuncioController@update")->name('anuncios.update');

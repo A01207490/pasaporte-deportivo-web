@@ -15,8 +15,8 @@
         }
 
         .grad {
-            background: rgb(255, 255, 255);
-            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 69%, rgba(0, 212, 255, 0.3169642857142857) 100%);
+            background: rgb(135, 235, 255);
+            background: linear-gradient(180deg, rgba(135, 235, 255, 0.7010154403558299) 0%, rgba(255, 255, 255, 1) 40%);
         }
     </style>
     @yield('head')

@@ -60,10 +60,7 @@ class ClaseController extends Controller
             'clase_hora_fin' => $request->clase_hora_fin,
             'coach_id' => $request->coach_id,
         ]));
-
-        dump($request);
         $clase->dias()->attach(request('dias'));
-
         return view('clases.success');
     }
 
