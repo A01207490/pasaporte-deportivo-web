@@ -14,7 +14,7 @@ class CreateClasesTable extends Migration
     public function up()
     {
         Schema::create('clases', function (Blueprint $table) {
-            $table->bigIncrements('clase_id');
+            $table->bigIncrements('id');
             $table->string('clase_nombre');
             $table->time('clase_hora_inicio');
             $table->time('clase_hora_fin');
@@ -22,7 +22,7 @@ class CreateClasesTable extends Migration
             $table->unsignedBigInteger('coach_id');
             $table->timestamps();
             $table->foreign('coach_id')
-                ->references('coach_id')
+                ->references('id')
                 ->on('coaches')
                 ->onDelete('cascade');
         });

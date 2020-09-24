@@ -15,7 +15,7 @@ class ClaseController extends Controller
     public function index()
     {
         $clases = Clase::paginate(10);
-        return view('clases.index', ["clases" => $clases]);
+        return view('clases.index', compact('clases'));
     }
 
     public function search()
@@ -91,7 +91,7 @@ class ClaseController extends Controller
      */
     public function destroy(Clase $clase)
     {
-        Clase::destroy($clase->clase_id);
+        Clase::destroy($clase->id);
         return redirect('clases');
     }
 }

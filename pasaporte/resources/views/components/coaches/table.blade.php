@@ -14,7 +14,7 @@
             <td data-col-title="Nómina">{{ $coach["coach_nomina"] }}</td>
             <td data-col-title="Correo">{{ $coach["coach_correo"] }}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
-                <a href="/coaches/{{$coach['coach_id']}}/edit" class="p-1">
+                <a href="/coaches/{{$coach['id']}}/edit" class="p-1">
                     <button class="btn btn-primary btn-circle btn-sm">
                         <img src="{{ asset('img/icons/edit.svg')}}" class="icon-white" alt="search" width="17px" height="17px">
                     </button>
@@ -42,7 +42,7 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                             Cancelar
                         </button>
-                        <a href="/coaches/{{$coach['coach_id']}}/destroy" class="p-1">
+                        <a href="/coaches/{{$coach['id']}}/destroy" class="p-1">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 Aceptar
                             </button>

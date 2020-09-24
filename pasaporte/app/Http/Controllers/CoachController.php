@@ -101,7 +101,7 @@ class CoachController extends Controller
     public function destroy(Coach $coach)
     {
         //
-        Coach::destroy($coach->coach_id);
+        Coach::destroy($coach->id);
         return redirect('coaches');
     }
 
