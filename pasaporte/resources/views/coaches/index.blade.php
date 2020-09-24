@@ -4,7 +4,7 @@
     <h3>Catálogo de Coaches</h3>
 </div>
 <div class="row p-2 d-flex justify-content-between align-items-center">
-    <form method="GET" action="/coaches" class="d-flex justify-content-around align-items-center">
+    <form method="GET" action="{{route('coaches.index')}}" class="d-flex justify-content-around align-items-center">
         @csrf
         <div>
             <input class="form-control" type="text" name="query" id="">
@@ -16,7 +16,7 @@
         </div>
     </form>
     <div>
-        <a href="/coaches/create">
+        <a href="{{route('coaches.create')}}">
             <button class="btn btn-primary">
                 <img src="{{ asset('img/icons/add_circle.svg')}}" class="icon-white" alt="search">
                 Agregar

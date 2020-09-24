@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="row p-2 d-flex justify-content-center align-items-center">
-    <form method="POST" action="/coaches" class="col-10 col-md-5 d-flex flex-column justify-content-center align-items-center">
+    <form method="POST" action="{{route('coaches.store')}}" class="col-10 col-md-5 d-flex flex-column justify-content-center align-items-center">
         @csrf
         <div class="form-group w-100">
             <label>Nombre</label>

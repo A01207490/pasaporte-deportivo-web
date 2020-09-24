@@ -31,7 +31,7 @@
                 <a class="nav-link {{ Request::path() === 'usuarios' ? 'active' : '' }}" href="{{ url('/usuarios') }}">Usuarios</a>
             </li>
             <li class="nav-item mr-2 ml-2">
-                <a class="nav-link {{ Request::path() === 'coaches' ? 'active' : '' }}" href="{{ url('/coaches') }}">Coaches</a>
+                <a class="nav-link {{ Request::path() === 'coaches' ? 'active' : '' }}" href="{{ route('coaches.index') }}">Coaches</a>
             </li>
             <li class="nav-item mr-2 ml-2">
                 <a class="nav-link {{ Request::path() === 'clases' ? 'active' : '' }}" href="{{ url('/clases') }}">Clases</a>

@@ -8,7 +8,7 @@
     </div>
 </div>
 <div class="row p-2d-flex justify-content-center align-items-center">
-    <a href="/coaches">
+    <a href="{{route('clases.index')}}">
         <button class="btn btn-primary">
             Aceptar
         </button>

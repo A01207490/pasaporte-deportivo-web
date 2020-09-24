@@ -14,7 +14,7 @@
             <td data-col-title="Nómina">{{ $coach["coach_nomina"] }}</td>
             <td data-col-title="Correo">{{ $coach["coach_correo"] }}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
-                <a href="/coaches/{{$coach['id']}}/edit" class="p-1">
+                <a href="{{route('coaches.edit', $coach)}}" class="p-1">
                     <button class="btn btn-primary btn-circle btn-sm">
                         <img src="{{ asset('img/icons/edit.svg')}}" class="icon-white" alt="search" width="17px" height="17px">
                     </button>

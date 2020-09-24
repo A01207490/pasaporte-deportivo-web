@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/", "CoachController@index");
+Route::view('/', "inicio");
 Route::get("/coaches", "CoachController@index")->name('coaches.index');
 Route::get("/coaches/{coach}/destroy", "CoachController@destroy")->name('coaches.destroy');
-Route::post("/coaches", "CoachController@store");
-Route::get("/coaches/create", "CoachController@create");
+Route::post("/coaches", "CoachController@store")->name('coaches.store');
+Route::get("/coaches/create", "CoachController@create")->name('coaches.create');
 Route::get("/coaches/{coach}", "CoachController@show")->name('coaches.show');
-Route::get("/coaches/{coach}/edit", "CoachController@edit");
-Route::put("/coaches/{coach}", "CoachController@update");
+Route::get("/coaches/{coach}/edit", "CoachController@edit")->name('coaches.edit');
+Route::put("/coaches/{coach}", "CoachController@update")->name('coaches.update');
 
 Route::get("/clases", "ClaseController@index")->name('clases.index');
 Route::get("/clases/{clase}/destroy", "ClaseController@destroy")->name('clases.destroy');

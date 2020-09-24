@@ -13,11 +13,16 @@
         a:hover {
             text-decoration: none !important;
         }
+
+        .grad {
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 69%, rgba(0, 212, 255, 0.3169642857142857) 100%);
+        }
     </style>
     @yield('head')
 </head>
 
-<body>
+<body class="grad">
     <div class="page-container">
         <div class="content-wrap">
             <x-navbar />
