@@ -21,18 +21,12 @@ class CoachController extends Controller
 
     public function search()
     {
-        //
-        //$coaches;
-        $coaches = collect($coaches);
-
-        $selected_coach = $coaches->filter(function ($value, $key) {
-            return data_get($value, 'mark') > 34;
-        });
-
-        $selected_coach = $selected_coach->all();
-
-        dd($passedstudents);
-        //return view('coaches', ["coaches" => $coaches]);
+        $value = '%' . request('query') . '%';
+        $coaches = Coach::where('coach_nombre', 'LIKE', $value)
+            ->orWhere('coach_nomina', 'LIKE', $value)
+            ->orWhere('coach_correo', 'LIKE', $value)
+            ->paginate(10);
+        return view('coaches.index', ["coaches" => $coaches]);
     }
 
     /**
@@ -43,6 +37,7 @@ class CoachController extends Controller
     public function create()
     {
         //
+        return view('coaches.create');
     }
 
     /**
@@ -54,6 +49,8 @@ class CoachController extends Controller
     public function store(Request $request)
     {
         //
+        Coach::create($this->validateCoach());
+        return view('coaches.success');
     }
 
     /**
@@ -65,6 +62,7 @@ class CoachController extends Controller
     public function show(Coach $coach)
     {
         //
+
     }
 
     /**
@@ -76,6 +74,7 @@ class CoachController extends Controller
     public function edit(Coach $coach)
     {
         //
+        return view('coaches.edit', compact('coach'));
     }
 
     /**
@@ -88,6 +87,9 @@ class CoachController extends Controller
     public function update(Request $request, Coach $coach)
     {
         //
+        $coach->update($this->validateCoach());
+        return view('coaches.success');
+        //return redirect($coach->path());
     }
 
     /**
@@ -99,5 +101,27 @@ class CoachController extends Controller
     public function destroy(Coach $coach)
     {
         //
+        Coach::destroy($coach->coach_id);
+        return redirect('coaches');
+    }
+
+    public function validateCoach()
+    {
+        //
+        $rules = [
+            'coach_nombre' => ['required', 'string', 'regex:/[a-zA-Z]/'],
+            'coach_nomina' => ['required', 'min:9', 'max:9', 'regex:/L+[0-9]/'],
+            'coach_correo' => ['required', 'email', 'regex:/[a-zA-Z0-9._%+-]+@tec.mx/']
+        ];
+        $custom_messages = [
+            'required' => 'El campo :attribute es requerido.',
+            'email' => 'El campo debe de ser un correo electrónico.',
+            'coach_nomina.min' => 'La nómina debe de ser de exactamente 9 caracteres.',
+            'coach_nomina.max' => 'La nómina debe de ser de exactamente 9 caracteres.',
+            'coach_nomina.regex' => 'La nómina debe de tener el siguiente formato: LXXXXXXXX, donde X es un dígito.',
+            'coach_correo.regex' => 'El dominio del correo debe de ser @tec.mx',
+            'coach_nombre.regex' => 'El nombre solo puede tener letras'
+        ];
+        return request()->validate($rules, $custom_messages);
     }
 }

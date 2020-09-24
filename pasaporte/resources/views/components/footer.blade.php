@@ -1,7 +1,7 @@
-<footer class="text-white bg-primary footer" style="height: 5rem;">
+<footer class="text-white bg-primary footer">
     <div class="container">
         <div class="row pt-3">
-            <div class="col-4">
+            <div class="col-6">
                 <a class="text-white" href="https://laravel.com/docs/7.x">
                     <svg class="mr-1" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0)">
