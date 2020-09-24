@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($clases as $clase)
+        @forelse($clases as $clase)
         <tr>
             <td data-col-title="Nombre">{{ $clase->clase_nombre }}</td>
             <td data-col-title="Hora inicio">{{ $clase["clase_hora_inicio"] }}</td>
@@ -31,7 +31,6 @@
                 <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-circle btn-sm">
                     <img src="{{ asset('img/icons/delete.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
                 </button>
-
             </td>
         </tr>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -59,7 +58,11 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        <tr>
+            @empty
+            <td colspan="6" class="text-center" data-col-title="Nombre">No hay registros disponibles</td>
+        </tr>
+        @endforelse
     </tbody>
 </table>
 <div class="d-flex justify-content-center">
