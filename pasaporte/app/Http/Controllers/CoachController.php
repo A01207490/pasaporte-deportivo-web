@@ -15,16 +15,17 @@ class CoachController extends Controller
     public function index()
     {
         //
-
         $coaches = Coach::paginate(10);
-        //dump($coaches);
         return view('coaches.index', ["coaches" => $coaches]);
     }
 
     public function search()
     {
-        $value = request('query');
-        $coaches = Coach::where('coach_nombre', 'LIKE', '%' . $value . '%')->paginate(10);
+        $value = '%' . request('query') . '%';
+        $coaches = Coach::where('coach_nombre', 'LIKE', $value)
+            ->orWhere('coach_nomina', 'LIKE', $value)
+            ->orWhere('coach_correo', 'LIKE', $value)
+            ->paginate(10);
         return view('coaches.index', ["coaches" => $coaches]);
     }
 

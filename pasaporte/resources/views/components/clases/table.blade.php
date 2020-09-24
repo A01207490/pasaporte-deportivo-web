@@ -2,19 +2,23 @@
     <thead class="thead text-white bg-secondary">
         <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Nómina</th>
-            <th scope="col">Correo</th>
+            <th scope="col">Hora inicio</th>
+            <th scope="col">Hora fin</th>
+            <th scope="col">Días</th>
+            <th scope="col">Coach</th>
             <th scope="col">Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($coaches as $coach)
+        @foreach($clases as $clase)
         <tr>
-            <td data-col-title="Nombre">{{ $coach["coach_nombre"] }}</td>
-            <td data-col-title="Nómina">{{ $coach["coach_nomina"] }}</td>
-            <td data-col-title="Correo">{{ $coach["coach_correo"] }}</td>
+            <td data-col-title="Nombre">{{ $clase["clase_nombre"] }}</td>
+            <td data-col-title="Hora inicio">{{ $clase["clase_hora_inicio"] }}</td>
+            <td data-col-title="Hora fin">{{ $clase["clase_hora_fin"] }}</td>
+            <td data-col-title="Días">{{ $clase["clase_dias"] }}</td>
+            <td data-col-title="Coach">{{ $clase["coach_id"] }}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
-                <a href="/coaches/{{$coach['coach_id']}}/edit" class="p-1">
+                <a href="/clases/{{$clase['clase_id']}}/edit" class="p-1">
                     <button class="btn btn-primary btn-circle btn-sm">
                         <img src="{{ asset('img/icons/edit.svg')}}" class="icon-white" alt="search" width="17px" height="17px">
                     </button>
@@ -42,7 +46,7 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                             Cancelar
                         </button>
-                        <a href="/coaches/{{$coach['coach_id']}}/destroy" class="p-1">
+                        <a href="/clases/{{$clase['clase_id']}}/destroy" class="p-1">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 Aceptar
                             </button>
@@ -55,5 +59,5 @@
     </tbody>
 </table>
 <div class="d-flex justify-content-center">
-    {{ $coaches->links() }}
+    {{ $clases->links() }}
 </div>

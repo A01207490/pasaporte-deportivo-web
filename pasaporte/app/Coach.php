@@ -13,4 +13,9 @@ class Coach extends Model
     {
         return route('coaches.show', $this);
     }
+
+    public function clases()
+    {
+        return $this->hasMany(Clase::class);
+    }
 }
