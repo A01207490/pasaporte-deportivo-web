@@ -49,7 +49,8 @@ class AnuncioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Anuncio::create($this->validateAnuncio());
+        return view('anuncios.success');
     }
 
     /**
@@ -60,7 +61,8 @@ class AnuncioController extends Controller
      */
     public function show(Anuncio $anuncio)
     {
-        //
+        $anuncio = Anuncio::find($anuncio->id);
+        return view('anuncios.show', compact('anuncio'));
     }
 
     /**
@@ -71,7 +73,7 @@ class AnuncioController extends Controller
      */
     public function edit(Anuncio $anuncio)
     {
-        //
+        return view('anuncios.edit', compact('anuncio'));
     }
 
     /**
@@ -83,7 +85,8 @@ class AnuncioController extends Controller
      */
     public function update(Request $request, Anuncio $anuncio)
     {
-        //
+        $anuncio->update($this->validateAnuncio());
+        return view('anuncios.success');
     }
 
     /**
@@ -94,6 +97,20 @@ class AnuncioController extends Controller
      */
     public function destroy(Anuncio $anuncio)
     {
-        //
+        Anuncio::destroy($anuncio->id);
+        return redirect('anuncios');
+    }
+
+    public function validateAnuncio()
+    {
+        $rules = [
+            'anuncio_titulo' => ['required'],
+            'anuncio_cuerpo' => ['required']
+        ];
+        $custom_messages = [
+            'anuncio_titulo.required' => 'El título es requerido.',
+            'anuncio_anuncio.required' => 'El cuerpo del anuncio es requerido.'
+        ];
+        return request()->validate($rules, $custom_messages);
     }
 }

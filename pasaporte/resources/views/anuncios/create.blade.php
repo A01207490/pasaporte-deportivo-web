@@ -20,7 +20,7 @@
             <input name="anuncio_titulo" type="text" class="form-control @error('anuncio_titulo') error-input @enderror" value="{{ old('anuncio_titulo')}}" required>
             @error('anuncio_titulo')
             <div class="alert alert-red p-1 mt-2">
-                {{ $errors->first('anuncio_titulo')}}
+                {{ $message }}
             </div>
             @enderror
         </div>
@@ -29,7 +29,7 @@
             <textarea name="anuncio_cuerpo" class="form-control" rows="5" class="form-control @error('anuncio_cuerpo') error-input @enderror" value="{{ old('anuncio_cuerpo')}}" required></textarea>
             @error('anuncio_cuerpo')
             <div class="alert alert-red p-1 mt-2">
-                {{ $errors->first('anuncio_cuerpo')}}
+                {{ $message }}
             </div>
             @enderror
         </div>

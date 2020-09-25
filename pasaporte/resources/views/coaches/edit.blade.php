@@ -21,7 +21,7 @@
             <input name="coach_nombre" type="text" class="form-control @error('coach_nombre') error-input @enderror" required value="{{ $coach->coach_nombre }}">
             @error('coach_nombre')
             <div class="alert alert-red p-1 mt-2">
-                {{ $errors->first('coach_nombre')}}
+                {{ $message }}
             </div>
             @enderror
         </div>
@@ -30,7 +30,7 @@
             <input name="coach_correo" type="email" class="form-control @error('coach_correo') error-input @enderror" required value="{{ $coach->coach_correo }}">
             @error('coach_correo')
             <div class="alert alert-red p-1 mt-2">
-                {{ $errors->first('coach_correo')}}
+                {{ $message }}
             </div>
             @enderror
         </div>
@@ -39,7 +39,7 @@
             <input name="coach_nomina" type="text" class="form-control @error('coach_nomina') error-input @enderror" required value="{{ $coach->coach_nomina }}">
             @error('coach_nomina')
             <div class="alert alert-red p-1 mt-2">
-                {{ $errors->first('coach_nomina')}}
+                {{ $message }}
             </div>
             @enderror
         </div>
