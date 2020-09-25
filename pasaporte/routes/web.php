@@ -48,10 +48,10 @@ Route::get("/users/{user}/edit", "UsersController@edit")->name('users.edit');
 Route::put("/users/{user}", "UsersController@update")->name('users.update');
 
 
-Route::get("/sesiones", "SesionesController@index")->name('sesiones.index');
-Route::get("/sesiones/{user}/destroy", "SesionesController@destroy")->name('sesiones.destroy');
-Route::post("/sesiones", "SesionesController@store")->name('sesiones.store');
-Route::get("/sesiones/create", "SesionesController@create")->name('sesiones.create');
-Route::get("/sesiones/{user}", "SesionesController@show")->name('sesiones.show');
-Route::get("/sesiones/{user}/edit", "SesionesController@edit")->name('sesiones.edit');
-Route::put("/sesiones/{user}", "SesionesController@update")->name('sesiones.update');
+Route::get("/sesions", "SesionController@index")->name('sesions.index');
+Route::get("/sesions/{user}/destroy", "SesionController@destroy")->name('sesions.destroy');
+Route::post("/sesions", "SesionController@store")->name('sesions.store');
+Route::get("/sesions/create", "SesionController@create")->name('sesions.create');
+Route::get("/sesions/{user}", "SesionController@show")->name('sesions.show');
+Route::get("/sesions/{user}/edit", "SesionController@edit")->name('sesions.edit');
+Route::put("/sesions/{user}", "SesionController@update")->name('sesions.update');

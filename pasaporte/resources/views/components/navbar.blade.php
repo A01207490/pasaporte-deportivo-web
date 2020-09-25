@@ -31,7 +31,7 @@
                 <a class="nav-link {{ Request::path() === 'users' ? 'active' : '' }}" href="{{ route('users.index') }}">Users</a>
             </li>
             <li class="nav-item mr-2 ml-2">
-                <a class="nav-link {{ Request::path() === 'sesiones' ? 'active' : '' }}" href="{{ route('sesiones.index') }}">Pasaportes</a>
+                <a class="nav-link {{ Request::path() === 'sesiones' ? 'active' : '' }}" href="{{ route('sesions.index') }}">Pasaportes</a>
             </li>
             <li class="nav-item mr-2 ml-2">
                 <a class="nav-link {{ Request::path() === 'coaches' ? 'active' : '' }}" href="{{ route('coaches.index') }}">Coaches</a>
