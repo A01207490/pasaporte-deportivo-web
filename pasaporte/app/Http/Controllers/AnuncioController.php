@@ -27,6 +27,8 @@ class AnuncioController extends Controller
         $value = '%' . request('query') . '%';
         $anuncios = Anuncio::where('anuncio_titulo', 'LIKE', $value)
             ->orWhere('anuncio_cuerpo', 'LIKE', $value)
+            ->orWhere('created_at', 'LIKE', $value)
+            ->orWhere('updated_at', 'LIKE', $value)
             ->paginate(10);
         return $anuncios;
     }
@@ -38,7 +40,7 @@ class AnuncioController extends Controller
      */
     public function create()
     {
-        //
+        return view('anuncios.create');
     }
 
     /**
@@ -49,7 +51,8 @@ class AnuncioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Anuncio::create($this->validateAnuncio());
+        return view('anuncios.success');
     }
 
     /**
@@ -60,7 +63,8 @@ class AnuncioController extends Controller
      */
     public function show(Anuncio $anuncio)
     {
-        //
+        $anuncio = Anuncio::find($anuncio->id);
+        return view('anuncios.show', compact('anuncio'));
     }
 
     /**
@@ -71,7 +75,7 @@ class AnuncioController extends Controller
      */
     public function edit(Anuncio $anuncio)
     {
-        //
+        return view('anuncios.edit', compact('anuncio'));
     }
 
     /**
@@ -83,7 +87,8 @@ class AnuncioController extends Controller
      */
     public function update(Request $request, Anuncio $anuncio)
     {
-        //
+        $anuncio->update($this->validateAnuncio());
+        return view('anuncios.success');
     }
 
     /**
@@ -94,6 +99,20 @@ class AnuncioController extends Controller
      */
     public function destroy(Anuncio $anuncio)
     {
-        //
+        Anuncio::destroy($anuncio->id);
+        return redirect('anuncios');
+    }
+
+    public function validateAnuncio()
+    {
+        $rules = [
+            'anuncio_titulo' => ['required'],
+            'anuncio_cuerpo' => ['required']
+        ];
+        $custom_messages = [
+            'anuncio_titulo.required' => 'El título es requerido.',
+            'anuncio_anuncio.required' => 'El cuerpo del anuncio es requerido.'
+        ];
+        return request()->validate($rules, $custom_messages);
     }
 }

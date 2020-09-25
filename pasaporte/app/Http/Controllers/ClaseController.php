@@ -72,7 +72,10 @@ class ClaseController extends Controller
      */
     public function show(Clase $clase)
     {
-        //
+        $clase = Clase::find($clase->id);
+        $coach = Coach::find($clase->coach_id);
+
+        return view('clases.show', compact('clase', 'coach'));
     }
 
     /**
@@ -83,7 +86,9 @@ class ClaseController extends Controller
      */
     public function edit(Clase $clase)
     {
-        //
+        $dias = Dia::all();
+        $coaches = Coach::all();
+        return view('clases.edit', compact('clase', 'dias', 'coaches'));
     }
 
     /**
@@ -95,7 +100,15 @@ class ClaseController extends Controller
      */
     public function update(Request $request, Clase $clase)
     {
-        //
+        $this->validateClase();
+        $clase->update([
+            'clase_nombre' => $request->clase_nombre,
+            'clase_hora_inicio' => $request->clase_hora_inicio,
+            'clase_hora_fin' => $request->clase_hora_fin,
+            'coach_id' => $request->coach_id,
+        ]);
+        $clase->dias()->sync(request('dias'));
+        return view('clases.success');
     }
 
     /**
