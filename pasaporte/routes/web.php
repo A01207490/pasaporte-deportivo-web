@@ -46,3 +46,12 @@ Route::get("/users/create", "UsersController@create")->name('users.create');
 Route::get("/users/{user}", "UsersController@show")->name('users.show');
 Route::get("/users/{user}/edit", "UsersController@edit")->name('users.edit');
 Route::put("/users/{user}", "UsersController@update")->name('users.update');
+
+
+Route::get("/sesiones", "SesionesController@index")->name('sesiones.index');
+Route::get("/sesiones/{user}/destroy", "SesionesController@destroy")->name('sesiones.destroy');
+Route::post("/sesiones", "SesionesController@store")->name('sesiones.store');
+Route::get("/sesiones/create", "SesionesController@create")->name('sesiones.create');
+Route::get("/sesiones/{user}", "SesionesController@show")->name('sesiones.show');
+Route::get("/sesiones/{user}/edit", "SesionesController@edit")->name('sesiones.edit');
+Route::put("/sesiones/{user}", "SesionesController@update")->name('sesiones.update');

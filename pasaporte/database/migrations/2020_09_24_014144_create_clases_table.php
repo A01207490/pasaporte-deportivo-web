@@ -25,23 +25,6 @@ class CreateClasesTable extends Migration
                 ->on('coaches')
                 ->onDelete('cascade');
         });
-
-        //clase_dia
-        Schema::create('clase_user', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('clase_id');
-            $table->unsignedBigInteger('user_id');
-            $table->timestamps();
-            $table->unique(['clase_id', 'user_id']);
-            $table->foreign('clase_id')
-                ->references('id')
-                ->on('clases')
-                ->onDelete('cascade');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-        });
     }
 
     /**
