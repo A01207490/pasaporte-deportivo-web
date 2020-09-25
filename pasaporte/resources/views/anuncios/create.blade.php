@@ -9,7 +9,7 @@
 </style>
 <div class="row p-2 mt-2 d-flex justify-content-center align-items-center">
     <div class="bd-highlight">
-        <h3>Agregar anuncio</h3>
+        <h3>Agregar Anuncio</h3>
     </div>
 </div>
 <div class="row p-2 d-flex justify-content-center align-items-center">
@@ -38,5 +38,4 @@
         </button>
     </form>
 </div>
-
 @endsection

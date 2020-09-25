@@ -72,7 +72,10 @@ class ClaseController extends Controller
      */
     public function show(Clase $clase)
     {
-        //
+        $clase = Clase::find($clase->id);
+        $coach = Coach::find($clase->coach_id);
+
+        return view('clases.show', compact('clase', 'coach'));
     }
 
     /**

@@ -22,6 +22,11 @@
             </td>
             <td data-col-title="Coach">{{ $clase->coach->coach_nombre }}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
+                <a href="{{route('clases.show', $clase)}}" class="p-1">
+                    <button type="button" class="btn btn-primary btn-circle btn-sm">
+                        <img src="{{ asset('img/icons/visibility.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
+                    </button>
+                </a>
                 <a href="{{route('clases.edit', $clase)}}" class="p-1">
                     <button class="btn btn-primary btn-circle btn-sm">
                         <img src="{{ asset('img/icons/edit.svg')}}" class="icon-white" alt="search" width="17px" height="17px">

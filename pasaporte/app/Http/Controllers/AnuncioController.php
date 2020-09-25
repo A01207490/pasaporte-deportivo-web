@@ -27,6 +27,8 @@ class AnuncioController extends Controller
         $value = '%' . request('query') . '%';
         $anuncios = Anuncio::where('anuncio_titulo', 'LIKE', $value)
             ->orWhere('anuncio_cuerpo', 'LIKE', $value)
+            ->orWhere('created_at', 'LIKE', $value)
+            ->orWhere('updated_at', 'LIKE', $value)
             ->paginate(10);
         return $anuncios;
     }

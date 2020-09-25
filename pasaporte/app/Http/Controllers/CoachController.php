@@ -62,8 +62,8 @@ class CoachController extends Controller
      */
     public function show(Coach $coach)
     {
-        //
-
+        $coach = Coach::find($coach->id);
+        return view('coaches.show', compact('coach'));
     }
 
     /**
