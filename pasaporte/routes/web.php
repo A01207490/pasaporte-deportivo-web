@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', "inicio");
+Route::view('/usuarios', "inicio");
 
 Route::get("/coaches", "CoachController@index")->name('coaches.index');
 Route::get("/coaches/{coach}/destroy", "CoachController@destroy")->name('coaches.destroy');
