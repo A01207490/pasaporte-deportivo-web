@@ -74,7 +74,6 @@ class ClaseController extends Controller
     {
         $clase = Clase::find($clase->id);
         $coach = Coach::find($clase->coach_id);
-
         return view('clases.show', compact('clase', 'coach'));
     }
 
@@ -135,5 +134,10 @@ class ClaseController extends Controller
             'required' => 'El campo :attribute es requerido.',
         ];
         return request()->validate($rules, $custom_messages);
+    }
+
+    public function confirm(Request $request, Clase $clase)
+    {
+        return view('clases.confirm', compact('clase'));
     }
 }

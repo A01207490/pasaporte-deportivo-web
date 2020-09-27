@@ -17,4 +17,9 @@ class Clase extends Model
     {
         return $this->belongsToMany(Dia::class);
     }
+
+    public function sesions()
+    {
+        return $this->belongsToMany(Sesion::class);
+    }
 }

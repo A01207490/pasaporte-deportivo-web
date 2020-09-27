@@ -28,16 +28,19 @@
                 <a class="nav-link {{ Request::path() === '/' ? 'active' : '' }}" href="{{ url('/') }}">Inicio</a>
             </li>
             <li class="nav-item mr-2 ml-2">
-                <a class="nav-link {{ Request::path() === 'usuarios' ? 'active' : '' }}" href="{{ url('/usuarios') }}">Usuarios</a>
+                <a class="nav-link {{ Request::path() === 'users' ? 'active' : '' }}" href="{{ route('users.index') }}">Users</a>
+            </li>
+            <li class="nav-item mr-2 ml-2">
+                <a class="nav-link {{ Request::path() === 'sesiones' ? 'active' : '' }}" href="{{ route('sesions.index') }}">Pasaportes</a>
             </li>
             <li class="nav-item mr-2 ml-2">
                 <a class="nav-link {{ Request::path() === 'coaches' ? 'active' : '' }}" href="{{ route('coaches.index') }}">Coaches</a>
             </li>
             <li class="nav-item mr-2 ml-2">
-                <a class="nav-link {{ Request::path() === 'clases' ? 'active' : '' }}" href="{{ url('/clases') }}">Clases</a>
+                <a class="nav-link {{ Request::path() === 'clases' ? 'active' : '' }}" href="{{ route('clases.index') }}">Clases</a>
             </li>
             <li class="nav-item mr-2 ml-2">
-                <a class="nav-link {{ Request::path() === 'anuncios' ? 'active' : '' }}" href="{{ url('/anuncios') }}">Anuncios</a>
+                <a class="nav-link {{ Request::path() === 'anuncios' ? 'active' : '' }}" href="{{ route('anuncios.index') }}">Anuncios</a>
             </li>
         </ul>
     </div>
