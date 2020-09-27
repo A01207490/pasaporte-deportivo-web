@@ -1,7 +1,7 @@
 @extends("layout")
 @section("content")
 <div class="row p-2 mt-2 d-flex justify-content-center align-items-center">
-    <h3>Sesions</h3>
+    <h3>Pasaportes</h3>
 </div>
 <div class="row p-2 d-flex justify-content-between align-items-center">
     <form method="GET" action="{{route('sesions.index')}}" class="d-flex justify-content-around align-items-center">
@@ -16,16 +16,16 @@
         </div>
     </form>
     <div>
-        <a href="{{route('sesions.create')}}">
+        <a href="/">
             <button class="btn btn-primary">
-                <img src="{{ asset('img/icons/add_circle.svg')}}" class="icon-white" alt="search">
-                Agregar
+                <img src="{{ asset('img/icons/download.svg')}}" height="15" class="icon-white" alt="search">
+                Descargar
             </button>
         </a>
     </div>
 </div>
 <div class="row p-2 d-flex justify-content-center">
-    <x-sesions.table :sesions="$sesions" />
+    <x-sesions.table :users="$users" />
 </div>
 
 @endsection
