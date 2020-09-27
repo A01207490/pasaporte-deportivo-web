@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Coach;
 use Illuminate\Http\Request;
+use BaconQrCode\Encoder\QrCode;
+use SimpleSoftwareIO\QrCode\Facade;
+use SimpleSoftwareIO\QrCode\ServiceProvider;
 
 class CoachController extends Controller
 {
@@ -62,7 +65,14 @@ class CoachController extends Controller
      */
     public function show(Coach $coach)
     {
-
+        /*
+        https://www.w3adda.com/blog/laravel-simple-qr-code-generator-example
+        https://www.sparkouttech.com/qr-code-in-laravel-a-complete-explanation-with-steps/
+        https://github.com/SimpleSoftwareIO/simple-qrcode/issues/44
+        https://www.youtube.com/watch?v=5y4_Xu4aA_I&t=304s
+        composer update -o
+        composer dumpautoload
+        */
         $coach = Coach::find($coach->id);
         return view('coaches.show', compact('coach'));
     }

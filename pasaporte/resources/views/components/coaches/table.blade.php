@@ -16,7 +16,7 @@
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
                 <a href="{{route('coaches.show', $coach)}}" class="p-1">
                     <button type="button" class="btn btn-primary btn-circle btn-sm">
-                        <img src="{{ asset('img/icons/visibility.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
+                        <img src="{{ asset('img/icons/document.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
                     </button>
                 </a>
                 <a href="{{route('coaches.edit', $coach)}}" class="p-1">
