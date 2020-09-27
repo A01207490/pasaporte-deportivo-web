@@ -15,6 +15,9 @@
                         Nómina:
                     </label>
                     {{$coach->coach_nomina}}
+
+                    {!! QrCode::generate({{$coach->coach_nomina}}); !!}
+
                 </li>
                 <li class="list-group-item">
                     <label class="font-weight-bold">
