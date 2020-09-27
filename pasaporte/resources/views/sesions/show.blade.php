@@ -5,9 +5,17 @@
     <div class="col-10 col-md-8 d-flex flex-column justify-content-center align-items-center">
         <div class="card  w-100">
             <div class="card-body">
-                <h4 class="card-title">
-                    {{$sesions[0]->user->name}}
-                </h4>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="card-title">
+                        {{$sesions[0]->user->name}}
+                    </h4>
+                    <a href="{{route('sesions.index')}}" class="card-link">
+                        <button class="btn btn-primary">
+                            Regresar
+                        </button>
+                    </a>
+                </div>
+
             </div>
             <table class="table smart-table">
                 <thead class="thead text-white bg-secondary">
@@ -30,11 +38,9 @@
                 </tbody>
             </table>
             <div class="card-body">
-                <a href="{{route('sesions.index')}}" class="card-link">
-                    <button class="btn btn-primary">
-                        Regresar
-                    </button>
-                </a>
+                <div class="d-flex justify-content-center">
+                    {{ $sesions->links() }}
+                </div>
             </div>
         </div>
     </div>

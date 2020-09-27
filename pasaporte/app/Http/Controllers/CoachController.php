@@ -19,7 +19,6 @@ class CoachController extends Controller
         } else {
             $coaches = Coach::paginate(10);
         }
-        dd($coaches);
         return view('coaches.index', compact('coaches'));
     }
 
