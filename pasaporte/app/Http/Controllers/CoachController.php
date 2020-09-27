@@ -19,6 +19,7 @@ class CoachController extends Controller
         } else {
             $coaches = Coach::paginate(10);
         }
+        dd($coaches);
         return view('coaches.index', compact('coaches'));
     }
 
@@ -62,6 +63,7 @@ class CoachController extends Controller
      */
     public function show(Coach $coach)
     {
+
         $coach = Coach::find($coach->id);
         return view('coaches.show', compact('coach'));
     }

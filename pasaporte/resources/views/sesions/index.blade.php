@@ -25,7 +25,7 @@
     </div>
 </div>
 <div class="row p-2 d-flex justify-content-center">
-    <x-sesions.table :sesions="$sesions" />
+    <x-sesions.table :users="$users" />
 </div>
 
 @endsection

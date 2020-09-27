@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Sesion;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SesionController extends Controller
 {
@@ -14,9 +16,12 @@ class SesionController extends Controller
      */
     public function index()
     {
-        $sesions = Sesion::paginate(10);
-        //dump($sesions);
-        return view('sesions.index', compact('sesions'));
+        $users = User::select('*')
+            ->whereIn('id', function ($query) {
+                $query->select('user_id')->from('sesions');
+            })
+            ->paginate(10);
+        return view('sesions.index', compact('users'));
     }
 
     /**
@@ -46,9 +51,12 @@ class SesionController extends Controller
      * @param  \App\Sesion  $sesion
      * @return \Illuminate\Http\Response
      */
-    public function show(Sesion $sesion)
+    public function show(Sesion $user)
     {
-        //
+
+        $sesions = Sesion::where('user_id', $user->id)
+            ->paginate(10);
+        return view('sesions.show', compact('sesions'));
     }
 
     /**

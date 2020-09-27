@@ -6,25 +6,31 @@
         <div class="card  w-100">
             <div class="card-body">
                 <h4 class="card-title">
-                    {{$coach->coach_nombre}}
+                    {{$sesions[0]->user->name}}
                 </h4>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <label class="font-weight-bold">
-                        Nómina:
-                    </label>
-                    {{$coach->coach_nomina}}
-                </li>
-                <li class="list-group-item">
-                    <label class="font-weight-bold">
-                        Correo:
-                    </label>
-                    {{$coach->coach_correo}}
-                </li>
-            </ul>
+            <table class="table smart-table">
+                <thead class="thead text-white bg-secondary">
+                    <tr>
+                        <th scope="col">Clase</th>
+                        <th scope="col">Coach</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($sesions as $sesion)
+                    <tr>
+                        <td data-col-title="Clase">{{ $sesion->clase->clase_nombre }}</td>
+                        <td data-col-title="Coach">{{ $sesion->clase->coach->coach_nombre }}</td>
+                    </tr>
+                    <tr>
+                        @empty
+                        <td colspan="6" class="text-center" data-col-title="Nombre">No hay registros disponibles</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
             <div class="card-body">
-                <a href="{{route('coaches.index')}}" class="card-link">
+                <a href="{{route('sesions.index')}}" class="card-link">
                     <button class="btn btn-primary">
                         Regresar
                     </button>
