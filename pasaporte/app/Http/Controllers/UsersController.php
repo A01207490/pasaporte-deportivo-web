@@ -38,7 +38,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -49,7 +49,8 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create($this->validateUser());
+        return view('users.success');
     }
 
     /**
@@ -71,24 +72,25 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $user->update($this->validateUser());
+        return view('users.success');
     }
 
     /**
@@ -101,5 +103,22 @@ class UsersController extends Controller
     {
         User::destroy($user->id);
         return view('users.success');
+    }
+
+    public function validateUser()
+    {
+        $rules = [
+            'name' => ['required', 'string', 'regex:/[a-zA-Z]/'],
+            'email' => ['required', 'email', 'regex:/[a-zA-Z0-9._%+-]+@itesm.mx/'],
+            'password' => ['required']
+        ];
+        $custom_messages = [
+            'name.required' => 'El campo nombre es requerido.',
+            'email.required' => 'El campo correo es requerido.',
+            'password.required' => 'El campo contraseña es requerido.',
+            'email.regex' => 'El dominio del correo debe de ser @itesm.mx',
+            'name.regex' => 'El nombre solo puede tener letras'
+        ];
+        return request()->validate($rules, $custom_messages);
     }
 }

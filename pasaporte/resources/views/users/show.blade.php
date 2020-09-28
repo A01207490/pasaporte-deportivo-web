@@ -11,10 +11,13 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    <label class="font-weight-bold">
-                        Nómina:
+                    <label>
+                        Correo
                     </label>
-                    {{$user->email}}
+                    <h6 class="font-weight-bold">
+                        {{$user->email}}
+                    </h6>
+
                 </li>
             </ul>
             <div class="card-body">
