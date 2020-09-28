@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Coach;
 use Illuminate\Http\Request;
-use BaconQrCode\Encoder\QrCode;
 use SimpleSoftwareIO\QrCode\Facade;
+use SimpleSoftwareIO\QrCode\Generator;
 use SimpleSoftwareIO\QrCode\ServiceProvider;
-use SebastianBergmann\ResourceOperations\generate;
+
 
 class CoachController extends Controller
 {
@@ -74,9 +74,13 @@ class CoachController extends Controller
         composer update -o
         composer dumpautoload
         */
-        //QrCode::generate('Make me into a QrCode!');
+        $qr_code = new Generator;
+        $code = $qr_code->generate('Make me into a QrCode!', '../public/img/qr_codes/my_qr_code.svg');
+
+        /*
         $coach = Coach::find($coach->id);
         return view('coaches.show', compact('coach'));
+        */
     }
 
     /**
