@@ -60,3 +60,6 @@ Route::get("/qr/{coach}/download", "CoachController@download")->name('qr.downloa
 
 
 Route::get("/anuncios/{anuncio}/confirm", "AnuncioController@confirm")->name('anuncios.confirm');
+Route::get("/clases/{clase}/confirm", "ClaseController@confirm")->name('clases.confirm');
+Route::get("/coaches/{coach}/confirm", "CoachController@confirm")->name('coaches.confirm');
+Route::get("/users/{user}/confirm", "UsersController@confirm")->name('users.confirm');

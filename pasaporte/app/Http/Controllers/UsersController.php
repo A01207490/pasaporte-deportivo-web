@@ -63,6 +63,11 @@ class UsersController extends Controller
         //
     }
 
+    public function confirm(User $user)
+    {
+        return view('users.confirm', compact('user'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -89,11 +94,12 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        User::destroy($user->id);
+        return view('users.success');
     }
 }

@@ -77,6 +77,11 @@ class ClaseController extends Controller
         return view('clases.show', compact('clase', 'coach'));
     }
 
+    public function confirm(Clase $clase)
+    {
+        return view('clases.confirm', compact('clase'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -119,7 +124,7 @@ class ClaseController extends Controller
     public function destroy(Clase $clase)
     {
         Clase::destroy($clase->id);
-        return redirect('clases');
+        return view('clases.success');
     }
     public function validateClase()
     {
@@ -134,10 +139,5 @@ class ClaseController extends Controller
             'required' => 'El campo :attribute es requerido.',
         ];
         return request()->validate($rules, $custom_messages);
-    }
-
-    public function confirm(Request $request, Clase $clase)
-    {
-        return view('clases.confirm', compact('clase'));
     }
 }

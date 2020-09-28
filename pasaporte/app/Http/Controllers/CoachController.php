@@ -96,6 +96,11 @@ class CoachController extends Controller
         return view('coaches.show', compact('coach'));
     }
 
+    public function confirm(Coach $coach)
+    {
+        return view('coaches.confirm', compact('coach'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -130,7 +135,7 @@ class CoachController extends Controller
     public function destroy(Coach $coach)
     {
         Coach::destroy($coach->id);
-        return redirect('coaches');
+        return view('coaches.success');
     }
 
     public function validateCoach()

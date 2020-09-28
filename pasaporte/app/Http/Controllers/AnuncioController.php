@@ -69,7 +69,6 @@ class AnuncioController extends Controller
 
     public function confirm(Anuncio $anuncio)
     {
-        //$anuncio = Anuncio::find($anuncio->id);
         return view('anuncios.confirm', compact('anuncio'));
     }
 
