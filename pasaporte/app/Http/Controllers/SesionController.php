@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Sesion;
 use App\User;
+use App\Sesion;
+use App\Exports\UsersExport;
 use Illuminate\Http\Request;
+use App\Exports\SesionsExport;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SesionController extends Controller
 {
@@ -20,6 +23,15 @@ class SesionController extends Controller
             $query->select('user_id')->from('sesions');
         })->paginate(10);
         return view('sesions.index', compact('users'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function export()
+    {
+        return Excel::download(new SesionsExport, 'sesions.xlsx');
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+use App\Exports\SesionsExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,3 +52,5 @@ Route::put("/users/{user}", "UsersController@update")->name('users.update');
 
 Route::get("/sesions", "SesionController@index")->name('sesions.index');
 Route::get("/sesions/{user}", "SesionController@show")->name('sesions.show');
+
+Route::get("/pasaportes/export", "SesionController@export")->name('pasaportes.export');

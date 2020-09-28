@@ -16,7 +16,7 @@
         </div>
     </form>
     <div>
-        <a href="/">
+        <a href="{{route('pasaportes.export')}}">
             <button class="btn btn-primary">
                 <img src="{{ asset('img/icons/download.svg')}}" height="15" class="icon-white" alt="search">
                 Descargar

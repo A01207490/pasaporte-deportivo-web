@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use BaconQrCode\Encoder\QrCode;
 use SimpleSoftwareIO\QrCode\Facade;
 use SimpleSoftwareIO\QrCode\ServiceProvider;
+use SebastianBergmann\ResourceOperations\generate;
 
 class CoachController extends Controller
 {
@@ -73,6 +74,7 @@ class CoachController extends Controller
         composer update -o
         composer dumpautoload
         */
+        //QrCode::generate('Make me into a QrCode!');
         $coach = Coach::find($coach->id);
         return view('coaches.show', compact('coach'));
     }
