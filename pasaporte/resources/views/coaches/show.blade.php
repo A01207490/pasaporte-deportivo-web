@@ -44,6 +44,11 @@
                         Regresar
                     </button>
                 </a>
+                <a href="{{route('qr.download', $coach)}}" class="card-link">
+                    <button class="btn btn-primary">
+                        Descargar
+                    </button>
+                </a>
             </div>
         </div>
 

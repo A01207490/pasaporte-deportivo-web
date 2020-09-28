@@ -6,6 +6,7 @@ use App\Coach;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facade;
 use SimpleSoftwareIO\QrCode\Generator;
+use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\ServiceProvider;
 
 
@@ -55,7 +56,18 @@ class CoachController extends Controller
     public function store(Request $request)
     {
         Coach::create($this->validateCoach());
+        $coach_nomina = $request->coach_nomina;
+        $qr_code = new Generator;
+        //$qr_code->format('png');
+        $qr_code->generate($coach_nomina, '../public/img/qr_codes/' . $coach_nomina . '.svg');
         return view('coaches.success');
+    }
+
+    public function download(Coach $coach)
+    {
+        $coach_nomina = $coach->coach_nomina;
+        //dd($coach_nomina);
+        return Storage::download('/public/img/qr_codes/' . $coach_nomina . '.svg');
     }
 
     /**
@@ -74,13 +86,14 @@ class CoachController extends Controller
         composer update -o
         composer dumpautoload
         */
-        $qr_code = new Generator;
-        $code = $qr_code->generate('Make me into a QrCode!', '../public/img/qr_codes/my_qr_code.svg');
-
         /*
+        $qr_code = new Generator;
+        $qr_code->format('png');
+        $code = $qr_code->generate('Make me into a QrCode!', '../public/img/qr_codes/my_qr_code.png');
+*/
+
         $coach = Coach::find($coach->id);
         return view('coaches.show', compact('coach'));
-        */
     }
 
     /**

@@ -54,3 +54,4 @@ Route::get("/sesions", "SesionController@index")->name('sesions.index');
 Route::get("/sesions/{user}", "SesionController@show")->name('sesions.show');
 
 Route::get("/pasaportes/export", "SesionController@export")->name('pasaportes.export');
+Route::get("/qr/{coach}/download", "CoachController@download")->name('qr.download');
