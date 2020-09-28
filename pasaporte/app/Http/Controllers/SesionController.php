@@ -19,10 +19,10 @@ class SesionController extends Controller
      */
     public function index()
     {
-        $users = User::whereIn('id', function ($query) {
+        $sesions = User::whereIn('id', function ($query) {
             $query->select('user_id')->from('sesions');
-        })->paginate(10);
-        return view('sesions.index', compact('users'));
+        })->paginate(5);
+        return view('sesions.index', compact('sesions'));
     }
     /**
      * Display a listing of the resource.
@@ -61,11 +61,11 @@ class SesionController extends Controller
      * @param  \App\Sesion  $sesion
      * @return \Illuminate\Http\Response
      */
-    public function show(Sesion $user)
+    public function show(Sesion $sesion)
     {
 
-        $sesions = Sesion::where('user_id', $user->id)
-            ->paginate(10);
+        $sesions = Sesion::where('user_id', $sesion->id)
+            ->paginate(6);
         return view('sesions.show', compact('sesions'));
     }
 

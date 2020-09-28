@@ -3,7 +3,7 @@
 
 <div class="row mt-4 p-2 d-flex justify-content-center align-items-center">
     <div class="col-10 col-md-12 d-flex flex-column justify-content-center align-items-center">
-        <div class="card  w-100">
+        <div class="card  w-100 ">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <h4 class="card-title">

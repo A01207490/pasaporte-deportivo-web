@@ -22,7 +22,7 @@ class CoachController extends Controller
         if (request('query')) {
             $coaches = $this->search();
         } else {
-            $coaches = Coach::paginate(10);
+            $coaches = Coach::paginate(5);
         }
         return view('coaches.index', compact('coaches'));
     }

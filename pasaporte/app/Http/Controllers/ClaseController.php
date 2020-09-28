@@ -19,7 +19,7 @@ class ClaseController extends Controller
         if (request('query')) {
             $clases = $this->search();
         } else {
-            $clases = Clase::paginate(10);
+            $clases = Clase::paginate(5);
         }
         return view('clases.index', compact('clases'));
     }

@@ -17,7 +17,7 @@ class AnuncioController extends Controller
         if (request('query')) {
             $anuncios = $this->search();
         } else {
-            $anuncios = Anuncio::paginate(10);
+            $anuncios = Anuncio::paginate(5);
         }
         return view('anuncios.index', compact('anuncios'));
     }
@@ -67,6 +67,12 @@ class AnuncioController extends Controller
         return view('anuncios.show', compact('anuncio'));
     }
 
+    public function confirm(Anuncio $anuncio)
+    {
+        //$anuncio = Anuncio::find($anuncio->id);
+        return view('anuncios.confirm', compact('anuncio'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -100,7 +106,7 @@ class AnuncioController extends Controller
     public function destroy(Anuncio $anuncio)
     {
         Anuncio::destroy($anuncio->id);
-        return redirect('anuncios');
+        return view('anuncios.success');
     }
 
     public function validateAnuncio()

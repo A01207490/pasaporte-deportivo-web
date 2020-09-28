@@ -1,7 +1,7 @@
 <table class="table smart-table">
     <thead class="thead text-white bg-secondary">
         <tr>
-            <th scope="col">Nombre</th>
+            <th scope="col">Título</th>
             <th scope="col">Creado</th>
             <th scope="col">Actualizado</th>
             <th scope="col">Acciones</th>
@@ -10,7 +10,7 @@
     <tbody>
         @forelse($anuncios as $anuncio)
         <tr>
-            <td data-col-title="Nombre">{{ $anuncio["anuncio_titulo"] }}</td>
+            <td data-col-title="Tpitulo">{{ $anuncio["anuncio_titulo"] }}</td>
             <td data-col-title="Creado">{{ $anuncio["created_at"] }}</td>
             <td data-col-title="Actualizado">{{ $anuncio["updated_at"] }}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
@@ -19,7 +19,7 @@
                         <img src="{{ asset('img/icons/visibility.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
                     </button>
                 </a>
-                <a href="{{route('anuncios.destroy', $anuncio)}}" class="p-1">
+                <a href="{{route('anuncios.confirm', $anuncio)}}" class="p-1">
                     <button type="button" class="btn btn-primary btn-circle btn-sm">
                         <img src="{{ asset('img/icons/delete.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
                     </button>

@@ -17,7 +17,7 @@ class UsersController extends Controller
         if (request('query')) {
             $users = $this->search();
         } else {
-            $users = User::paginate(10);
+            $users = User::paginate(5);
         }
         return view('users.index', compact('users'));
     }
