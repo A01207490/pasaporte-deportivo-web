@@ -27,7 +27,7 @@ class UsersController extends Controller
         $value = '%' . request('query') . '%';
         $users = User::where('name', 'LIKE', $value)
             ->orWhere('email', 'LIKE', $value)
-            ->paginate(10);
+            ->paginate(5);
         return $users;
     }
 
@@ -55,12 +55,12 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('users.show', compact('user'));
     }
 
     public function confirm(User $user)

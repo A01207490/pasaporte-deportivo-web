@@ -6,7 +6,7 @@
         <div class="card  w-100">
             <div class="card-body">
                 <h4 class="card-title">
-                    {{$coach->coach_nombre}}
+                    {{$user->name}}
                 </h4>
             </div>
             <ul class="list-group list-group-flush">
@@ -14,17 +14,11 @@
                     <label class="font-weight-bold">
                         Nómina:
                     </label>
-                    {{$coach->coach_nomina}}
-                </li>
-                <li class="list-group-item">
-                    <label class="font-weight-bold">
-                        Correo:
-                    </label>
-                    {{$coach->coach_correo}}
+                    {{$user->email}}
                 </li>
             </ul>
             <div class="card-body">
-                <a href="{{route('coaches.index')}}" class="card-link">
+                <a href="{{route('users.index')}}" class="card-link">
                     <button class="btn btn-primary">
                         Regresar
                     </button>

@@ -9,7 +9,7 @@
             <p>¡La operación fue exitosa!</p>
             <hr>
             <div class="d-flex justify-content-end align-items-center">
-                <a href="{{route('coaches.index')}}" class="pl-2 ">
+                <a href="{{route('users.index')}}" class="pl-2 ">
                     <button class="btn btn-primary">
                         Continuar
                     </button>
