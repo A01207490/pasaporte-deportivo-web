@@ -25,3 +25,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  * @param  \App\User  $user
  * @return \Illuminate\Http\Response
  */
+
+Route::resource('users', UsersController::class);

@@ -22,7 +22,16 @@ class UsersController extends Controller
         } else {
             $users = User::paginate(5);
         }
-        return view('users.index', compact('users'));
+        if (\Request::is('api/*')) {
+
+            return response()->json([
+                'data' => $users
+            ], 200);
+
+            exit();
+        } else {
+            return view('users.index', compact('users'));
+        }
     }
 
     public function search()
@@ -30,7 +39,12 @@ class UsersController extends Controller
         $value = '%' . request('query') . '%';
         $users = User::where('name', 'LIKE', $value)
             ->orWhere('email', 'LIKE', $value)
+            ->orWhere('semestre', 'LIKE', $value)
             ->paginate(5);
+        /*
+        $carrera_nombre = Carrera::findOrFail(request('query'));
+        $value = '%' . $carrera_nombre . '%';
+        */
         return $users;
     }
 
