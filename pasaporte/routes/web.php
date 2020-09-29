@@ -1,5 +1,7 @@
 <?php
 
+use App\Exports\SesionsExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +33,7 @@ Route::get("/clases/{clase}", "ClaseController@show")->name('clases.show');
 Route::get("/clases/{clase}/edit", "ClaseController@edit")->name('clases.edit');
 Route::put("/clases/{clase}", "ClaseController@update")->name('clases.update');
 
+
 Route::get("/anuncios", "AnuncioController@index")->name('anuncios.index');
 Route::get("/anuncios/{anuncio}/destroy", "AnuncioController@destroy")->name('anuncios.destroy');
 Route::post("/anuncios", "AnuncioController@store")->name('anuncios.store');
@@ -49,9 +52,14 @@ Route::put("/users/{user}", "UsersController@update")->name('users.update');
 
 
 Route::get("/sesions", "SesionController@index")->name('sesions.index');
-Route::get("/sesions/{user}/destroy", "SesionController@destroy")->name('sesions.destroy');
-Route::post("/sesions", "SesionController@store")->name('sesions.store');
-Route::get("/sesions/create", "SesionController@create")->name('sesions.create');
 Route::get("/sesions/{user}", "SesionController@show")->name('sesions.show');
-Route::get("/sesions/{user}/edit", "SesionController@edit")->name('sesions.edit');
-Route::put("/sesions/{user}", "SesionController@update")->name('sesions.update');
+
+Route::get("/pasaportes/export", "SesionController@export")->name('pasaportes.export');
+Route::get("/qr/{coach}/download", "CoachController@download")->name('qr.download');
+
+
+
+Route::get("/anuncios/{anuncio}/confirm", "AnuncioController@confirm")->name('anuncios.confirm');
+Route::get("/clases/{clase}/confirm", "ClaseController@confirm")->name('clases.confirm');
+Route::get("/coaches/{coach}/confirm", "CoachController@confirm")->name('coaches.confirm');
+Route::get("/users/{user}/confirm", "UsersController@confirm")->name('users.confirm');

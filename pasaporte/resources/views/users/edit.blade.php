@@ -9,17 +9,16 @@
 </style>
 <div class="row p-2 mt-2 d-flex justify-content-center align-items-center">
     <div class="bd-highlight">
-        <h3>Editar coach</h3>
+        <h3>Agregar user</h3>
     </div>
 </div>
 <div class="row p-2 d-flex justify-content-center align-items-center">
-    <form method="POST" action="{{route('coaches.update', $coach)}}" class="col-10 col-md-5 d-flex flex-column justify-content-center align-items-center">
+    <form method="POST" action="{{route('users.store')}}" class="col-10 col-md-5 d-flex flex-column justify-content-center align-items-center">
         @csrf
-        @method('PUT')
         <div class="form-group w-100">
             <label>Nombre</label>
-            <input name="coach_nombre" type="text" class="form-control @error('coach_nombre') error-input @enderror" required value="{{ $coach->coach_nombre }}">
-            @error('coach_nombre')
+            <input name="name" type="text" class="form-control @error('name') error-input @enderror" value="{{ $user->name }}" required>
+            @error('name')
             <div class="alert alert-red p-1 mt-2">
                 {{ $message }}
             </div>
@@ -27,17 +26,17 @@
         </div>
         <div class="form-group w-100">
             <label>Correo</label>
-            <input name="coach_correo" type="email" class="form-control @error('coach_correo') error-input @enderror" required value="{{ $coach->coach_correo }}">
-            @error('coach_correo')
+            <input name="email" type="email" class="form-control @error('email') error-input @enderror" value="{{ $user->email }}" required>
+            @error('email')
             <div class="alert alert-red p-1 mt-2">
                 {{ $message }}
             </div>
             @enderror
         </div>
         <div class="form-group w-100">
-            <label>Nómina</label>
-            <input name="coach_nomina" type="text" class="form-control @error('coach_nomina') error-input @enderror" required value="{{ $coach->coach_nomina }}">
-            @error('coach_nomina')
+            <label>Contraseña</label>
+            <input name="password" type="password" class="form-control @error('password') error-input @enderror" value="{{ $user->password }}" required>
+            @error('password')
             <div class="alert alert-red p-1 mt-2">
                 {{ $message }}
             </div>

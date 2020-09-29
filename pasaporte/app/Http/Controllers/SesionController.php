@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Sesion;
 use App\User;
+use App\Sesion;
+use App\Exports\UsersExport;
 use Illuminate\Http\Request;
+use App\Exports\SesionsExport;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SesionController extends Controller
 {
@@ -16,12 +19,20 @@ class SesionController extends Controller
      */
     public function index()
     {
-        $users = User::select('*')
-            ->whereIn('id', function ($query) {
-                $query->select('user_id')->from('sesions');
-            })
-            ->paginate(10);
+        //Estos son usuarios
+        $users = User::whereIn('id', function ($query) {
+            $query->select('user_id')->from('sesions');
+        })->paginate(5);
         return view('sesions.index', compact('users'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function export()
+    {
+        return Excel::download(new SesionsExport, 'sesions.xlsx');
     }
 
     /**
@@ -51,11 +62,11 @@ class SesionController extends Controller
      * @param  \App\Sesion  $sesion
      * @return \Illuminate\Http\Response
      */
-    public function show(Sesion $user)
+    public function show(User $user)
     {
-
+        //$sesion: es un usuario
         $sesions = Sesion::where('user_id', $user->id)
-            ->paginate(10);
+            ->paginate(6);
         return view('sesions.show', compact('sesions'));
     }
 
@@ -93,3 +104,12 @@ class SesionController extends Controller
         //
     }
 }
+
+/*
+  $users = User::select('*')
+            ->whereIn('id', function ($query) {
+                $query->select('user_id')->from('sesions');
+            })
+            ->paginate(10);
+        return view('sesions.index', compact('users'));
+*/
