@@ -9,12 +9,13 @@
 </style>
 <div class="row p-2 mt-2 d-flex justify-content-center align-items-center">
     <div class="bd-highlight">
-        <h3>Agregar user</h3>
+        <h3>Actualizar Usuario</h3>
     </div>
 </div>
 <div class="row p-2 d-flex justify-content-center align-items-center">
-    <form method="POST" action="{{route('users.store')}}" class="col-10 col-md-5 d-flex flex-column justify-content-center align-items-center">
+    <form method="POST" action="{{route('users.update', $user)}}" class="col-10 col-md-5 d-flex flex-column justify-content-center align-items-center">
         @csrf
+        @method('PUT')
         <div class="form-group w-100">
             <label>Nombre</label>
             <input name="name" type="text" class="form-control @error('name') error-input @enderror" value="{{ $user->name }}" required>
@@ -37,6 +38,38 @@
             <label>Contraseña</label>
             <input name="password" type="password" class="form-control @error('password') error-input @enderror" value="{{ $user->password }}" required>
             @error('password')
+            <div class="alert alert-red p-1 mt-2">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="form-group w-100">
+            <label>Carrera</label>
+            <select name='carrera_id' class="form-control @error('carrera_id') error-input @enderror" value="{{ $user->carrera_id }}" required>
+                @foreach($carreras as $carrera)
+                <option value="{{$carrera->id}}">{{$carrera->carrera_nombre}}</option>
+                @endforeach
+            </select>
+            @error('carrera')
+            <div class="alert alert-red p-1 mt-2">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="form-group w-100">
+            <label>Semestre</label>
+            <select name='semestre' class="form-control @error('semestre') error-input @enderror" value="{{ $user->semestre }}" required>
+                <option value="1">1°</option>
+                <option value="2">2°</option>
+                <option value="3">3°</option>
+                <option value="4">4°</option>
+                <option value="5">5°</option>
+                <option value="6">6°</option>
+                <option value="7">7°</option>
+                <option value="8">8°</option>
+                <option value="9">9°</option>
+            </select>
+            @error('semestre')
             <div class="alert alert-red p-1 mt-2">
                 {{ $message }}
             </div>

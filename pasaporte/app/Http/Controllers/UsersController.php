@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Carrera;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -19,7 +22,16 @@ class UsersController extends Controller
         } else {
             $users = User::paginate(5);
         }
-        return view('users.index', compact('users'));
+        if (\Request::is('api/*')) {
+
+            return response()->json([
+                'data' => $users
+            ], 200);
+
+            exit();
+        } else {
+            return view('users.index', compact('users'));
+        }
     }
 
     public function search()
@@ -27,7 +39,12 @@ class UsersController extends Controller
         $value = '%' . request('query') . '%';
         $users = User::where('name', 'LIKE', $value)
             ->orWhere('email', 'LIKE', $value)
+            ->orWhere('semestre', 'LIKE', $value)
             ->paginate(5);
+        /*
+        $carrera_nombre = Carrera::findOrFail(request('query'));
+        $value = '%' . $carrera_nombre . '%';
+        */
         return $users;
     }
 
@@ -38,7 +55,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $carreras = Carrera::all();
+        return view('users.create', compact('carreras'));
     }
 
     /**
@@ -49,7 +67,21 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        //dd(request('semestre'));
         User::create($this->validateUser());
+        /*
+        $user = User::create(([
+          
+        ]));
+        $carrera_user = ([
+            'user_id' => $user->id,
+            'carrera_id' => $request->carrera_id,
+            'user_semestre' => $request->user_semestre,
+            'created_at' => NOW(),
+            'updated_at' => NOW()
+        ]);
+        DB::table('carrera_user')->insert($carrera_user);
+        */
         return view('users.success');
     }
 
@@ -61,6 +93,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
+
         return view('users.show', compact('user'));
     }
 
@@ -77,7 +110,8 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $carreras = Carrera::all();
+        return view('users.edit', compact('user', 'carreras'));
     }
 
     /**
@@ -110,7 +144,9 @@ class UsersController extends Controller
         $rules = [
             'name' => ['required', 'string', 'regex:/[a-zA-Z]/'],
             'email' => ['required', 'email', 'regex:/[a-zA-Z0-9._%+-]+@itesm.mx/'],
-            'password' => ['required']
+            'password' => ['required'],
+            'carrera_id' => ['required'],
+            'semestre' => ['required']
         ];
         $custom_messages = [
             'name.required' => 'El campo nombre es requerido.',

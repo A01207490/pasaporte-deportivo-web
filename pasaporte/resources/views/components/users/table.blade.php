@@ -3,6 +3,8 @@
         <tr>
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>
+            <th scope="col">Carrera</th>
+            <th scope="col">Semestre</th>
             <th scope="col">Acciones</th>
         </tr>
     </thead>
@@ -11,6 +13,8 @@
         <tr>
             <td data-col-title="Nombre">{{ $user["name"] }}</td>
             <td data-col-title="Correo">{{ $user["email"] }}</td>
+            <td data-col-title="Carrera">{{ $user->carrera->carrera_nombre }}</td>
+            <td data-col-title="Semestre">{{ $user->semestre . '°' }}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
                 <a href="{{route('users.show', $user)}}" class="p-1">
                     <button type="button" class="btn btn-primary btn-circle btn-sm">
