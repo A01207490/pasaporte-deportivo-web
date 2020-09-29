@@ -43,6 +43,38 @@
             </div>
             @enderror
         </div>
+        <div class="form-group w-100">
+            <label>Carrera</label>
+            <select name='carrera_id' class="form-control @error('carrera_id') error-input @enderror" value="{{ $user->carrera_id }}" required>
+                @foreach($carreras as $carrera)
+                <option value="{{$carrera->id}}">{{$carrera->carrera_nombre}}</option>
+                @endforeach
+            </select>
+            @error('carrera')
+            <div class="alert alert-red p-1 mt-2">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="form-group w-100">
+            <label>Semestre</label>
+            <select name='semestre' class="form-control @error('semestre') error-input @enderror" value="{{ $user->semestre }}" required>
+                <option value="1">1°</option>
+                <option value="2">2°</option>
+                <option value="3">3°</option>
+                <option value="4">4°</option>
+                <option value="5">5°</option>
+                <option value="6">6°</option>
+                <option value="7">7°</option>
+                <option value="8">8°</option>
+                <option value="9">9°</option>
+            </select>
+            @error('semestre')
+            <div class="alert alert-red p-1 mt-2">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Aceptar
         </button>
