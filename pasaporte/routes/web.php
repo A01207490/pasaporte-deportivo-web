@@ -52,7 +52,7 @@ Route::put("/users/{user}", "UsersController@update")->name('users.update');
 
 
 Route::get("/sesions", "SesionController@index")->name('sesions.index');
-Route::get("/sesions/{sesion}", "SesionController@show")->name('sesions.show');
+Route::get("/sesions/{user}", "SesionController@show")->name('sesions.show');
 
 Route::get("/pasaportes/export", "SesionController@export")->name('pasaportes.export');
 Route::get("/qr/{coach}/download", "CoachController@download")->name('qr.download');

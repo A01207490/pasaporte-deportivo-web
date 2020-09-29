@@ -6,11 +6,11 @@
         </tr>
     </thead>
     <tbody>
-        @forelse($sesions as $sesion)
+        @forelse($users as $user)
         <tr>
-            <td data-col-title="Alumno">{{ $sesion->name }}</td>
+            <td data-col-title="Alumno">{{ $user->name }}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
-                <a href="{{route('sesions.show', $sesion)}}" class="p-1">
+                <a href="{{route('sesions.show', $user)}}" class="p-1">
                     <button type="button" class="btn btn-primary btn-circle btn-sm">
                         <img src="{{ asset('img/icons/visibility.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
                     </button>
@@ -26,5 +26,5 @@
     </tbody>
 </table>
 <div class="d-flex justify-content-center">
-    {{ $sesions->links() }}
+    {{ $users->links() }}
 </div>
