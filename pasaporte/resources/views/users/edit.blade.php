@@ -9,12 +9,13 @@
 </style>
 <div class="row p-2 mt-2 d-flex justify-content-center align-items-center">
     <div class="bd-highlight">
-        <h3>Agregar user</h3>
+        <h3>Actualizar Usuario</h3>
     </div>
 </div>
 <div class="row p-2 d-flex justify-content-center align-items-center">
-    <form method="POST" action="{{route('users.store')}}" class="col-10 col-md-5 d-flex flex-column justify-content-center align-items-center">
+    <form method="POST" action="{{route('users.update', $user)}}" class="col-10 col-md-5 d-flex flex-column justify-content-center align-items-center">
         @csrf
+        @method('PUT')
         <div class="form-group w-100">
             <label>Nombre</label>
             <input name="name" type="text" class="form-control @error('name') error-input @enderror" value="{{ $user->name }}" required>
