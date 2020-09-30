@@ -65,6 +65,11 @@ Route::get("/clases/{clase}/confirm", "ClaseController@confirm")->name('clases.c
 Route::get("/coaches/{coach}/confirm", "CoachController@confirm")->name('coaches.confirm');
 Route::get("/users/{user}/confirm", "UsersController@confirm")->name('users.confirm');
 
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
