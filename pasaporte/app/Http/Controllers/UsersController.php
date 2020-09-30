@@ -30,7 +30,8 @@ class UsersController extends Controller
 
             exit();
         } else {
-            return view('users.index', compact('users'));
+            $carreras = Carrera::all();
+            return view('users.index', compact('users', 'carreras'));
         }
     }
 
@@ -67,8 +68,9 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //dd(request('semestre'));
+
         User::create($this->validateUser());
+
         /*
         $user = User::create(([
           
