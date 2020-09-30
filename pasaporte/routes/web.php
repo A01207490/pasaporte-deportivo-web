@@ -1,6 +1,7 @@
 <?php
 
 use App\Exports\SesionsExport;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
 
@@ -63,3 +64,7 @@ Route::get("/anuncios/{anuncio}/confirm", "AnuncioController@confirm")->name('an
 Route::get("/clases/{clase}/confirm", "ClaseController@confirm")->name('clases.confirm');
 Route::get("/coaches/{coach}/confirm", "CoachController@confirm")->name('coaches.confirm');
 Route::get("/users/{user}/confirm", "UsersController@confirm")->name('users.confirm');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
