@@ -18,8 +18,14 @@ class Clase extends Model
         return $this->belongsToMany(Dia::class);
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();;
+    }
+    /*
     public function sesions()
     {
         return $this->belongsToMany(Sesion::class);
     }
+    */
 }

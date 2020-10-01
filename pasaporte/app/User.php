@@ -41,11 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    /*
     public function sesions()
     {
         return $this->hasMany(Sesion::class);
     }
+    */
 
     public function coach()
     {
@@ -56,6 +57,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Carrera::class);
     }
+
+    public function clases()
+    {
+        return $this->belongsToMany(Clase::class)->withTimestamps();;
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);

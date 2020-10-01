@@ -7,8 +7,11 @@ use App\Sesion;
 use App\Exports\UsersExport;
 use Illuminate\Http\Request;
 use App\Exports\SesionsExport;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class SesionController extends Controller
 {
@@ -21,7 +24,7 @@ class SesionController extends Controller
     {
         //Estos son usuarios
         $users = User::whereIn('id', function ($query) {
-            $query->select('user_id')->from('sesions');
+            $query->select('user_id')->from('clase_user');
         })->paginate(5);
         return view('sesions.index', compact('users'));
     }
@@ -62,13 +65,27 @@ class SesionController extends Controller
      * @param  \App\Sesion  $sesion
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $sesion)
     {
         //$sesion: es un usuario
+        $user = $sesion;
+        //$user = User::find($user->id);
+        /*
         $sesions = Sesion::where('user_id', $user->id)
-            ->paginate(6);
-        return view('sesions.show', compact('sesions'));
+            ->join('clases', 'clase_user.clase_id', '=', 'clases.id')
+            ->join('users', 'clase_user.user_id', '=', 'users.id')
+            ->join('coaches', 'clases.coach_id', '=', 'coaches.id')
+            ->select('clase_user.created_at', 'users.name', 'users.email', 'clases.clase_nombre', 'clases.clase_hora_inicio', 'clases.clase_hora_fin', 'coaches.coach_nombre', 'coaches.coach_nomina', 'coaches.coach_correo')
+            ->paginate(5);
+        */
+        $sesions = Sesion::getSesions($user)->paginate(5);
+        //$sesions = $this->paginate($user->clases);
+        //return $sesions = $user->clases->paginate(6);
+        //return $sesions;
+        return view('sesions.show', compact('user', 'sesions'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.

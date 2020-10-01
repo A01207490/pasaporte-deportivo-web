@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <h4 class="card-title">
-                        {{$sesions[0]->user->name}}
+                        {{$user->name}}
                     </h4>
                     <a href="{{route('sesions.index')}}" class="card-link">
                         <button class="btn btn-primary">
@@ -31,11 +31,12 @@
                 <tbody>
                     @forelse($sesions as $sesion)
                     <tr>
-                        <td data-col-title="Clase">{{ $sesion->clase->clase_nombre }}</td>
+
+                        <td data-col-title="Clase">{{ $sesion->clase_nombre }}</td>
                         <td data-col-title="Fecha registro">{{ $sesion->created_at }}</td>
-                        <td data-col-title="Coach">{{ $sesion->clase->coach->coach_nombre }}</td>
-                        <td data-col-title="Hora inicio">{{ $sesion->clase->clase_hora_inicio }}</td>
-                        <td data-col-title="Hora fin">{{ $sesion->clase->clase_hora_fin }}</td>
+                        <td data-col-title="Coach">{{ $sesion->coach_nombre }}</td>
+                        <td data-col-title="Hora inicio">{{ $sesion->clase_hora_inicio }}</td>
+                        <td data-col-title="Hora fin">{{ $sesion->clase_hora_fin }}</td>
 
                     </tr>
                     <tr>
