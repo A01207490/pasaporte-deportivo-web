@@ -19,7 +19,6 @@ class CreateDiasTable extends Migration
             $table->timestamps();
         });
 
-        //clase_dia
         Schema::create('clase_dia', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('clase_id');

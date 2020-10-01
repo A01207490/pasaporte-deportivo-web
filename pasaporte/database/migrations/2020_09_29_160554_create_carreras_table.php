@@ -18,24 +18,6 @@ class CreateCarrerasTable extends Migration
             $table->timestamps();
             $table->string('carrera_nombre');
         });
-        /*
-        Schema::create('carrera_user', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('carrera_id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('user_semestre');
-            $table->timestamps();
-            $table->unique(['user_id']);
-            $table->foreign('carrera_id')
-                ->references('id')
-                ->on('carreras')
-                ->onDelete('cascade');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-        });
-        */
     }
 
     /**

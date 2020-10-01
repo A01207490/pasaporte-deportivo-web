@@ -1,6 +1,8 @@
 <?php
 
+use App\Clase;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class ClaseSeeder extends Seeder
 {
