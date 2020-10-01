@@ -18,7 +18,7 @@ class UsersController extends Controller
     public function index()
     {
         if (request('query')) {
-            $users = $this->search();
+            $users = $this->search()->paginate(5);
         } else {
 
             $users = User::getAllStudents()->paginate(5);
@@ -40,15 +40,20 @@ class UsersController extends Controller
     public function search()
     {
         $value = '%' . request('query') . '%';
-        $users = User::where('name', 'LIKE', $value)
+        $students = User::where('name', 'LIKE', $value)
             ->orWhere('email', 'LIKE', $value)
             ->orWhere('semestre', 'LIKE', $value)
-            ->paginate(5);
-        /*
-        $carrera_nombre = Carrera::findOrFail(request('query'));
-        $value = '%' . $carrera_nombre . '%';
-        */
-        return $users;
+            ->orWhere('carreras.carrera_nombre', 'LIKE', $value)
+            ->join('carreras', 'users.carrera_id', '=', 'carreras.id')
+            ->select('users.id')
+            ->get();
+        $query = User::where('role_id', 2)
+            ->whereIn('users.id', $students)
+            ->join('role_user', 'users.id', '=', 'role_user.user_id')
+            ->join('carreras', 'users.carrera_id', '=', 'carreras.id')
+            ->join('roles', 'role_user.role_id', '=', 'roles.id')
+            ->select('users.id', 'roles.name', 'users.name', 'users.email', 'users.semestre', 'carreras.carrera_nombre');
+        return $query;
     }
 
     /**
