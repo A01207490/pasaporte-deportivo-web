@@ -16,7 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::view('/', "inicio");
+
+Route::get("/users/destroyAll", "UsersController@destroyAll")->name('users.destroyAll')->middleware(['auth', 'auth.admin']);
+Route::get("/users/confirmDestroyAll", "UsersController@confirmDestroyAll")->name('users.confirmDestroyAll')->middleware(['auth', 'auth.admin']);
+
+
+
+
 
 Route::resource("/anuncios", "AnuncioController")->middleware(['auth', 'auth.admin']);
 Route::resource("/coaches", "CoachController")->middleware(['auth', 'auth.admin']);

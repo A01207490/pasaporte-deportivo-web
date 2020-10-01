@@ -83,7 +83,7 @@ class UsersController extends Controller
           
         ]));
         $carrera_user = ([
-            'user_id' => $user->id,
+            'user_id' => $user->id, 
             'carrera_id' => $request->carrera_id,
             'user_semestre' => $request->user_semestre,
             'created_at' => NOW(),
@@ -109,6 +109,11 @@ class UsersController extends Controller
     public function confirm(User $user)
     {
         return view('users.confirm', compact('user'));
+    }
+
+    public function confirmDestroyAll()
+    {
+        return view('users.confirmDestroyAll');
     }
 
     /**
@@ -145,6 +150,13 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         User::destroy($user->id);
+        return view('users.success');
+    }
+
+    public function destroyAll()
+    {
+        $students = User::where('role_id', 2)
+            ->join('role_user', 'users.id', '=', 'role_user.user_id')->delete();
         return view('users.success');
     }
 

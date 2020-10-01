@@ -31,7 +31,7 @@
     </div>
     -->
         <div class="">
-            <a href="{{route('users.create')}}">
+            <a href="{{route('users.confirmDestroyAll')}}">
                 <button class="btn btn-primary">
                     <img src="{{ asset('img/icons/delete.svg')}}" class="icon-white" alt="search">
                     Borrar
