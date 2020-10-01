@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Carrera;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -42,6 +43,17 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $carreras = Carrera::all();
+        return view('auth.register', compact('carreras'));
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -51,8 +63,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/[a-zA-Z0-9._%+-]+@itesm.mx/'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'carrera_id' => ['required'],
+            'semestre' => ['required'],
         ]);
     }
 
@@ -68,6 +82,16 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'semestre' => $data['semestre'],
+            'carrera_id' => $data['carrera_id'],
         ]);
+    }
+
+    public function validateUser()
+    {
+        $rules = [
+            'carrera_id' => ['required'],
+            'semestre' => ['required']
+        ];
     }
 }

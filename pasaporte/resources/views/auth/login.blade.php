@@ -3,9 +3,7 @@
 @section('content')
 @section('content')
 <div class="card-header">
-    <h4>
-        {{ __('Login') }}
-    </h4>
+    {{ __('Login') }}
 </div>
 
 <div class="card-body">

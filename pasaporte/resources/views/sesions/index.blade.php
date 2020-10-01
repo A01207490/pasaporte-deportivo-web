@@ -2,9 +2,7 @@
 
 @section('content')
 <div class="card-header">
-    <h4>
-        Pasaportes
-    </h4>
+    Pasaportes
 </div>
 
 <div class="card-body">

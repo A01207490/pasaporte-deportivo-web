@@ -2,9 +2,7 @@
 
 @section('content')
 <div class="card-header">
-    <h4>
-        Alumnos
-    </h4>
+    Alumnos
 </div>
 
 <div class="card-body">
@@ -39,12 +37,7 @@
                     Borrar
                 </button>
             </a>
-            <a href="{{route('users.create')}}">
-                <button class="btn btn-primary">
-                    <img src="{{ asset('img/icons/add_circle.svg')}}" class="icon-white" alt="search">
-                    Agregar
-                </button>
-            </a>
+
         </div>
     </div>
     <div class="row p-2 d-flex justify-content-center">

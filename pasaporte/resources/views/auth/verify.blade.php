@@ -2,9 +2,7 @@
 
 @section('content')
 <div class="card-header">
-    <h4>
-        {{ __('Verifica tu dirección de correo') }}
-    </h4>
+    {{ __('Verifica tu dirección de correo') }}
 </div>
 
 <div class="card-body">

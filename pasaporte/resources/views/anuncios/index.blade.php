@@ -2,9 +2,7 @@
 
 @section('content')
 <div class="card-header">
-    <h4>
-        Anuncios
-    </h4>
+    Anuncios
 </div>
 
 <div class="card-body">

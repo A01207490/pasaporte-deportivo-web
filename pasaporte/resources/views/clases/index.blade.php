@@ -2,9 +2,7 @@
 
 @section('content')
 <div class="card-header">
-    <h4>
-        Clases
-    </h4>
+    Clases
 </div>
 
 <div class="card-body">

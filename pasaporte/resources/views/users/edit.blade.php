@@ -1,7 +1,6 @@
-@extends("layout")
-@section('head')
-@endsection
-@section("content")
+@extends('layouts.app')
+
+@section('content')
 <style>
     .error-input {
         border: 2px solid #FD8080;

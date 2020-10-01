@@ -1,7 +1,6 @@
-@extends("layout")
-@section('head')
-@endsection
-@section("content")
+@extends('layouts.app')
+
+@section('content')
 <div class="row p-2 mt-2 d-flex justify-content-center align-items-center">
     <div class="alert alert-success" role="alert">
         ¡La operación fue exitosa!

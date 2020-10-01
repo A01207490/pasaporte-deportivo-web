@@ -3,9 +3,7 @@
 @section('content')
 
 <div class="card-header">
-    <h4>
-        Coaches
-    </h4>
+    Coaches
 </div>
 
 <div class="card-body">

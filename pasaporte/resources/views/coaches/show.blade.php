@@ -1,5 +1,6 @@
-@extends("layout")
-@section("content")
+@extends('layouts.app')
+
+@section('content')
 
 <div class="row mt-4 p-2 d-flex justify-content-center align-items-center">
     <div class="col-12 col-sm-11 col-md-8 col-lg-6 col-xl-5 d-flex flex-column justify-content-center align-items-center">
