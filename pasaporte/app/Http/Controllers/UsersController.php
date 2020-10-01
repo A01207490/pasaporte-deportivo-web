@@ -20,7 +20,9 @@ class UsersController extends Controller
         if (request('query')) {
             $users = $this->search();
         } else {
-            $users = User::paginate(5);
+
+            $users = User::getAllStudents()->paginate(5);
+            //return $users;
         }
         if (\Request::is('api/*')) {
 

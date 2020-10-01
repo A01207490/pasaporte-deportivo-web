@@ -77,4 +77,9 @@ class User extends Authenticatable
     {
         return null != $this->roles()->where('name', $roles)->first();
     }
+
+    static public function getAllStudents()
+    {
+        return User::where('role_id', 2)->join('role_user', 'users.id', '=', 'role_user.user_id')->join('carreras', 'users.carrera_id', '=', 'carreras.id')->join('roles', 'role_user.role_id', '=', 'roles.id')->select('users.id', 'roles.name', 'users.name', 'users.email', 'users.semestre', 'carreras.carrera_nombre');
+    }
 }

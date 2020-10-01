@@ -8,7 +8,7 @@
     <tbody>
         @forelse($users as $user)
         <tr>
-            <td data-col-title="Alumno">{{ $user->name . $user->id  }}</td>
+            <td data-col-title="Alumno">{{ $user->name }}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
                 <a href="{{route('sesions.show', $user)}}" class="p-1">
                     <button type="button" class="btn btn-primary btn-circle btn-sm">

@@ -16,9 +16,7 @@
             <td data-col-title="Hora inicio">{{ $clase["clase_hora_inicio"] }}</td>
             <td data-col-title="Hora fin">{{ $clase["clase_hora_fin"] }}</td>
             <td data-col-title="Días">
-                @foreach($clase->dias as $dia)
-                {{ $dia->dia_nombre }}
-                @endforeach
+                {{ implode(', ', $clase->dias()->get()->pluck('dia_nombre')->toArray()) }}
             </td>
             <td data-col-title="Coach">{{ $clase->coach->coach_nombre }}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
