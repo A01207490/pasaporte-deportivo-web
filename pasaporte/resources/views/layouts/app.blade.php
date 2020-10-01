@@ -32,7 +32,7 @@
             <div id="app">
                 <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
                     <div class="container">
-                        <a class="navbar-brand" href="{{ url('/home') }}">
+                        <a class="navbar-brand" href="{{ url('/') }}">
                             <img src="{{ asset('img/icons/pasaporte.svg')}}" alt="Pasaporte" height="40px">
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -43,8 +43,9 @@
                             <!-- Left Side Of Navbar -->
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item mr-2 ml-2">
-                                    <a class="nav-link {{ Request::path() === '/' ? 'active' : '' }}" href="{{ url('/') }}">Inicio</a>
+                                    <a class="nav-link {{ Request::path() === '/' ? 'active' : '' }}" href="{{ url('/home') }}">Inicio</a>
                                 </li>
+                                @hasRole('admin')
                                 <li class="nav-item mr-2 ml-2">
                                     <a class="nav-link {{ Request::path() === 'users' ? 'active' : '' }}" href="{{ route('users.index') }}">Alumnos</a>
                                 </li>
@@ -60,6 +61,7 @@
                                 <li class="nav-item mr-2 ml-2">
                                     <a class="nav-link {{ Request::path() === 'anuncios' ? 'active' : '' }}" href="{{ route('anuncios.index') }}">Anuncios</a>
                                 </li>
+                                @endhasRole
                             </ul>
 
                             <!-- Right Side Of Navbar -->

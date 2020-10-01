@@ -18,52 +18,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', "inicio");
 
-Route::get("/coaches", "CoachController@index")->name('coaches.index');
-Route::get("/coaches/{coach}/destroy", "CoachController@destroy")->name('coaches.destroy');
-Route::post("/coaches", "CoachController@store")->name('coaches.store');
-Route::get("/coaches/create", "CoachController@create")->name('coaches.create');
-Route::get("/coaches/{coach}", "CoachController@show")->name('coaches.show');
-Route::get("/coaches/{coach}/edit", "CoachController@edit")->name('coaches.edit');
-Route::put("/coaches/{coach}", "CoachController@update")->name('coaches.update');
+Route::resource("/anuncios", "AnuncioController")->middleware(['auth', 'auth.admin']);
+Route::resource("/coaches", "CoachController")->middleware(['auth', 'auth.admin']);
+Route::resource("/clases", "ClaseController")->middleware(['auth', 'auth.admin']);
+Route::resource("/users", "UsersController")->middleware(['auth', 'auth.admin']);
+Route::resource("/sesions", "SesionController", ['except' => ['store', 'create', 'update', 'destroy', 'edit']])->middleware(['auth', 'auth.admin']);
 
-Route::get("/clases", "ClaseController@index")->name('clases.index');
-Route::get("/clases/{clase}/destroy", "ClaseController@destroy")->name('clases.destroy');
-Route::post("/clases", "ClaseController@store")->name('clases.store');
-Route::get("/clases/create", "ClaseController@create")->name('clases.create');
-Route::get("/clases/{clase}", "ClaseController@show")->name('clases.show');
-Route::get("/clases/{clase}/edit", "ClaseController@edit")->name('clases.edit');
-Route::put("/clases/{clase}", "ClaseController@update")->name('clases.update');
+Route::get("/pasaportes/export", "SesionController@export")->name('pasaportes.export')->middleware(['auth', 'auth.admin']);
+Route::get("/qr/{coach}/download", "CoachController@download")->name('qr.download')->middleware(['auth', 'auth.admin']);
 
-
-Route::get("/anuncios", "AnuncioController@index")->name('anuncios.index');
-Route::get("/anuncios/{anuncio}/destroy", "AnuncioController@destroy")->name('anuncios.destroy');
-Route::post("/anuncios", "AnuncioController@store")->name('anuncios.store');
-Route::get("/anuncios/create", "AnuncioController@create")->name('anuncios.create');
-Route::get("/anuncios/{anuncio}", "AnuncioController@show")->name('anuncios.show');
-Route::get("/anuncios/{anuncio}/edit", "AnuncioController@edit")->name('anuncios.edit');
-Route::put("/anuncios/{anuncio}", "AnuncioController@update")->name('anuncios.update');
-
-Route::get("/users", "UsersController@index")->name('users.index');
-Route::get("/users/{user}/destroy", "UsersController@destroy")->name('users.destroy');
-Route::post("/users", "UsersController@store")->name('users.store');
-Route::get("/users/create", "UsersController@create")->name('users.create');
-Route::get("/users/{user}", "UsersController@show")->name('users.show');
-Route::get("/users/{user}/edit", "UsersController@edit")->name('users.edit');
-Route::put("/users/{user}", "UsersController@update")->name('users.update');
-
-
-Route::get("/sesions", "SesionController@index")->name('sesions.index');
-Route::get("/sesions/{user}", "SesionController@show")->name('sesions.show');
-
-Route::get("/pasaportes/export", "SesionController@export")->name('pasaportes.export');
-Route::get("/qr/{coach}/download", "CoachController@download")->name('qr.download');
-
-
-
-Route::get("/anuncios/{anuncio}/confirm", "AnuncioController@confirm")->name('anuncios.confirm');
-Route::get("/clases/{clase}/confirm", "ClaseController@confirm")->name('clases.confirm');
-Route::get("/coaches/{coach}/confirm", "CoachController@confirm")->name('coaches.confirm');
-Route::get("/users/{user}/confirm", "UsersController@confirm")->name('users.confirm');
+Route::get("/anuncios/{anuncio}/confirm", "AnuncioController@confirm")->name('anuncios.confirm')->middleware(['auth', 'auth.admin']);
+Route::get("/clases/{clase}/confirm", "ClaseController@confirm")->name('clases.confirm')->middleware(['auth', 'auth.admin']);
+Route::get("/coaches/{coach}/confirm", "CoachController@confirm")->name('coaches.confirm')->middleware(['auth', 'auth.admin']);
+Route::get("/users/{user}/confirm", "UsersController@confirm")->name('users.confirm')->middleware(['auth', 'auth.admin']);
 
 
 Route::get('/', function () {
