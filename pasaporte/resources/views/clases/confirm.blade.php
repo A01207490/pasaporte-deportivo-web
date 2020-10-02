@@ -13,11 +13,16 @@
                         Cancelar
                     </button>
                 </a>
-                <a href="{{route('clases.destroy', $clase)}}" class="pl-2 ">
+
+                <form method="POST" class="pl-2 " action="{{route('clases.destroy', $clase)}}">
+                    @csrf
+                    @method('DELETE')
                     <button class="btn btn-primary">
                         Aceptar
                     </button>
-                </a>
+                </form>
+
+
             </div>
         </div>
     </div>
