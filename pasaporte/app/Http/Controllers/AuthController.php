@@ -41,12 +41,6 @@ class AuthController extends Controller
         ], 401);
     }
 
-
-    public function hai()
-    {
-        return 'hai';
-    }
-
     /**
      * Get the authenticated User.
      *
@@ -93,5 +87,15 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+    public function getAuthUser(Request $request)
+    {
+        //return response()->json(['request' => $request]);
+        $this->validate($request, [
+            'token' => 'required'
+        ]);
+        $user = auth()->user();
+        return response()->json(['user' => $user]);
     }
 }

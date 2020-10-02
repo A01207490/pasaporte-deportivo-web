@@ -34,9 +34,10 @@ Route::group([
     'prefix' => 'auth'
 
 ], function ($router) {
-    Route::get('login', 'AuthController@login');
+    Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('hai', 'AuthController@hai');
     Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
+    Route::get('me', 'AuthController@me');
+    Route::post('getAuthUser', 'AuthController@getAuthUser');
 });
