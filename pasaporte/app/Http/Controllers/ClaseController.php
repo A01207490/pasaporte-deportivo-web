@@ -129,7 +129,7 @@ class ClaseController extends Controller
     public function validateClase()
     {
         $rules = [
-            'clase_nombre' => ['required'],
+            'clase_nombre' => ['required', 'string', 'regex:/[a-zA-Z]/'],
             'clase_hora_inicio' => ['required'],
             'clase_hora_inicio' => ['required'],
             'dias' => ['required'],
@@ -137,6 +137,7 @@ class ClaseController extends Controller
         ];
         $custom_messages = [
             'required' => 'El campo :attribute es requerido.',
+            'clase_nombre.regex' => 'El nombre solo puede tener letras'
         ];
         return request()->validate($rules, $custom_messages);
     }

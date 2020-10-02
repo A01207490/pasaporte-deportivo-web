@@ -11,9 +11,9 @@
     <tbody>
         @forelse($users as $user)
         <tr>
-            <td data-col-title="Nombre">{{ $user["name"] }}</td>
-            <td data-col-title="Correo">{{ $user["email"] }}</td>
-            <td data-col-title="Carrera">{{ $user->carrera->carrera_nombre }}</td>
+            <td data-col-title="Nombre">{{ $user->name }}</td>
+            <td data-col-title="Correo">{{ $user->email }}</td>
+            <td data-col-title="Carrera">{{ $user->carrera_nombre }}</td>
             <td data-col-title="Semestre">{{ $user->semestre . '°' }}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
                 <a href="{{route('users.show', $user)}}" class="p-1">

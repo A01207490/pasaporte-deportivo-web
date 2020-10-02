@@ -8,21 +8,18 @@
             <p>¿Está seguro de borrar el registro?</p>
             <hr>
             <div class="d-flex justify-content-end align-items-center">
-                <a href="{{route('clases.index')}}" class="pl-2 ">
+                <a href="{{route('users.index')}}" class="pl-2 ">
                     <button class="btn btn-primary">
                         Cancelar
                     </button>
                 </a>
 
-                <form method="POST" class="pl-2 " action="{{route('clases.destroy', $clase)}}">
-                    @csrf
-                    @method('DELETE')
+
+                <a class="pl-2 " href="{{route('users.destroyAll')}}">
                     <button class="btn btn-primary">
                         Aceptar
                     </button>
-                </form>
-
-
+                </a>
             </div>
         </div>
     </div>

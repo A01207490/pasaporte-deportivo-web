@@ -18,9 +18,11 @@ class UsersController extends Controller
     public function index()
     {
         if (request('query')) {
-            $users = $this->search();
+            $users = $this->search()->paginate(5);
         } else {
-            $users = User::paginate(5);
+
+            $users = User::getAllStudents()->paginate(5);
+            //return $users;
         }
         if (\Request::is('api/*')) {
 
@@ -38,15 +40,20 @@ class UsersController extends Controller
     public function search()
     {
         $value = '%' . request('query') . '%';
-        $users = User::where('name', 'LIKE', $value)
+        $students = User::where('name', 'LIKE', $value)
             ->orWhere('email', 'LIKE', $value)
             ->orWhere('semestre', 'LIKE', $value)
-            ->paginate(5);
-        /*
-        $carrera_nombre = Carrera::findOrFail(request('query'));
-        $value = '%' . $carrera_nombre . '%';
-        */
-        return $users;
+            ->orWhere('carreras.carrera_nombre', 'LIKE', $value)
+            ->join('carreras', 'users.carrera_id', '=', 'carreras.id')
+            ->select('users.id')
+            ->get();
+        $query = User::where('role_id', 2)
+            ->whereIn('users.id', $students)
+            ->join('role_user', 'users.id', '=', 'role_user.user_id')
+            ->join('carreras', 'users.carrera_id', '=', 'carreras.id')
+            ->join('roles', 'role_user.role_id', '=', 'roles.id')
+            ->select('users.id', 'roles.name', 'users.name', 'users.email', 'users.semestre', 'carreras.carrera_nombre');
+        return $query;
     }
 
     /**
@@ -76,7 +83,7 @@ class UsersController extends Controller
           
         ]));
         $carrera_user = ([
-            'user_id' => $user->id,
+            'user_id' => $user->id, 
             'carrera_id' => $request->carrera_id,
             'user_semestre' => $request->user_semestre,
             'created_at' => NOW(),
@@ -102,6 +109,11 @@ class UsersController extends Controller
     public function confirm(User $user)
     {
         return view('users.confirm', compact('user'));
+    }
+
+    public function confirmDestroyAll()
+    {
+        return view('users.confirmDestroyAll');
     }
 
     /**
@@ -138,6 +150,13 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         User::destroy($user->id);
+        return view('users.success');
+    }
+
+    public function destroyAll()
+    {
+        $students = User::where('role_id', 2)
+            ->join('role_user', 'users.id', '=', 'role_user.user_id')->delete();
         return view('users.success');
     }
 

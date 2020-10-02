@@ -1,49 +1,59 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    .error-input {
-        border: 2px solid #FD8080;
-    }
-</style>
-<div class="row p-2 mt-2 d-flex justify-content-center align-items-center">
-    <div class="bd-highlight">
-        <h3>Agregar Coach</h3>
-    </div>
+
+<div class="card-header">
+    {{ __('Editar') }}
 </div>
-<div class="row p-2 d-flex justify-content-center align-items-center">
-    <form method="POST" action="{{route('coaches.store')}}" class="col-10 col-md-5 d-flex flex-column justify-content-center align-items-center">
+
+<div class="card-body">
+    <form method="POST" action="{{route('coaches.store')}}">
         @csrf
-        <div class="form-group w-100">
-            <label>Nombre</label>
-            <input name="coach_nombre" type="text" class="form-control @error('coach_nombre') error-input @enderror" value="{{ old('coach_nombre')}}" required>
-            @error('coach_nombre')
-            <div class="alert alert-red p-1 mt-2">
-                {{ $message }}
+
+        <div class="form-group row">
+            <label for="coach_nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+            <div class="col-md-6">
+                <input id="coach_nombre" type="text" class="form-control @error('coach_nombre') is-invalid error-input @enderror" name="coach_nombre" value="{{ old('coach_nombre') }}" required autocomplete="coach_nombre" autofocus>
+                @error('coach_nombre')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
-            @enderror
         </div>
-        <div class="form-group w-100">
-            <label>Correo</label>
-            <input name="coach_correo" type="email" class="form-control @error('coach_correo') error-input @enderror" value="{{ old('coach_correo')}}" required>
-            @error('coach_correo')
-            <div class="alert alert-red p-1 mt-2">
-                {{ $message }}
+
+        <div class="form-group row">
+            <label for="coach_correo" class="col-md-4 col-form-label text-md-right">{{ __('Correo') }}</label>
+            <div class="col-md-6">
+                <input id="coach_correo" type="text" class="form-control @error('coach_correo') is-invalid error-input @enderror" name="coach_correo" value="{{ old('coach_correo') }}" required autocomplete="coach_correo" autofocus>
+                @error('coach_correo')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
-            @enderror
         </div>
-        <div class="form-group w-100">
-            <label>Nómina</label>
-            <input name="coach_nomina" type="text" class="form-control @error('coach_nomina') error-input @enderror" value="{{ old('coach_nomina')}}" required>
-            @error('coach_nomina')
-            <div class="alert alert-red p-1 mt-2">
-                {{ $message }}
+
+        <div class="form-group row">
+            <label for="coach_nomina" class="col-md-4 col-form-label text-md-right">{{ __('Nómina') }}</label>
+            <div class="col-md-6">
+                <input id="coach_nomina" type="text" class="form-control @error('coach_nomina') is-invalid error-input @enderror" name="coach_nomina" value="{{ old('coach_nomina') }}" required autocomplete="coach_nomina" autofocus>
+                @error('coach_nomina')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
-            @enderror
         </div>
-        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Aceptar
-        </button>
+
+        <div class="form-group row mb-0">
+            <div class="col-md-6 offset-md-4">
+                <button type="submit" class="btn btn-primary">
+                    {{ __('Registrar') }}
+                </button>
+            </div>
+        </div>
+
     </form>
 </div>
 
