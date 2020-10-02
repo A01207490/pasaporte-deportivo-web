@@ -8,9 +8,9 @@
 <div class="card-body">
 
 
-    <div class="row">
-        <div class="col-12 col-sm-11 col-md-8">
-            <ul class="list-group list-group-flush">
+    <div class="row p-2">
+        <div class="col-12 col-sm-8 d-flex align-items-center">
+            <ul class="list-group list-group-flush w-100">
                 <li class="list-group-item">
                     <label>
                         Nómina
@@ -28,18 +28,12 @@
                         {{$coach->coach_correo}}
                     </h6>
                 </li>
-                <li class="list-group-item">
-                    <a href="{{route('coaches.index')}}">
-                        <button class="btn btn-primary">
-                            Regresar
-                        </button>
-                    </a>
-                </li>
+
 
             </ul>
         </div>
 
-        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 d-flex flex-column justify-content-center align-items-center">
+        <div class="col-12 col-sm-4 d-flex flex-column justify-content-center align-items-center">
             <div class="d-flex flex-column justify-content-between align-items-center ">
 
                 <div class="border border-grey-lighten-1 rounded p-3">
@@ -54,7 +48,13 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row m-2 border-top">
+
+        <a class="p-2" href="{{route('coaches.index')}}">
+            <button class="btn btn-primary">
+                Regresar
+            </button>
+        </a>
 
 
 

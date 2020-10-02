@@ -14,7 +14,7 @@
             <label for="coach_nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
             <div class="col-md-6">
                 <input id="coach_nombre" type="text" class="form-control @error('coach_nombre') is-invalid error-input @enderror" name="coach_nombre" value="{{ old('coach_nombre') }}" required autocomplete="coach_nombre" autofocus>
-                @error('coach_correo')
+                @error('coach_nombre')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>

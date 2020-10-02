@@ -1,44 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    .error-input {
-        border: 2px solid #FD8080;
-    }
-</style>
-<div class="row p-2 mt-2 d-flex justify-content-center align-items-center">
-    <div class="bd-highlight">
-        <h3>Editar Anuncio</h3>
-    </div>
-</div>
-<div class="row p-2 d-flex justify-content-center align-items-center">
-    <form method="POST" action="{{route('anuncios.update', $anuncio)}}" class="col-10 col-md-5 d-flex flex-column justify-content-center align-items-center">
-        @csrf
-        @method('PUT')
-        <div class="form-group w-100">
-            <label>Título</label>
-            <input name="anuncio_titulo" type="text" class="form-control @error('anuncio_titulo') error-input @enderror" required value="{{ $anuncio->anuncio_titulo }}">
-            @error('anuncio_titulo')
-            <div class="alert alert-red p-1 mt-2">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-        <div class="form-group w-100">
-            <label>Cuerpo</label>
-            <textarea name="anuncio_cuerpo" class="form-control" rows="5" class="form-control @error('anuncio_cuerpo') error-input @enderror" value="{{ $anuncio->anuncio_cuerpo }}" required>
-            {{ $anuncio->anuncio_cuerpo }}
-            </textarea>
-            @error('anuncio_cuerpo')
-            <div class="alert alert-red p-1 mt-2">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Aceptar
-        </button>
-    </form>
+
+<div class="card-header">
+    {{ __('Editar') }}
 </div>
 
+<div class="card-body">
+    <form method="POST" action="{{route('anuncios.update', $anuncio)}}">
+        @csrf
+        @method('PUT')
+
+        <div class="form-group row">
+            <label for="anuncio_titulo" class="col-md-4 col-form-label text-md-right">{{ __('Título') }}</label>
+            <div class="col-md-6">
+                <input id="anuncio_titulo" type="text" class="form-control @error('anuncio_titulo') is-invalid error-input @enderror" name="anuncio_titulo" value="{{ $anuncio->anuncio_titulo }}" required autocomplete="anuncio_titulo" autofocus>
+                @error('anuncio_titulo')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="anuncio_cuerpo" class="col-md-4 col-form-label text-md-right">{{ __('Cuerpo') }}</label>
+            <div class="col-md-6">
+                <textarea rows="5" id="anuncio_cuerpo" type="text" class="form-control @error('anuncio_cuerpo') is-invalid error-input @enderror" name="anuncio_cuerpo" value="{{ $anuncio->anuncio_cuerpo }}" required autocomplete="anuncio_cuerpo" autofocus>
+                {{ $anuncio->anuncio_cuerpo }}
+                </textarea>
+                @error('anuncio_cuerpo')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+        </div>
+
+        <div class="form-group row mb-0">
+            <div class="col-md-6 offset-md-4">
+                <button type="submit" class="btn btn-primary">
+                    {{ __('Aceptar') }}
+                </button>
+            </div>
+        </div>
+
+    </form>
+</div>
 @endsection

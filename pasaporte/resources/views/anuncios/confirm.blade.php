@@ -13,11 +13,15 @@
                         Cancelar
                     </button>
                 </a>
-                <a href="{{route('anuncios.destroy', $anuncio)}}" class="pl-2 ">
+                <form method="POST" class="pl-2 " action="{{route('anuncios.destroy', $anuncio)}}">
+                    @csrf
+                    @method('DELETE')
                     <button class="btn btn-primary">
                         Aceptar
                     </button>
-                </a>
+                </form>
+
+
             </div>
         </div>
     </div>

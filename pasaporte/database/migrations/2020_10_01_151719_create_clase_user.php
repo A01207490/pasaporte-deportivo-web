@@ -18,6 +18,14 @@ class CreateClaseUser extends Migration
             $table->unsignedBigInteger('clase_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->foreign('clase_id')
+                ->references('id')
+                ->on('clases')
+                ->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
