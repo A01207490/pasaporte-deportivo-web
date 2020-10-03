@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Sesion;
+
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller;
-
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
@@ -31,14 +32,14 @@ class AuthController extends Controller
         $token = null;
         if (!$token = JWTAuth::attempt($credentials)) {
             return response()->json([
-                'error' => 'Unauthorized',
+                'status' => 'invalid_credentials',
                 'message' => 'Correo o contraseña no válidos'
             ], 401);
         }
         return response()->json([
-            'status' => 'success',
+            'status' => 'ok',
             'token' => $token
-        ], 401);
+        ], 200);
     }
 
     /**
@@ -96,6 +97,10 @@ class AuthController extends Controller
             'token' => 'required'
         ]);
         $user = auth()->user();
-        return response()->json(['user' => $user]);
+        $sesions = Sesion::getSesions($user)->get();
+        return response()->json([
+            'user' => $user,
+            'sesions' => $sesions
+        ]);
     }
 }
