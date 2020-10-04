@@ -90,17 +90,17 @@ class AuthController extends Controller
         ]);
     }
 
-    public function getAuthUser(Request $request)
+    public function getSessions(Request $request)
     {
         //return response()->json(['request' => $request]);
+
         $this->validate($request, [
             'token' => 'required'
         ]);
+
+
         $user = auth()->user();
         $sesions = Sesion::getSesions($user)->get();
-        return response()->json([
-            'user' => $user,
-            'sesions' => $sesions
-        ]);
+        return response()->json($sesions);
     }
 }
