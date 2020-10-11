@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Clase extends Model
@@ -29,12 +30,22 @@ class Clase extends Model
     }
     */
 
+    function connect_db()
+    {
+        $server_name = "localhost";
+        $user_name = "root";
+        $password = "";
+        $db_name = "pasaporte";
+        $con = mysqli_connect($server_name, $user_name, $password, $db_name);
+        if (!$con) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        return $con;
+    }
+
     static public function getCurrentClasses()
     {
-        return Clase::where('role_id', 2)
-            ->join('role_user', 'users.id', '=', 'role_user.user_id')
-            ->join('carreras', 'users.carrera_id', '=', 'carreras.id')
-            ->join('roles', 'role_user.role_id', '=', 'roles.id')
-            ->select('users.id', 'roles.name', 'users.name', 'users.email', 'users.semestre', 'carreras.carrera_nombre');
+        $minutes_tolerance = 30; //Minutos de toleracia en minutos.
+        return DB::select(DB::raw("select * from clases c inner join clase_dia cd on cd.clase_id = c.id where dayofweek(current_date()) = dia_id and current_time between date_sub(clase_hora_fin, interval " . $minutes_tolerance . " minute) and date_add(clase_hora_fin, interval " . $minutes_tolerance . " minute)"));
     }
 }
