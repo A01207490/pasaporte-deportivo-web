@@ -13,10 +13,12 @@ class DiaSeeder extends Seeder
     public function run()
     {
         //Dia::truncate();
+        Dia::create(['dia_nombre' => 'Domingo', 'created_at' => NOW(), 'updated_at' => NOW()]);
         Dia::create(['dia_nombre' => 'Lunes', 'created_at' => NOW(), 'updated_at' => NOW()]);
         Dia::create(['dia_nombre' => 'Martes', 'created_at' => NOW(), 'updated_at' => NOW()]);
         Dia::create(['dia_nombre' => 'Miércoles', 'created_at' => NOW(), 'updated_at' => NOW()]);
         Dia::create(['dia_nombre' => 'Jueves', 'created_at' => NOW(), 'updated_at' => NOW()]);
         Dia::create(['dia_nombre' => 'Viernes', 'created_at' => NOW(), 'updated_at' => NOW()]);
+        Dia::create(['dia_nombre' => 'Sábado', 'created_at' => NOW(), 'updated_at' => NOW()]);
     }
 }

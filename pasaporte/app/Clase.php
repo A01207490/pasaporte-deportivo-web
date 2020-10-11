@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Clase extends Model
@@ -31,10 +32,7 @@ class Clase extends Model
 
     static public function getCurrentClasses()
     {
-        return Clase::where('role_id', 2)
-            ->join('role_user', 'users.id', '=', 'role_user.user_id')
-            ->join('carreras', 'users.carrera_id', '=', 'carreras.id')
-            ->join('roles', 'role_user.role_id', '=', 'roles.id')
-            ->select('users.id', 'roles.name', 'users.name', 'users.email', 'users.semestre', 'carreras.carrera_nombre');
+        $minutes_tolerance = 120; //Minutos de toleracia en minutos.
+        return DB::select(DB::raw("select * from clases c inner join clase_dia cd on cd.clase_id = c.id where dayofweek(current_date()) = dia_id and current_time between date_sub(clase_hora_fin, interval " . $minutes_tolerance . " minute) and date_add(clase_hora_fin, interval " . $minutes_tolerance . " minute)"));
     }
 }
