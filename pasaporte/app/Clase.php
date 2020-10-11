@@ -30,22 +30,9 @@ class Clase extends Model
     }
     */
 
-    function connect_db()
-    {
-        $server_name = "localhost";
-        $user_name = "root";
-        $password = "";
-        $db_name = "pasaporte";
-        $con = mysqli_connect($server_name, $user_name, $password, $db_name);
-        if (!$con) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-        return $con;
-    }
-
     static public function getCurrentClasses()
     {
-        $minutes_tolerance = 30; //Minutos de toleracia en minutos.
+        $minutes_tolerance = 120; //Minutos de toleracia en minutos.
         return DB::select(DB::raw("select * from clases c inner join clase_dia cd on cd.clase_id = c.id where dayofweek(current_date()) = dia_id and current_time between date_sub(clase_hora_fin, interval " . $minutes_tolerance . " minute) and date_add(clase_hora_fin, interval " . $minutes_tolerance . " minute)"));
     }
 }

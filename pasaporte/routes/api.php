@@ -53,12 +53,12 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::get('me', 'AuthController@me');
     Route::post('getSessions', 'AuthController@getSessions');
-    Route::get('getClasses', function () {
-        $clases = Clase::getSesions()->get();
-        return response()->json($clases);
-    });
     Route::get('getAnuncios', function () {
         $anuncios = Anuncio::all();
-        return response()->json($anuncios);
+        return response()->json($anuncios, 200);
+    });
+    Route::get('getCurrentClasses', function () {
+        $clases = Clase::getCurrentClasses();
+        return response()->json($clases, 200);
     });
 });
