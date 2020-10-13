@@ -24,12 +24,22 @@ class SesionController extends Controller
      */
     public function index()
     {
-        $users = User::whereIn('id', function ($query) {
-            $query->select('user_id')->from('clase_user');
-        })->paginate(5);
-        $users = User::getStudentAllinAll()->paginate();
+        if (request('query')) {
+            $users = $this->search()->paginate(5);
+        } else {
+            $users = User::getStudentAllinAll()->paginate(5);
+        }
         return view('sesions.index', compact('users'));
     }
+
+    public function search()
+    {
+        $value = request('query');
+        $value = '%' . request('query') . '%';
+        $users = User::where('role_id', 2)->leftJoin('clase_user', 'users.id', '=', 'clase_user.user_id')->join('role_user', 'users.id', '=', 'role_user.user_id')->where('name', 'LIKE', $value)->orWhere('name', 'LIKE', $value)->selectRaw('users.id, name, count(clase_user.user_id) sesion_completed')->groupByRaw('users.id, name');
+        return $users;
+    }
+
     /**
      * Display a listing of the resource.
      *

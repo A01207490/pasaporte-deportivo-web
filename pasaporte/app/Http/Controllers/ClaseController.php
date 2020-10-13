@@ -17,9 +17,8 @@ class ClaseController extends Controller
     public function index()
     {
         if (request('query')) {
-            $clases = $this->search()->paginate();
+            $clases = $this->search()->paginate(5);
         } else {
-
             $clases = Clase::paginate(5);
         }
         return view('clases.index', compact('clases'));

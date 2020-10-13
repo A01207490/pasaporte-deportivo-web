@@ -125,7 +125,7 @@ class CoachController extends Controller
     {
         $rules = [
             'coach_nombre' => ['required', 'string', 'regex:/[a-zA-Z]/'],
-            'coach_nomina' => ['required', 'min:9', 'max:9', 'regex:/L+[0-9]/'],
+            'coach_nomina' => ['required', 'min:9', 'max:9', 'regex:/L+[0-9]/', 'unique:coaches'],
             'coach_correo' => ['required', 'email', 'regex:/[a-zA-Z0-9._%+-]+@tec.mx/']
         ];
         $custom_messages = [
@@ -135,7 +135,8 @@ class CoachController extends Controller
             'coach_nomina.max' => 'La nómina debe de ser de exactamente 9 caracteres.',
             'coach_nomina.regex' => 'La nómina debe de tener el siguiente formato: LXXXXXXXX, donde X es un dígito.',
             'coach_correo.regex' => 'El dominio del correo debe de ser @tec.mx',
-            'coach_nombre.regex' => 'El nombre solo puede tener letras'
+            'coach_nombre.regex' => 'El nombre solo puede tener letras',
+            'coach_nomina.unique' => 'Esta nomina ya se encuentra registrada'
         ];
         return request()->validate($rules, $custom_messages);
     }
