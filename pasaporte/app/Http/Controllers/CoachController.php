@@ -127,7 +127,7 @@ class CoachController extends Controller
         $rules = [
             'coach_nombre' => ['required', 'string', 'regex:/[a-zA-Z]/'],
             'coach_nomina' => ['required', 'min:9', 'max:9', 'regex:/L+[0-9]/', Rule::unique('coaches')->ignore($coach->id)],
-            'coach_correo' => ['required', 'email', 'regex:/[a-zA-Z0-9._%+-]+@tec.mx/', Rule::unique('coaches')->ignore($coach->coach_correo)]
+            'coach_correo' => ['required', 'email', 'regex:/[a-zA-Z0-9._%+-]+@tec.mx/'],
         ];
         $custom_messages = [
             'required' => 'El campo :attribute es requerido.',
