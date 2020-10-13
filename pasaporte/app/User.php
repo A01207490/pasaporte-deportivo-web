@@ -2,10 +2,11 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 
 class User extends Authenticatable implements JWTSubject
@@ -83,6 +84,25 @@ class User extends Authenticatable implements JWTSubject
     static public function getAllStudents()
     {
         return User::where('role_id', 2)->join('role_user', 'users.id', '=', 'role_user.user_id')->join('carreras', 'users.carrera_id', '=', 'carreras.id')->join('roles', 'role_user.role_id', '=', 'roles.id')->select('users.id', 'roles.name', 'users.name', 'users.email', 'users.semestre', 'carreras.carrera_nombre');
+    }
+
+    static public function getStudentAllinAll()
+    {
+        return DB::select(DB::raw("select u.id, name, cast(count(cu.user_id) as varchar(03)) as sesion_number from users u left outer join clase_user cu on cu.user_id = u.id inner join role_user ru on ru.user_id = u.id and role_id = 2 group by u.id, name"));
+        /*
+        return User::select(`u.id`, `name`)
+            ->addSelect(DB::raw(`count(cu.user_id) as sesion_number`))
+            ->from(`users as u`)
+            ->join(`clase_user as cu`, function ($join) {
+                $join->on(`cu.user_id`, `=`, `u.id`);
+            })
+            ->join(`role_user as ru`, function ($join) {
+                $join->on(`ru.user_id`, `=`, `u.id`)
+                    ->on(`role_id`, `=`, 2);
+            })
+            ->groupBy(`u.id`)
+            ->groupBy(`name`)->paginate(5);
+            */
     }
 
     /**
