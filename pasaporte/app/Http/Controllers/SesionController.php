@@ -24,17 +24,10 @@ class SesionController extends Controller
      */
     public function index()
     {
-
         $users = User::whereIn('id', function ($query) {
             $query->select('user_id')->from('clase_user');
         })->paginate(5);
-        //$users = User::getStudentAllinAll();
         $users = User::getStudentAllinAll()->paginate();
-        // $total = count($users_array);
-        $perPage = 5;
-        $currentPage = 1;
-        //$users = new LengthAwarePaginator($users_array, $total, $perPage, $currentPage, ['path' => url('/sesions')]);
-        //return $users;
         return view('sesions.index', compact('users'));
     }
     /**
@@ -129,12 +122,3 @@ class SesionController extends Controller
         return view('sesions.success', compact('user'));
     }
 }
-
-/*
-  $users = User::select('*')
-            ->whereIn('id', function ($query) {
-                $query->select('user_id')->from('sesions');
-            })
-            ->paginate(10);
-        return view('sesions.index', compact('users'));
-*/

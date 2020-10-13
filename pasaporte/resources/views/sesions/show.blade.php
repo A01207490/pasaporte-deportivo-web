@@ -4,7 +4,6 @@
 <div class="card-header">
     {{$user->name}}
 </div>
-
 <div class="card-body">
     <div class="row p-2 d-flex justify-content-between align-items-center">
         <form method="GET" action="/clases" class="d-flex justify-content-around align-items-center">
@@ -18,28 +17,24 @@
                 </button>
             </div>
         </form>
-        <div>
-            <a href="{{route('sesions.create', $user->id)}}">
-                <button class="btn btn-primary">
-                    <img src="{{ asset('img/icons/add_circle.svg')}}" class="icon-white" alt="search">
-                    Agregar
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <a href="{{route('sesions.create', $user->id)}}">
+                    <button class="btn btn-primary">
+                        <img src="{{ asset('img/icons/add_circle.svg')}}" class="icon-white" alt="search">
+                        Agregar
+                    </button>
+                </a>
+            </div>
+            <a class="pl-1" href="{{route('sesions.index')}}">
+                <button class="btn btn-primary p-2">
+                    Regresar
                 </button>
             </a>
         </div>
-        <a href="{{route('sesions.index')}}">
-            <button class="btn btn-primary">
-                Regresar
-            </button>
-        </a>
-
-    </div>
-
-    <div class="row p-2 d-flex justify-content-end align-items-center">
-
     </div>
     <div class="row p-2 d-flex justify-content-center">
         <x-sesions.table_details :sesions="$sesions" :user="$user" />
     </div>
 </div>
-
 @endsection

@@ -88,24 +88,7 @@ class User extends Authenticatable implements JWTSubject
 
     static public function getStudentAllinAll()
     {
-        /*
-        return DB::select(DB::raw("select u.id, name, cast(count(cu.user_id) as varchar(03)) as sesion_number from users u left outer join clase_user cu on cu.user_id = u.id inner join role_user ru on ru.user_id = u.id and role_id = 2 group by u.id, name"));
-        */
         return User::where('role_id', 2)->leftJoin('clase_user', 'users.id', '=', 'clase_user.user_id')->join('role_user', 'users.id', '=', 'role_user.user_id')->selectRaw('users.id, name, count(clase_user.user_id) sesion_completed')->groupByRaw('users.id, name');
-        /*
-        return User::select(`u.id`, `name`)
-            ->addSelect(DB::raw(`count(cu.user_id) as sesion_number`))
-            ->from(`users as u`)
-            ->join(`clase_user as cu`, function ($join) {
-                $join->on(`cu.user_id`, `=`, `u.id`);
-            })
-            ->join(`role_user as ru`, function ($join) {
-                $join->on(`ru.user_id`, `=`, `u.id`)
-                    ->on(`role_id`, `=`, 2);
-            })
-            ->groupBy(`u.id`)
-            ->groupBy(`name`)->paginate(5);
-            */
     }
 
     /**
