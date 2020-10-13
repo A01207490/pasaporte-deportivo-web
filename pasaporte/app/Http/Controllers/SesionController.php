@@ -29,8 +29,8 @@ class SesionController extends Controller
             $query->select('user_id')->from('clase_user');
         })->paginate(5);
         //$users = User::getStudentAllinAll();
-        $users_array = User::getStudentAllinAll();
-        $total = count($users_array);
+        $users = User::getStudentAllinAll()->paginate();
+        // $total = count($users_array);
         $perPage = 5;
         $currentPage = 1;
         //$users = new LengthAwarePaginator($users_array, $total, $perPage, $currentPage, ['path' => url('/sesions')]);
