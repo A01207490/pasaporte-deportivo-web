@@ -2,10 +2,11 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 
 class User extends Authenticatable implements JWTSubject
@@ -83,6 +84,11 @@ class User extends Authenticatable implements JWTSubject
     static public function getAllStudents()
     {
         return User::where('role_id', 2)->join('role_user', 'users.id', '=', 'role_user.user_id')->join('carreras', 'users.carrera_id', '=', 'carreras.id')->join('roles', 'role_user.role_id', '=', 'roles.id')->select('users.id', 'roles.name', 'users.name', 'users.email', 'users.semestre', 'carreras.carrera_nombre');
+    }
+
+    static public function getStudentAllinAll()
+    {
+        return User::where('role_id', 2)->leftJoin('clase_user', 'users.id', '=', 'clase_user.user_id')->join('role_user', 'users.id', '=', 'role_user.user_id')->selectRaw('users.id, name, count(clase_user.user_id) sesion_completed')->groupByRaw('users.id, name');
     }
 
     /**

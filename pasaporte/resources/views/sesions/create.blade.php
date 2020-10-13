@@ -1,49 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    .error-input {
-        border: 2px solid #FD8080;
-    }
-</style>
-<div class="row p-2 mt-2 d-flex justify-content-center align-items-center">
-    <div class="bd-highlight">
-        <h3>Agregar Coach</h3>
-    </div>
+
+<div class="card-header">
+    {{ __('Registrar') }}
+    {{$user->id}}
 </div>
-<div class="row p-2 d-flex justify-content-center align-items-center">
-    <form method="POST" action="{{route('coaches.store')}}" class="col-10 col-md-5 d-flex flex-column justify-content-center align-items-center">
+
+<div class="card-body">
+    <form method="POST" action="{{route('sesions.store', $user)}}">
         @csrf
-        <div class="form-group w-100">
-            <label>Nombre</label>
-            <input name="coach_nombre" type="text" class="form-control @error('coach_nombre') error-input @enderror" value="{{ old('coach_nombre')}}" required>
-            @error('coach_nombre')
-            <div class="alert alert-red p-1 mt-2">
-                {{ $message }}
+
+        <div class="form-group row">
+            <label for="clase_id" class="col-md-4 col-form-label text-md-right">{{ __('Clase') }}</label>
+            <div class="col-md-6">
+                <select id="clase_id" type="text" class="custom-select @error('clase_id') is-invalid error-input @enderror" name="clase_id" value="{{ old('clase_id') }}" required autocomplete="clase_id" autofocus>
+                    @foreach($clases as $clase)
+                    <option value="{{$clase->id}}">{{$clase->clase_nombre, }}</option>
+                    @endforeach
+                </select>
+                @error('clase_id')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
-            @enderror
         </div>
-        <div class="form-group w-100">
-            <label>Correo</label>
-            <input name="coach_correo" type="email" class="form-control @error('coach_correo') error-input @enderror" value="{{ old('coach_correo')}}" required>
-            @error('coach_correo')
-            <div class="alert alert-red p-1 mt-2">
-                {{ $message }}
+
+        <div class="form-group row mb-0">
+            <div class="col-md-6 offset-md-4">
+                <button type="submit" class="btn btn-primary">
+                    {{ __('Aceptar') }}
+                </button>
             </div>
-            @enderror
         </div>
-        <div class="form-group w-100">
-            <label>Nómina</label>
-            <input name="coach_nomina" type="text" class="form-control @error('coach_nomina') error-input @enderror" value="{{ old('coach_nomina')}}" required>
-            @error('coach_nomina')
-            <div class="alert alert-red p-1 mt-2">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Aceptar
-        </button>
+
     </form>
 </div>
 

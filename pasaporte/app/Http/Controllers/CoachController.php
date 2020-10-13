@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Coach;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use SimpleSoftwareIO\QrCode\Facade;
 use SimpleSoftwareIO\QrCode\Generator;
 use Illuminate\Support\Facades\Storage;
@@ -55,10 +56,9 @@ class CoachController extends Controller
      */
     public function store(Request $request)
     {
-        Coach::create($this->validateCoach());
+        Coach::create($this->validateCoach(new Coach()));
         $coach_nomina = $request->coach_nomina;
         $qr_code = new Generator;
-        //$qr_code->format('png');
         $qr_code->generate($coach_nomina,  storage_path('app/public/qr_codes/' . $coach_nomina . '.svg'));
         return view('coaches.success');
     }
@@ -66,7 +66,6 @@ class CoachController extends Controller
     public function download(Coach $coach)
     {
         $coach_nomina = $coach->coach_nomina;
-        //return Storage::download(public_path('storage/qr_codes/' . $coach_nomina . '.svg'));
         return response()->download(public_path('storage/qr_codes/' . $coach_nomina . '.svg'));
     }
 
@@ -78,20 +77,6 @@ class CoachController extends Controller
      */
     public function show(Coach $coach)
     {
-        /*
-        https://www.w3adda.com/blog/laravel-simple-qr-code-generator-example
-        https://www.sparkouttech.com/qr-code-in-laravel-a-complete-explanation-with-steps/
-        https://github.com/SimpleSoftwareIO/simple-qrcode/issues/44
-        https://www.youtube.com/watch?v=5y4_Xu4aA_I&t=304s
-        composer update -o
-        composer dumpautoload
-        */
-        /*
-        $qr_code = new Generator;
-        $qr_code->format('png');
-        $code = $qr_code->generate('Make me into a QrCode!', '../public/img/qr_codes/my_qr_code.png');
-
-*/
         $coach = Coach::find($coach->id);
         return view('coaches.show', compact('coach'));
     }
@@ -121,11 +106,8 @@ class CoachController extends Controller
      */
     public function update(Request $request, Coach $coach)
     {
-        //$coach_nomina = $coach->coach_nomina;
-        $coach->update($this->validateCoach());
-
+        $coach->update($this->validateCoach($coach));
         return view('coaches.success');
-        //return redirect($coach->path());
     }
 
     /**
@@ -140,12 +122,12 @@ class CoachController extends Controller
         return view('coaches.success');
     }
 
-    public function validateCoach()
+    public function validateCoach(Coach $coach)
     {
         $rules = [
             'coach_nombre' => ['required', 'string', 'regex:/[a-zA-Z]/'],
-            'coach_nomina' => ['required', 'min:9', 'max:9', 'regex:/L+[0-9]/'],
-            'coach_correo' => ['required', 'email', 'regex:/[a-zA-Z0-9._%+-]+@tec.mx/']
+            'coach_nomina' => ['required', 'min:9', 'max:9', 'regex:/L+[0-9]/', Rule::unique('coaches')->ignore($coach->id)],
+            'coach_correo' => ['required', 'email', 'regex:/[a-zA-Z0-9._%+-]+@tec.mx/'],
         ];
         $custom_messages = [
             'required' => 'El campo :attribute es requerido.',
@@ -154,7 +136,9 @@ class CoachController extends Controller
             'coach_nomina.max' => 'La nómina debe de ser de exactamente 9 caracteres.',
             'coach_nomina.regex' => 'La nómina debe de tener el siguiente formato: LXXXXXXXX, donde X es un dígito.',
             'coach_correo.regex' => 'El dominio del correo debe de ser @tec.mx',
-            'coach_nombre.regex' => 'El nombre solo puede tener letras'
+            'coach_nombre.regex' => 'El nombre solo puede tener letras',
+            'coach_nomina.unique' => 'Esta nomina ya se encuentra registrada',
+            'coach_correo.unique' => 'Este correo ya se encuentra registrado'
         ];
         return request()->validate($rules, $custom_messages);
     }

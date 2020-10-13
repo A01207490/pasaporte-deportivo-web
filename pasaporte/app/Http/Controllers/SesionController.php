@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Clase;
 use App\Sesion;
 use App\Exports\UsersExport;
 use Illuminate\Http\Request;
 use App\Exports\SesionsExport;
+use Illuminate\Pagination\Factory;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
@@ -22,12 +24,22 @@ class SesionController extends Controller
      */
     public function index()
     {
-        //Estos son usuarios
-        $users = User::whereIn('id', function ($query) {
-            $query->select('user_id')->from('clase_user');
-        })->paginate(5);
+        if (request('query')) {
+            $users = $this->search()->paginate(5);
+        } else {
+            $users = User::getStudentAllinAll()->paginate(5);
+        }
         return view('sesions.index', compact('users'));
     }
+
+    public function search()
+    {
+        $value = request('query');
+        $value = '%' . request('query') . '%';
+        $users = User::where('role_id', 2)->leftJoin('clase_user', 'users.id', '=', 'clase_user.user_id')->join('role_user', 'users.id', '=', 'role_user.user_id')->where('name', 'LIKE', $value)->orWhere('name', 'LIKE', $value)->selectRaw('users.id, name, count(clase_user.user_id) sesion_completed')->groupByRaw('users.id, name');
+        return $users;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,9 +55,10 @@ class SesionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(User $user)
     {
-        //
+        $clases = Clase::all();
+        return view('sesions.create', compact('clases', 'user'));
     }
 
     /**
@@ -54,9 +67,14 @@ class SesionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        //
+
+        Sesion::create([
+            'user_id' => $user->id,
+            'clase_id' => $request->clase_id,
+        ]);
+        return view('sesions.success', compact('user'));
     }
 
     /**
@@ -69,23 +87,14 @@ class SesionController extends Controller
     {
         //$sesion: es un usuario
         $user = $sesion;
-        //$user = User::find($user->id);
-        /*
-        $sesions = Sesion::where('user_id', $user->id)
-            ->join('clases', 'clase_user.clase_id', '=', 'clases.id')
-            ->join('users', 'clase_user.user_id', '=', 'users.id')
-            ->join('coaches', 'clases.coach_id', '=', 'coaches.id')
-            ->select('clase_user.created_at', 'users.name', 'users.email', 'clases.clase_nombre', 'clases.clase_hora_inicio', 'clases.clase_hora_fin', 'coaches.coach_nombre', 'coaches.coach_nomina', 'coaches.coach_correo')
-            ->paginate(5);
-        */
         $sesions = Sesion::getSesions($user)->paginate(5);
-        //$sesions = $this->paginate($user->clases);
-        //return $sesions = $user->clases->paginate(6);
-        //return $sesions;
         return view('sesions.show', compact('user', 'sesions'));
     }
 
-
+    public function confirm(Sesion $sesion, User $user)
+    {
+        return view('sesions.confirm', compact('sesion', 'user'));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -118,15 +127,8 @@ class SesionController extends Controller
      */
     public function destroy(Sesion $sesion)
     {
-        //
+        $user = $sesion->user_id;
+        Sesion::destroy($sesion->id);
+        return view('sesions.success', compact('user'));
     }
 }
-
-/*
-  $users = User::select('*')
-            ->whereIn('id', function ($query) {
-                $query->select('user_id')->from('sesions');
-            })
-            ->paginate(10);
-        return view('sesions.index', compact('users'));
-*/

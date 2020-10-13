@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="card-header">
-    {{ __('Editar') }}
+    {{ __('Registrar') }}
 </div>
 
 <div class="card-body">
@@ -53,7 +53,6 @@
                 </button>
             </div>
         </div>
-
     </form>
 </div>
 
