@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Clase;
+
 use App\Sesion;
 
 use Illuminate\Http\Request;
-
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 
 class AuthController extends Controller
 {
@@ -33,7 +35,7 @@ class AuthController extends Controller
         if (!$token = JWTAuth::attempt($credentials)) {
             return response()->json([
                 'status' => 'invalid_credentials',
-                'message' => 'Correo o contraseña no válidos'
+                'message' => 'Invalid email or password'
             ], 401);
         }
         return response()->json([
@@ -92,15 +94,36 @@ class AuthController extends Controller
 
     public function getSessions(Request $request)
     {
-        //return response()->json(['request' => $request]);
-
         $this->validate($request, [
             'token' => 'required'
         ]);
-
-
         $user = auth()->user();
         $sesions = Sesion::getSesions($user)->get();
         return response()->json($sesions);
+    }
+
+    public function registerSession(Request $request)
+    {
+        $this->validate($request, [
+            'token' => 'required'
+        ]);
+        $user = auth()->user();
+        $clase = Clase::find($request->clase_id);
+        $decrypted_coach_nomina = Crypt::decryptString($request->coach_nomina);
+        if ($decrypted_coach_nomina == $clase->coach->coach_nomina) {
+            Sesion::create([
+                'user_id' => $user->id,
+                'clase_id' => $request->clase_id,
+            ]);
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'Session registered successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Incorrect id'
+            ], 401);
+        }
     }
 }

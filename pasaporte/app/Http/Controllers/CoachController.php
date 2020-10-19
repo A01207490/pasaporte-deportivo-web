@@ -6,6 +6,7 @@ use App\Coach;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use SimpleSoftwareIO\QrCode\Facade;
+use Illuminate\Support\Facades\Crypt;
 use SimpleSoftwareIO\QrCode\Generator;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\ServiceProvider;
@@ -59,7 +60,8 @@ class CoachController extends Controller
         Coach::create($this->validateCoach(new Coach()));
         $coach_nomina = $request->coach_nomina;
         $qr_code = new Generator;
-        $qr_code->generate($coach_nomina,  storage_path('app/public/qr_codes/' . $coach_nomina . '.svg'));
+        $encrypted_coach_nomina = Crypt::encryptString($coach_nomina);
+        $qr_code->generate($encrypted_coach_nomina,  storage_path('app/public/qr_codes/' . $coach_nomina . '.svg'));
         return view('coaches.success');
     }
 
@@ -78,7 +80,8 @@ class CoachController extends Controller
     public function show(Coach $coach)
     {
         $coach = Coach::find($coach->id);
-        return view('coaches.show', compact('coach'));
+        $encrypted_coach_nomina = Crypt::encryptString($coach->coach_nomina);
+        return view('coaches.show', compact('coach', 'encrypted_coach_nomina'));
     }
 
     public function confirm(Coach $coach)
@@ -107,6 +110,10 @@ class CoachController extends Controller
     public function update(Request $request, Coach $coach)
     {
         $coach->update($this->validateCoach($coach));
+        $coach_nomina = $coach->coach_nomina;
+        $qr_code = new Generator;
+        $encrypted_coach_nomina = Crypt::encryptString($coach_nomina);
+        $qr_code->generate($encrypted_coach_nomina,  storage_path('app/public/qr_codes/' . $coach_nomina . '.svg'));
         return view('coaches.success');
     }
 
