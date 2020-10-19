@@ -37,7 +37,7 @@
             <div class="d-flex flex-column justify-content-between align-items-center ">
 
                 <div class="border border-grey-lighten-1 rounded p-3">
-                    {!! QrCode::generate($coach->coach_nomina); !!}
+                    {!! QrCode::generate($encrypted_coach_nomina); !!}
                 </div>
                 <a href="{{route('qr.download', $coach)}}" class="card-link pt-3 w-100">
                     <button class="btn btn-primary w-100">
