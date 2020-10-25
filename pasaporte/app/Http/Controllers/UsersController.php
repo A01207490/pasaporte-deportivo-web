@@ -19,7 +19,15 @@ class UsersController extends Controller
     {
         if (request('query')) {
             $users = $this->search()->paginate(5);
-        } else {
+        }else if(request('filtro')!="Ninguno" && request('filtro')=="Nombre"){
+            $users = User::getAllStudents()->orderBy('users.name','asc')->paginate(5);
+        }else if(request('filtro')!="Ninguno" && request('filtro')=="Correo"){
+            $users = User::getAllStudents()->orderBy('users.email','asc')->paginate(5);
+        }else if(request('filtro')!="Ninguno" && request('filtro')=="Carrera"){
+            $users = User::getAllStudents()->orderBy('users.semestre','asc')->paginate(5);
+        }else if(request('filtro')!="Ninguno" && request('filtro')=="Semestre"){
+            $users = User::getAllStudents()->orderBy('users.carrera_id','asc')->paginate(5);
+        }else{
 
             $users = User::getAllStudents()->paginate(5);
             //return $users;

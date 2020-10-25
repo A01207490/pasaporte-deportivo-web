@@ -12,11 +12,21 @@
             <div>
                 <input class="form-control" type="text" name="query" id="">
             </div>
+            <div>
+            <select class="form-control" id="exampleFormControlSelect1" name="filtro">
+            <option>Ninguno</option>
+             <option>Nombre</option>
+            <option>Correo</option>
+            <option>Carrera</option>
+            <option>Semestre</option>
+            </select>
+            </div>
             <div class="pl-1">
                 <button class="btn btn-primary btn-square btn-sm">
                     <img src="{{ asset('img/icons/search.svg')}}" class="icon-white" alt="search">
                 </button>
             </div>
+            
 
 
         </form>

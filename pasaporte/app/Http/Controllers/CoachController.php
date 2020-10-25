@@ -23,7 +23,16 @@ class CoachController extends Controller
     {
         if (request('query')) {
             $coaches = $this->search();
-        } else {
+        }else if(request('filtro')!="Ninguno" && request('filtro') == "Nombre"){
+            $coaches = Coach::orderBy('coach_nombre','asc')->paginate(5);
+
+        }else if(request('filtro')!="Ninguno" && request('filtro') == "Nómina"){
+            $coaches = Coach::orderBy('coach_nombre','asc')->paginate(5);
+
+        }else if(request('filtro')!="Ninguno" && request('filtro') == "Correo"){
+            $coaches = Coach::orderBy('coach_nombre','asc')->paginate(5);
+
+        }else {
             $coaches = Coach::paginate(5);
         }
         return view('coaches.index', compact('coaches'));
@@ -35,6 +44,7 @@ class CoachController extends Controller
         $coaches = Coach::where('coach_nombre', 'LIKE', $value)
             ->orWhere('coach_nomina', 'LIKE', $value)
             ->orWhere('coach_correo', 'LIKE', $value)
+            //->orderBy('coach_nombre','asc')
             ->paginate(10);
         return $coaches;
     }
