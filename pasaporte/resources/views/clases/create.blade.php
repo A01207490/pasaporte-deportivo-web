@@ -13,7 +13,7 @@
         <div class="form-group row">
             <label for="clase_nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
             <div class="col-md-6">
-                <input id="clase_nombre" type="text" class="form-control @error('clase_nombre') is-invalid error-input @enderror" name="clase_nombre" value="{{ old('clase_nombre') }}" required autocomplete="clase_nombre" autofocus>
+                <input id="clase_nombre" type="text" class="form-control @error('clase_nombre') is-invalid error-input @enderror" name="clase_nombre" value="{{ old('clase_nombre') }}" required autocomplete="clase_nombre" autofocus placeholder="Atletismo">
                 @error('clase_nombre')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

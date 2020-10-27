@@ -13,7 +13,7 @@
         <div class="form-group row">
             <label for="coach_nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
             <div class="col-md-6">
-                <input id="coach_nombre" type="text" class="form-control @error('coach_nombre') is-invalid error-input @enderror" name="coach_nombre" value="{{ old('coach_nombre') }}" required autocomplete="coach_nombre" autofocus>
+                <input id="coach_nombre" type="text" class="form-control @error('coach_nombre') is-invalid error-input @enderror" name="coach_nombre" value="{{ old('coach_nombre') }}" required autocomplete="coach_nombre" autofocus placeholder="Luis Eduardo Maravilla Chávez">
                 @error('coach_nombre')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -25,7 +25,7 @@
         <div class="form-group row">
             <label for="coach_correo" class="col-md-4 col-form-label text-md-right">{{ __('Correo') }}</label>
             <div class="col-md-6">
-                <input id="coach_correo" type="text" class="form-control @error('coach_correo') is-invalid error-input @enderror" name="coach_correo" value="{{ old('coach_correo') }}" required autocomplete="coach_correo" autofocus>
+                <input id="coach_correo" type="text" class="form-control @error('coach_correo') is-invalid error-input @enderror" name="coach_correo" value="{{ old('coach_correo') }}" required autocomplete="coach_correo" autofocus placeholder="correo@tec.mx">
                 @error('coach_correo')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -37,7 +37,7 @@
         <div class="form-group row">
             <label for="coach_nomina" class="col-md-4 col-form-label text-md-right">{{ __('Nómina') }}</label>
             <div class="col-md-6">
-                <input id="coach_nomina" type="text" class="form-control @error('coach_nomina') is-invalid error-input @enderror" name="coach_nomina" value="{{ old('coach_nomina') }}" required autocomplete="coach_nomina" autofocus>
+                <input id="coach_nomina" type="text" class="form-control @error('coach_nomina') is-invalid error-input @enderror" name="coach_nomina" value="{{ old('coach_nomina') }}" required autocomplete="coach_nomina" autofocus placeholder="L00000000">
                 @error('coach_nomina')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

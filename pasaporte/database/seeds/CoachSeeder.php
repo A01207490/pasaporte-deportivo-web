@@ -18,7 +18,7 @@ class CoachSeeder extends Seeder
             'coach_correo' => 'lmaravil@tec.mx',
         ]);
         Coach::create([
-            'coach_nomina' => 'L00000000',
+            'coach_nomina' => 'L00000001',
             'coach_nombre' => 'Luis Adrián Landeros Domínguez',
             'coach_correo' => 'a.landeros.d@tec.mx',
         ]);

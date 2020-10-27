@@ -13,7 +13,7 @@
         <div class="form-group row">
             <label for="anuncio_titulo" class="col-md-4 col-form-label text-md-right">{{ __('Título') }}</label>
             <div class="col-md-6">
-                <input id="anuncio_titulo" type="text" class="form-control @error('anuncio_titulo') is-invalid error-input @enderror" name="anuncio_titulo" value="{{ old('anuncio_titulo') }}" required autocomplete="anuncio_titulo" autofocus>
+                <input id="anuncio_titulo" type="text" class="form-control @error('anuncio_titulo') is-invalid error-input @enderror" name="anuncio_titulo" value="{{ old('anuncio_titulo') }}" required autocomplete="anuncio_titulo" autofocus placeholder="Festival de Atletismo y Borrego Plateado.">
                 @error('anuncio_titulo')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -25,8 +25,7 @@
         <div class="form-group row">
             <label for="anuncio_cuerpo" class="col-md-4 col-form-label text-md-right">{{ __('Cuerpo') }}</label>
             <div class="col-md-6">
-                <textarea rows="5" id="anuncio_cuerpo" type="text" class="form-control @error('anuncio_cuerpo') is-invalid error-input @enderror" name="anuncio_cuerpo" value="{{ old('anuncio_cuerpo') }}" required autocomplete="anuncio_cuerpo" autofocus>
-                </textarea>
+                <textarea rows="15" id="anuncio_cuerpo" type="text" class="form-control @error('anuncio_cuerpo') is-invalid error-input @enderror" name="anuncio_cuerpo" value="{{ old('anuncio_cuerpo') }}" required autocomplete="anuncio_cuerpo" autofocus placeholder="Estimad@ alumn@: Te saludo con gusto y te hago llegar la invitación para participar en las pruebas del Festival de Atletismo."></textarea>
                 @error('anuncio_cuerpo')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
