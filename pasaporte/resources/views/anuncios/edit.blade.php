@@ -26,9 +26,7 @@
         <div class="form-group row">
             <label for="anuncio_cuerpo" class="col-md-4 col-form-label text-md-right">{{ __('Cuerpo') }}</label>
             <div class="col-md-6">
-                <textarea rows="5" id="anuncio_cuerpo" type="text" class="form-control @error('anuncio_cuerpo') is-invalid error-input @enderror" name="anuncio_cuerpo" value="{{ $anuncio->anuncio_cuerpo }}" required autocomplete="anuncio_cuerpo" autofocus>
-                {{ $anuncio->anuncio_cuerpo }}
-                </textarea>
+                <textarea rows="15" id="anuncio_cuerpo" type="text" class="form-control @error('anuncio_cuerpo') is-invalid error-input @enderror" name="anuncio_cuerpo" value="{{ $anuncio->anuncio_cuerpo }}" required autocomplete="anuncio_cuerpo" autofocus>{{ $anuncio->anuncio_cuerpo }}</textarea>
                 @error('anuncio_cuerpo')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card-header">
-    Home
+    Inicio
 </div>
 <div class="card-body">
     @if (session('status'))
@@ -10,7 +10,7 @@
         {{ session('status') }}
     </div>
     @endif
-    {{ __('You are logged in!') }}
+    {{ __('Bienvenido!') }}
 </div>
 
 @endsection

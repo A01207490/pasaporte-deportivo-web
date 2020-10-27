@@ -3,7 +3,6 @@
         <tr>
             <th scope="col">Título</th>
             <th scope="col">Creado</th>
-            <th scope="col">Actualizado</th>
             <th scope="col">Acciones</th>
         </tr>
     </thead>
@@ -12,7 +11,6 @@
         <tr>
             <td data-col-title="Tpitulo">{{ $anuncio["anuncio_titulo"] }}</td>
             <td data-col-title="Creado">{{ $anuncio["created_at"] }}</td>
-            <td data-col-title="Actualizado">{{ $anuncio["updated_at"] }}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
                 <a href="{{route('anuncios.show', $anuncio)}}" class="p-1">
                     <button type="button" class="btn btn-primary btn-circle btn-sm">

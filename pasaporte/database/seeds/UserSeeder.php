@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
 
         $student1 = User::create([
             'name' => 'student1',
-            'email' => 'student1@itesm.com',
+            'email' => 'A00000000@itesm.mx',
             'password' => bcrypt('student1'),
             'semestre' => 1,
             'carrera_id' => 1
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
 
         $student2 = User::create([
             'name' => 'student2',
-            'email' => 'student2@itesm.com',
+            'email' => 'A00000001@itesm.mx',
             'password' => bcrypt('student2'),
             'semestre' => 2,
             'carrera_id' => 2
