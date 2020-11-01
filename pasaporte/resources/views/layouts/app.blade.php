@@ -42,9 +42,11 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <!-- Left Side Of Navbar -->
                             <ul class="navbar-nav mr-auto">
+                                @hasRoles(['admin', 'student'])
                                 <li class="nav-item mr-2 ml-2">
                                     <a class="nav-link {{ Request::path() === '/' ? 'active' : '' }}" href="{{ url('/home') }}">Inicio</a>
                                 </li>
+                                @endhasRoles
                                 @hasRole('admin')
                                 <li class="nav-item mr-2 ml-2">
                                     <a class="nav-link {{ Request::path() === 'users' ? 'active' : '' }}" href="{{ route('users.index') }}">Alumnos</a>
