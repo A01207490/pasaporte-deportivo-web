@@ -20,25 +20,67 @@ class ClaseSeeder extends Seeder
         $jueves = Dia::where('dia_nombre', 'Jueves')->first();
         $viernes = Dia::where('dia_nombre', 'Viernes')->first();
 
-        $fondo = Clase::create([
+        $tenis = Clase::create([
             'clase_nombre' => 'Tenis',
             'clase_hora_inicio' => NOW(),
             'clase_hora_fin' => NOW(),
             'coach_id' => '1'
         ]);
 
-        $velocidad = Clase::create([
+        $atletismo = Clase::create([
             'clase_nombre' => 'Atletismo',
             'clase_hora_inicio' => NOW(),
             'clase_hora_fin' => NOW(),
             'coach_id' => '2'
         ]);
 
-        $fondo->dias()->attach($lunes);
-        $fondo->dias()->attach($miercoles);
-        $fondo->dias()->attach($viernes);
+        $natacion = Clase::create([
+            'clase_nombre' => 'Natación',
+            'clase_hora_inicio' => NOW(),
+            'clase_hora_fin' => NOW(),
+            'coach_id' => '3'
+        ]);
 
-        $velocidad->dias()->attach($martes);
-        $velocidad->dias()->attach($jueves);
+        $futbol = Clase::create([
+            'clase_nombre' => 'Futbol',
+            'clase_hora_inicio' => NOW(),
+            'clase_hora_fin' => NOW(),
+            'coach_id' => '4'
+        ]);
+
+        $gimnasio = Clase::create([
+            'clase_nombre' => 'Gimnasio',
+            'clase_hora_inicio' => NOW(),
+            'clase_hora_fin' => NOW(),
+            'coach_id' => '5'
+        ]);
+
+        $baloncesto = Clase::create([
+            'clase_nombre' => 'Baloncesto',
+            'clase_hora_inicio' => NOW(),
+            'clase_hora_fin' => NOW(),
+            'coach_id' => '6'
+        ]);
+
+        $tenis->dias()->attach($lunes);
+        $tenis->dias()->attach($miercoles);
+        $tenis->dias()->attach($viernes);
+
+        $atletismo->dias()->attach($martes);
+        $atletismo->dias()->attach($jueves);
+
+        $natacion->dias()->attach($lunes);
+        $natacion->dias()->attach($miercoles);
+        $natacion->dias()->attach($viernes);
+
+        $futbol->dias()->attach($martes);
+        $futbol->dias()->attach($jueves);
+
+        $gimnasio->dias()->attach($lunes);
+        $gimnasio->dias()->attach($miercoles);
+        $gimnasio->dias()->attach($viernes);
+
+        $baloncesto->dias()->attach($martes);
+        $baloncesto->dias()->attach($jueves);
     }
 }

@@ -11,6 +11,8 @@
     </div>
     @endif
     {{ __('Bienvenido!') }}
+    <!-- Change the colour #f8fafc to match the previous section colour -->
+
 </div>
 
 @endsection
