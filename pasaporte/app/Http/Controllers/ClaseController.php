@@ -16,17 +16,13 @@ class ClaseController extends Controller
      */
     public function index()
     {
-        if (request('query')) {
-            $clases = $this->search()->paginate(5);
-        } else {
-            $clases = Clase::paginate(5);
-        }
+        if (request('query')) $clases = $this->search()->paginate(5);
+        else $clases = Clase::sortable()->paginate(5);
         return view('clases.index', compact('clases'));
     }
 
     public function search()
     {
-        $value = request('query');
         $value = '%' . request('query') . '%';
         $filteredClases = Clase::orWhere('dias.dia_nombre', 'LIKE', $value)->orWhere('clase_nombre', 'LIKE', $value)->orWhere('clase_hora_inicio', 'LIKE', $value)->orWhere('clase_hora_fin', 'LIKE', $value)->orWhere('coach_nombre', 'LIKE', $value)->join('clase_dia', 'clases.id', '=', 'clase_dia.clase_id')->join('coaches', 'clases.coach_id', '=', 'coaches.id')->join('dias', 'clase_dia.dia_id', '=', 'dias.id')->selectRaw('distinct clase_dia.clase_id')->get();
         $clases = Clase::whereIn('id', $filteredClases);

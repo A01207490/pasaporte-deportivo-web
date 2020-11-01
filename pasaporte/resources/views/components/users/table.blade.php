@@ -1,10 +1,10 @@
 <table class="table smart-table">
     <thead class="thead text-white bg-secondary">
         <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Carrera</th>
-            <th scope="col">Semestre</th>
+            <th scope="col">@sortablelink('name', 'Nombre')</th>
+            <th scope="col">@sortablelink('email', 'Correo')</th>
+            <th scope="col">@sortablelink('carrera_id', 'Carrera')</th>
+            <th scope="col">@sortablelink('semestre', 'Semestre')</th>
             <th scope="col">Acciones</th>
         </tr>
     </thead>
@@ -37,5 +37,5 @@
     </tbody>
 </table>
 <div class="d-flex justify-content-center">
-    {{ $users->links() }}
+    {!! $users->appends(\Request::except('page'))->render() !!}
 </div>

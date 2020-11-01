@@ -2,11 +2,18 @@
 
 namespace App;
 
+use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
 
 class Coach extends Model
 {
+    use Sortable;
+
     protected $guarded = [];
+
+    public $sortable = [
+        'coach_nombre', 'coach_correo', 'coach_nomina',
+    ];
 
     public function path()
     {

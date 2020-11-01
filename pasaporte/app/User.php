@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Support\Facades\DB;
+use Kyslik\ColumnSortable\Sortable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,13 +13,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-
+    use Sortable;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
+        'name', 'email', 'password', 'semestre', 'carrera_id'
+    ];
+
+    public $sortable = [
         'name', 'email', 'password', 'semestre', 'carrera_id'
     ];
 
@@ -85,6 +90,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return User::where('role_id', 2)->join('role_user', 'users.id', '=', 'role_user.user_id')->join('carreras', 'users.carrera_id', '=', 'carreras.id')->join('roles', 'role_user.role_id', '=', 'roles.id')->select('users.id', 'roles.name', 'users.name', 'users.email', 'users.semestre', 'carreras.carrera_nombre');
     }
+
+    public function carrera_nombreSortable($query, $direction)
+    {
+        return $query->join('carreras', 'users.carrera_id', '=', 'carreras.id')
+            ->orderBy('carrera_nombre', $direction)
+            ->select('users.*');
+    }
+
 
     static public function getStudentAllinAll()
     {
