@@ -14,11 +14,8 @@ class AnuncioController extends Controller
      */
     public function index()
     {
-        if (request('query')) {
-            $anuncios = $this->search();
-        } else {
-            $anuncios = Anuncio::paginate(5);
-        }
+        if (request('query')) $anuncios = $this->search()->paginate(5);
+        else $anuncios = Anuncio::sortable()->paginate(5);
         return view('anuncios.index', compact('anuncios'));
     }
 
@@ -28,8 +25,7 @@ class AnuncioController extends Controller
         $anuncios = Anuncio::where('anuncio_titulo', 'LIKE', $value)
             ->orWhere('anuncio_cuerpo', 'LIKE', $value)
             ->orWhere('created_at', 'LIKE', $value)
-            ->orWhere('updated_at', 'LIKE', $value)
-            ->paginate(10);
+            ->orWhere('updated_at', 'LIKE', $value);
         return $anuncios;
     }
 

@@ -3,11 +3,17 @@
 namespace App;
 
 use Illuminate\Support\Facades\DB;
+use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
 
 class Clase extends Model
 {
+    use Sortable;
     protected $guarded = [];
+
+    public $sortable = [
+        'clase_nombre', 'clase_hora_inicio', 'clase_hora_fin',
+    ];
 
     public function coach()
     {

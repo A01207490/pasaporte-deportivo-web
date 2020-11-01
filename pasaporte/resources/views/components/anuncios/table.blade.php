@@ -1,8 +1,8 @@
 <table class="table smart-table">
     <thead class="thead text-white bg-secondary">
         <tr>
-            <th scope="col">Título</th>
-            <th scope="col">Creado</th>
+            <th scope="col">@sortablelink('anuncio_titulo', 'Título')</th>
+            <th scope="col">@sortablelink('created_at', 'Creado')</th>
             <th scope="col">Acciones</th>
         </tr>
     </thead>
@@ -39,5 +39,5 @@
     </tbody>
 </table>
 <div class="d-flex justify-content-center">
-    {{ $anuncios->links() }}
+    {!! $anuncios->appends(\Request::except('page'))->render() !!}
 </div>

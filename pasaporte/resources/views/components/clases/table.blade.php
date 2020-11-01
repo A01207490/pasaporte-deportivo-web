@@ -1,9 +1,9 @@
 <table class="table smart-table">
     <thead class="thead text-white bg-secondary">
         <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Hora inicio</th>
-            <th scope="col">Hora fin</th>
+            <th scope="col">@sortablelink('clase_nombre', 'Nombre')</th>
+            <th scope="col">@sortablelink('clase_hora_inicio', 'Inicio')</th>
+            <th scope="col">@sortablelink('clase_hora_fin', 'Fin')</th>
             <th scope="col">Días</th>
             <th scope="col">Coach</th>
             <th scope="col">Acciones</th>
@@ -45,5 +45,5 @@
     </tbody>
 </table>
 <div class="d-flex justify-content-center">
-    {{ $clases->links() }}
+    {!! $clases->appends(\Request::except('page'))->render() !!}
 </div>

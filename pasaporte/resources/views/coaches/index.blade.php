@@ -15,15 +15,7 @@
                 <label class="form-text text-muted">Buscar</label>
                 <input class="form-control" type="text" name="query" id="">
             </div>
-            <div class="ml-1">
-                <label class="form-text text-muted">Ordenar</label>
-                <select class="form-control" id="exampleFormControlSelect1" name="filtro">
-                    <option>Ninguno</option>
-                    <option>Nombre</option>
-                    <option>Nómina</option>
-                    <option>Correo</option>
-                </select>
-            </div>
+
             <div class="ml-1">
                 <button class="btn btn-primary btn-square btn-sm">
                     <img src="{{ asset('img/icons/search.svg')}}" class="icon-white" alt="search">
