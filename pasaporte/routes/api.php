@@ -48,4 +48,8 @@ Route::group([
         $clases = Clase::getCurrentClasses();
         return response()->json($clases, 200);
     });
+    Route::get('getAllClasses', function () {
+        return Clase::getAllClasses();
+        $clases = response()->json($clases, 200);
+    });
 });
