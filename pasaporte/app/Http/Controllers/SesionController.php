@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Pagination\LengthAwarePaginator;
+use \App\Tables\PasaporteTable;
 
 class SesionController extends Controller
 {
@@ -24,12 +25,8 @@ class SesionController extends Controller
      */
     public function index()
     {
-        if (request('query')) {
-            $users = $this->search()->paginate(5);
-        } else {
-            $users = User::getStudentAllinAll()->paginate(5);
-        }
-        return view('sesions.index', compact('users'));
+        $table = (new PasaporteTable)->setup();
+        return view('sesions.index', compact('table'));
     }
 
     public function search()
