@@ -13,8 +13,8 @@
         @forelse($clases as $clase)
         <tr>
             <td data-col-title="Nombre">{{ $clase->clase_nombre }}</td>
-            <td data-col-title="Hora inicio">{{ $clase["clase_hora_inicio"] }}</td>
-            <td data-col-title="Hora fin">{{ $clase["clase_hora_fin"] }}</td>
+            <td data-col-title="Hora inicio">{{ \Carbon\Carbon::parse($clase["clase_hora_inicio"])->format('h:m')}}</td>
+            <td data-col-title="Hora fin">{{ \Carbon\Carbon::parse($clase["clase_hora_fin"])->format('h:m')}}</td>
             <td data-col-title="Días">
                 {{ implode(', ', $clase->dias()->get()->pluck('dia_nombre')->toArray()) }}
             </td>

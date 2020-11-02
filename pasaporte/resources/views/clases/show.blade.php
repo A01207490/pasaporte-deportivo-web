@@ -10,13 +10,14 @@
             <label class="font-weight-bold">
                 Hora de inicio:
             </label>
-            {{$clase->clase_hora_inicio}}
+            {{ \Carbon\Carbon::parse($clase->clase_hora_inicio)->format('h:m')}}
         </li>
         <li class="list-group-item">
             <label class="font-weight-bold">
                 Hora de finalización:
             </label>
-            {{$clase->clase_hora_fin}}
+            {{ \Carbon\Carbon::parse($clase->clase_hora_fin)->format('h:m')}}
+
         </li>
         <li class="list-group-item">
             <label class="font-weight-bold">

@@ -67,10 +67,10 @@
         <div class="form-group row">
             <label for="dias" class="col-md-4 col-form-label text-md-right">{{ __('Días') }}</label>
             <div class="col-md-6">
-                <select id="dias" type="text" class="custom-select @error('dias') is-invalid error-input @enderror" name="dias[]" value="{{ $clase->dias }}" required autocomplete="dias" autofocus multiple>
+                <select id="dias" type="text" class="custom-select @error('dias') is-invalid error-input @enderror" name="dias[]" required autofocus multiple>
                     @foreach($dias as $dia)
-                    <option value="{{$dia->id}}">{{$dia->dia_nombre}}</option>
-                    @endforeach
+                    <option value="{{$dia->id}}" {{ in_array($dia->id, $clase->dias()->get()->pluck('id')->toArray()) ? 'selected' : '' }}>{{$dia->dia_nombre}}</option>
+                    @endforeach             
                 </select>
                 @error('dias')
                 <span class="invalid-feedback" role="alert">
