@@ -6,24 +6,7 @@
 </div>
 
 <div class="card-body">
-    <div class="row p-2 d-flex justify-content-between align-items-end">
-
-        <form method="GET" action="{{route('users.index')}}" class="d-flex justify-content-around align-items-end">
-            @csrf
-            <div class="">
-                <label class="form-text text-muted">Buscar</label>
-                <input class="form-control" type="text" name="query" id="">
-            </div>
-
-            <div class="ml-1">
-                <button class="btn btn-primary btn-square btn-sm">
-                    <img src="{{ asset('img/icons/search.svg')}}" class="icon-white" alt="search">
-                </button>
-            </div>
-
-
-
-        </form>
+    <div class="row p-2 d-flex justify-content-end align-items-end">
 
         <div class="mt-1">
             <a href="{{route('users.confirmDestroyAll')}}">
@@ -32,11 +15,11 @@
                     Borrar
                 </button>
             </a>
-
         </div>
+
     </div>
     <div class="row p-2 d-flex justify-content-center">
-        <x-users.table :users="$users" />
+        {{ $table }}
     </div>
 </div>
 @endsection

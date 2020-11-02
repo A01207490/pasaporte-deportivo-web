@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Anuncio;
 use Illuminate\Http\Request;
+use \App\Tables\AnuncioTable;
+
 
 class AnuncioController extends Controller
 {
@@ -14,9 +16,8 @@ class AnuncioController extends Controller
      */
     public function index()
     {
-        if (request('query')) $anuncios = $this->search()->paginate(5);
-        else $anuncios = Anuncio::sortable()->paginate(5);
-        return view('anuncios.index', compact('anuncios'));
+        $table = (new AnuncioTable)->setup();
+        return view('anuncios.index', compact('table'));
     }
 
     public function search()

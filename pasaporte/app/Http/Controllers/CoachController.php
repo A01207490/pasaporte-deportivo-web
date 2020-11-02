@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Crypt;
 use SimpleSoftwareIO\QrCode\Generator;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\ServiceProvider;
+use \App\Tables\CoachTable;
 
 
 class CoachController extends Controller
@@ -22,18 +23,8 @@ class CoachController extends Controller
     public function index()
     {
 
-        if (request('query')) $coaches = $this->search()->paginate(5);
-        else $coaches = Coach::sortable()->paginate(5);
-        return view('coaches.index', compact('coaches'));
-    }
-
-    public function search()
-    {
-        $value = '%' . request('query') . '%';
-        $query = Coach::where('coach_nombre', 'LIKE', $value)
-            ->orWhere('coach_nomina', 'LIKE', $value)
-            ->orWhere('coach_correo', 'LIKE', $value);
-        return $query;
+        $table = (new CoachTable)->setup();
+        return view('coaches.index', compact('table'));
     }
 
     /**
