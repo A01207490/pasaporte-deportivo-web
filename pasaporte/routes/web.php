@@ -46,7 +46,7 @@ Route::get("/qr/{coach}/download", "CoachController@download")->name('qr.downloa
 
 Route::delete("/anuncios/{anuncio}/confirm", "AnuncioController@confirm")->name('anuncios.confirm')->middleware(['auth', 'auth.admin']);
 Route::get("/clases/{clase}/confirm", "ClaseController@confirm")->name('clases.confirm')->middleware(['auth', 'auth.admin']);
-Route::get("/coaches/{coach}/confirm", "CoachController@confirm")->name('coaches.confirm')->middleware(['auth', 'auth.admin']);
+Route::delete("/coaches/{coach}/confirm", "CoachController@confirm")->name('coaches.confirm')->middleware(['auth', 'auth.admin']);
 Route::delete("/cs/{user}/confirm", "UsersController@confirm")->name('users.confirm')->middleware(['auth', 'auth.admin']);
 Route::get("/sesions/{sesion}/confirm", "SesionController@confirm")->name('sesions.confirm')->middleware(['auth', 'auth.admin']);
 
