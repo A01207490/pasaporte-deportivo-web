@@ -10,21 +10,22 @@
         @forelse($anuncios as $anuncio)
         <tr>
             <td data-col-title="Tpitulo">{{ $anuncio["anuncio_titulo"] }}</td>
-            <td data-col-title="Creado">{{ $anuncio["created_at"] }}</td>
+            <td data-col-title="Creado">{{ \Carbon\Carbon::parse($anuncio["created_at"])->format('d/m/Y')}}</td>
             <td data-col-title="Acciones" class="d-flex justify-content-start align-items-center">
                 <a href="{{route('anuncios.show', $anuncio)}}" class="p-1">
                     <button type="button" class="btn btn-primary btn-circle btn-sm">
                         <img src="{{ asset('img/icons/visibility.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
                     </button>
                 </a>
-                <a href="{{route('anuncios.confirm', $anuncio)}}" class="p-1">
-                    <button type="button" class="btn btn-primary btn-circle btn-sm">
-                        <img src="{{ asset('img/icons/delete.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
-                    </button>
-                </a>
+               
                 <a href="{{route('anuncios.edit', $anuncio)}}" class="p-1">
                     <button class="btn btn-primary btn-circle btn-sm">
                         <img src="{{ asset('img/icons/edit.svg')}}" class="icon-white" alt="search" width="17px" height="17px">
+                    </button>
+                </a>
+                <a href="{{route('anuncios.confirm', $anuncio)}}" class="p-1">
+                    <button type="button" class="btn btn-primary btn-circle btn-sm">
+                        <img src="{{ asset('img/icons/delete.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
                     </button>
                 </a>
 

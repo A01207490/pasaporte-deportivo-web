@@ -27,6 +27,13 @@ class User extends Authenticatable implements JWTSubject
         'name', 'email', 'password', 'semestre', 'carrera_id'
     ];
 
+    public function carrera_nombreSortable($query, $direction)
+    {
+        return $query->join('carreras', 'users.carrera_id', '=', 'carreras.id')
+            ->orderBy('carrera_nombre', $direction)
+            ->select('users.*');
+    }
+
     protected $attributes = array(
         'semestre' => 1,
         'carrera_id' => 1,
@@ -90,14 +97,6 @@ class User extends Authenticatable implements JWTSubject
     {
         return User::where('role_id', 2)->join('role_user', 'users.id', '=', 'role_user.user_id')->join('carreras', 'users.carrera_id', '=', 'carreras.id')->join('roles', 'role_user.role_id', '=', 'roles.id')->select('users.id', 'roles.name', 'users.name', 'users.email', 'users.semestre', 'carreras.carrera_nombre');
     }
-
-    public function carrera_nombreSortable($query, $direction)
-    {
-        return $query->join('carreras', 'users.carrera_id', '=', 'carreras.id')
-            ->orderBy('carrera_nombre', $direction)
-            ->select('users.*');
-    }
-
 
     static public function getStudentAllinAll()
     {

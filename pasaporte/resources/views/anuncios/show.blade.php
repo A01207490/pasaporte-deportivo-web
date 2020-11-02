@@ -11,7 +11,7 @@
                 <label class="font-weight-bold">
                     Fecha de creación:
                 </label>
-                {{$anuncio->created_at}}
+                {{ \Carbon\Carbon::parse($anuncio->created_at)->format('h:m')}}
             </p>
         </li>
         <li class="list-group-item">
@@ -19,7 +19,7 @@
                 <label class="font-weight-bold">
                     Fecha de actualización:
                 </label>
-                {{$anuncio->updated_at}}
+                {{ \Carbon\Carbon::parse($anuncio->updated_at)->format('h:m')}}
             </p>
         </li>
         <li class="list-group-item">
