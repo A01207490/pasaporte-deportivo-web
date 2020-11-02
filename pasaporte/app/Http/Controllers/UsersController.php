@@ -7,6 +7,7 @@ use App\Carrera;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use \App\Tables\UsersTable;
 
 class UsersController extends Controller
 {
@@ -17,29 +18,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        if (request('query')) $users = $this->search()->paginate(5);
-        else $users = User::getAllStudents()->sortable()->paginate(5);
-        $carreras = Carrera::all();
-        return view('users.index', compact('users', 'carreras'));
-    }
-
-    public function search()
-    {
-        $value = '%' . request('query') . '%';
-        $students = User::where('name', 'LIKE', $value)
-            ->orWhere('email', 'LIKE', $value)
-            ->orWhere('semestre', 'LIKE', $value)
-            ->orWhere('carreras.carrera_nombre', 'LIKE', $value)
-            ->join('carreras', 'users.carrera_id', '=', 'carreras.id')
-            ->select('users.id')
-            ->get();
-        $query = User::where('role_id', 2)
-            ->whereIn('users.id', $students)
-            ->join('role_user', 'users.id', '=', 'role_user.user_id')
-            ->join('carreras', 'users.carrera_id', '=', 'carreras.id')
-            ->join('roles', 'role_user.role_id', '=', 'roles.id')
-            ->select('users.id', 'roles.name', 'users.name', 'users.email', 'users.semestre', 'carreras.carrera_nombre');
-        return $query;
+        $table = (new UsersTable)->setup();
+        return view('users.index', compact('table'));
     }
 
     /**
