@@ -37,7 +37,9 @@ class CoachTable extends AbstractTable
      */
     protected function columns(Table $table): void
     {
-        $table->column('clase_nombre')->title(__('Name'))->sortable()->searchable();
+        $table->column('coach_nombre')->title(__('Name'))->sortable()->searchable();
+        $table->column('coach_nomina')->title(__('Id'))->sortable()->searchable();
+        $table->column('coach_correo')->title(__('Email'))->sortable()->searchable();
     }
 
     /**
