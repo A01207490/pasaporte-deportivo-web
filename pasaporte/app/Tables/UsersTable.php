@@ -3,9 +3,9 @@
 namespace App\Tables;
 
 use App\User;
-use Illuminate\Database\Eloquent\Builder;
 use Okipa\LaravelTable\Abstracts\AbstractTable;
 use Okipa\LaravelTable\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class UsersTable extends AbstractTable
 {
@@ -25,20 +25,10 @@ class UsersTable extends AbstractTable
                 //'edit'    => ['name' => 'user.edit'],
                 'destroy' => ['name' => 'users.confirm'],
             ])
-             /*
-                $query->where('role_id', 2);
-                $query->join('role_user', 'users.id', '=', 'role_user.user_id');
-                $query->join('carreras', 'users.carrera_id', '=', 'carreras.id');
-                $query->join('roles', 'role_user.role_id', '=', 'roles.id');
-                $query->select('users.id', 'roles.name', 'users.name', 'users.email', 'users.semestre', 'carreras.carrera_nombre');
-            */
             ->query(function (Builder $query) {
-                // Some examples of what you can do
                 $query->select('users.*');
-                // Alias a value to make it available from the column model
                 $query->addSelect('carreras.carrera_nombre as carrera');
                 $query->join('carreras', 'carreras.id', '=', 'users.carrera_id');
-
                 $query->join('role_user', 'users.id', '=', 'role_user.user_id');
                 $query->where('role_id', 2);
                
