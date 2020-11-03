@@ -1,0 +1,50 @@
+{
+    "Home": "Inicio",
+    "Register": "Registrarse",
+    "Search by:": "Buscar por:",
+    "Create": "Crear",
+    "Show": "Mostrar",
+    "Edit": "Editar",
+    "Destroy": "Destruir",
+    "Number of rows": "Numero de filas",
+    "Reset research": "Restaurar busqueda",
+    "Actions": "Acciones",
+    "No results were found.": "No se encontraron resultados",
+    "Showing results <b>:start</b> to <b>:stop</b> on <b>:total</b>": "Mostrando resultados <b>:start</b> a <b>:stop</b> de <b>:total</b>",
+
+    "Students": "Alumnos",
+    "Name": "Nombre",
+    "Email": "Correo",
+    "Career": "Carrera",
+    "Semester": "Semestre",
+
+    "Start hour": "Hora inicio",
+    "End hour": "Hora fin",
+    "Days": "Días",
+    "E-Mail Address": "Dirección de correo",
+
+    "Class": "Clase",
+    "Sessions": "Sesiones",
+    "Id": "Matrícula",
+    "Employee Number": "Nómina",
+
+    "Accept": "Aceptar",
+    "Cancel": "Cancelar",
+    "Go Back": "Regresar",
+    "Password": "Contraseña",
+    "Confirm password": "Confirmar contraseña",
+    "Forgot password?": "Olvido su contraseña?",
+    "Institutional email": "Correo institucional",
+    "Remember me": "Recordarme",
+    "Registered": "Registrado",
+    "Updated": "Actualizado",
+    "Body": "Cuerpo",
+    "Title": "Título"
+
+
+
+
+
+
+
+}

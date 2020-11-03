@@ -8,24 +8,27 @@
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
             <label class="font-weight-bold">
-                Hora de inicio:
+                {{ __('Start hour') }}:
             </label>
-            {{ \Carbon\Carbon::parse($clase->clase_hora_inicio)->format('h:m')}}
+            {{ \Carbon\Carbon::parse($clase->clase_hora_inicio)->format('g:i A')}}
         </li>
         <li class="list-group-item">
             <label class="font-weight-bold">
-                Hora de finalización:
+                {{ __('End hour') }}:
             </label>
-            {{ \Carbon\Carbon::parse($clase->clase_hora_fin)->format('h:m')}}
+            {{ \Carbon\Carbon::parse($clase->clase_hora_fin)->format('g:i A')}}
 
         </li>
         <li class="list-group-item">
             <label class="font-weight-bold">
-                Coach:
+                {{ __('Coach') }}:
             </label>
             {{$coach->coach_nombre}}
         </li>
         <li class="list-group-item">
+            <label class="font-weight-bold">
+                {{ __('Days') }}:
+            </label>
             @foreach($clase->dias as $dia)
             <ul>
                 <li>

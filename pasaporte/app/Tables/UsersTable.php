@@ -31,7 +31,6 @@ class UsersTable extends AbstractTable
                 $query->join('carreras', 'carreras.id', '=', 'users.carrera_id');
                 $query->join('role_user', 'users.id', '=', 'role_user.user_id');
                 $query->where('role_id', 2);
-               
             });
     }
 
@@ -47,6 +46,7 @@ class UsersTable extends AbstractTable
         $table->column('name')->title(__('Name'))->sortable()->searchable();
         $table->column('email')->title(__('Email'))->sortable()->searchable();
         $table->column('carrera')->title(__('Career'))->sortable()->searchable('carreras', ['carrera_nombre']);
+        $table->column('semestre')->title(__('Semester'))->sortable()->searchable();
     }
 
     /**

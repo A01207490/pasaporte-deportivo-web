@@ -9,22 +9,24 @@
         <li class="list-group-item">
             <p class="card-text">
                 <label class="font-weight-bold">
-                    Fecha de creación:
+                    {{ __('Registered') }}:
+
                 </label>
-                {{ \Carbon\Carbon::parse($anuncio->created_at)->format('h:m')}}
+                {{ \Carbon\Carbon::parse($anuncio->created_at)->format('j-M-y')}}
             </p>
         </li>
         <li class="list-group-item">
             <p class="card-text">
                 <label class="font-weight-bold">
-                    Fecha de actualización:
+                    {{ __('Updated') }}:
+
                 </label>
-                {{ \Carbon\Carbon::parse($anuncio->updated_at)->format('h:m')}}
+                {{ \Carbon\Carbon::parse($anuncio->updated_at)->format('j-M-y')}}
             </p>
         </li>
         <li class="list-group-item">
             <label class="font-weight-bold">
-                Cuerpo:
+                {{ __('Body') }}:
             </label>
             <p class="card-text">
                 {{$anuncio->anuncio_cuerpo}}
@@ -34,7 +36,7 @@
     <div class="card-body">
         <a href="{{route('anuncios.index')}}" class="card-link">
             <button class="btn btn-primary">
-                Regresar
+                {{ __('Go Back') }}
             </button>
         </a>
     </div>

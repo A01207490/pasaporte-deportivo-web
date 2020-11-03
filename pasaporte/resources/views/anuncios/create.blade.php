@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="card-header">
-    {{ __('Registrar') }}
+    {{ __('Create') }}
 </div>
 
 <div class="card-body">
@@ -11,7 +11,7 @@
         @csrf
 
         <div class="form-group row">
-            <label for="anuncio_titulo" class="col-md-4 col-form-label text-md-right">{{ __('Título') }}</label>
+            <label for="anuncio_titulo" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
             <div class="col-md-6">
                 <input id="anuncio_titulo" type="text" class="form-control @error('anuncio_titulo') is-invalid error-input @enderror" name="anuncio_titulo" value="{{ old('anuncio_titulo') }}" required autocomplete="anuncio_titulo" autofocus placeholder="Festival de Atletismo y Borrego Plateado.">
                 @error('anuncio_titulo')
@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="anuncio_cuerpo" class="col-md-4 col-form-label text-md-right">{{ __('Cuerpo') }}</label>
+            <label for="anuncio_cuerpo" class="col-md-4 col-form-label text-md-right">{{ __('Body') }}</label>
             <div class="col-md-6">
                 <textarea rows="15" id="anuncio_cuerpo" type="text" class="form-control @error('anuncio_cuerpo') is-invalid error-input @enderror" name="anuncio_cuerpo" value="{{ old('anuncio_cuerpo') }}" required autocomplete="anuncio_cuerpo" autofocus placeholder="Estimad@ alumn@: Te saludo con gusto y te hago llegar la invitación para participar en las pruebas del Festival de Atletismo."></textarea>
                 @error('anuncio_cuerpo')
@@ -37,7 +37,7 @@
         <div class="form-group row mb-0">
             <div class="col-md-6 offset-md-4">
                 <button type="submit" class="btn btn-primary">
-                    {{ __('Registrar') }}
+                    {{ __('Accept') }}
                 </button>
             </div>
         </div>

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="card-header">
-    {{ __('Registrar') }}
+    {{ __('Create') }}
 </div>
 
 <div class="card-body">
@@ -11,7 +11,7 @@
         @csrf
 
         <div class="form-group row">
-            <label for="clase_nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+            <label for="clase_nombre" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
             <div class="col-md-6">
                 <input id="clase_nombre" type="text" class="form-control @error('clase_nombre') is-invalid error-input @enderror" name="clase_nombre" value="{{ old('clase_nombre') }}" required autocomplete="clase_nombre" autofocus placeholder="Atletismo">
                 @error('clase_nombre')
@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="clase_hora_inicio" class="col-md-4 col-form-label text-md-right">{{ __('Hora de inicio') }}</label>
+            <label for="clase_hora_inicio" class="col-md-4 col-form-label text-md-right">{{ __('Start hour') }}</label>
             <div class="col-md-6">
                 <input id="clase_hora_inicio" type="time" class="form-control @error('clase_hora_inicio') is-invalid error-input @enderror" name="clase_hora_inicio" value="{{ old('clase_hora_inicio') }}" required autocomplete="clase_hora_inicio" autofocus>
                 @error('clase_hora_inicio')
@@ -36,7 +36,7 @@
 
 
         <div class="form-group row">
-            <label for="clase_hora_fin" class="col-md-4 col-form-label text-md-right">{{ __('Hora de finalización') }}</label>
+            <label for="clase_hora_fin" class="col-md-4 col-form-label text-md-right">{{ __('End hour') }}</label>
             <div class="col-md-6">
                 <input id="clase_hora_fin" type="time" class="form-control @error('clase_hora_fin') is-invalid error-input @enderror" name="clase_hora_fin" value="{{ old('clase_hora_fin') }}" required autocomplete="clase_hora_fin" autofocus>
                 @error('clase_hora_fin')
@@ -64,7 +64,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="dias" class="col-md-4 col-form-label text-md-right">{{ __('Días') }}</label>
+            <label for="dias" class="col-md-4 col-form-label text-md-right">{{ __('Days') }}</label>
             <div class="col-md-6">
                 <select id="dias" type="text" class="custom-select @error('dias') is-invalid error-input @enderror" name="dias[]" value="{{ old('$clase->dias') }}" required autocomplete="dias" autofocus multiple>
                     @foreach($dias as $dia)
@@ -82,7 +82,7 @@
         <div class="form-group row mb-0">
             <div class="col-md-6 offset-md-4">
                 <button type="submit" class="btn btn-primary">
-                    {{ __('Aceptar') }}
+                    {{ __('Accept') }}
                 </button>
             </div>
         </div>

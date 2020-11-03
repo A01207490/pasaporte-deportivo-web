@@ -45,7 +45,7 @@
                             <ul class="navbar-nav mr-auto">
                                 @hasRoles(['admin', 'student'])
                                 <li class="nav-item mr-2 ml-2">
-                                    <a class="nav-link {{ Request::path() === '/' ? 'active' : '' }}" href="{{ url('/home') }}">Inicio</a>
+                                    <a class="nav-link {{ Request::path() === '/' ? 'active' : '' }}" href="{{ url('/home') }}">{{ __('Home') }}</a>
                                 </li>
                                 @endhasRoles
                                 @hasRole('admin')
@@ -76,7 +76,7 @@
                                 </li>
                                 @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                                 @endif
                                 @else
