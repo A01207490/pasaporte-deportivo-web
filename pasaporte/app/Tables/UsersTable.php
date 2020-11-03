@@ -32,10 +32,7 @@ class UsersTable extends AbstractTable
                 $query->join('role_user', 'users.id', '=', 'role_user.user_id');
                 $query->where('role_id', 2);
                
-            })
-            ->destroyConfirmationHtmlAttributes(fn(User $user) => [
-                'data-confirm' => __('Are you sure you want to delete the line ' . $user->database_attribute . ' ?'),
-            ]);
+            });
     }
 
     /**

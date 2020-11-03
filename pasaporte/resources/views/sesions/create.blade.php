@@ -4,7 +4,6 @@
 
 <div class="card-header">
     {{ __('Registrar') }}
-    {{$user->id}}
 </div>
 
 <div class="card-body">

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Pagination\LengthAwarePaginator;
+use \App\Tables\PasaporteTable;
+use \App\Tables\SesionTable;
 
 class SesionController extends Controller
 {
@@ -24,20 +26,8 @@ class SesionController extends Controller
      */
     public function index()
     {
-        if (request('query')) {
-            $users = $this->search()->paginate(5);
-        } else {
-            $users = User::getStudentAllinAll()->paginate(5);
-        }
-        return view('sesions.index', compact('users'));
-    }
-
-    public function search()
-    {
-        $value = request('query');
-        $value = '%' . request('query') . '%';
-        $users = User::where('role_id', 2)->leftJoin('clase_user', 'users.id', '=', 'clase_user.user_id')->join('role_user', 'users.id', '=', 'role_user.user_id')->where('name', 'LIKE', $value)->orWhere('name', 'LIKE', $value)->selectRaw('users.id, name, count(clase_user.user_id) sesion_completed')->groupByRaw('users.id, name');
-        return $users;
+        $table = (new PasaporteTable)->setup();
+        return view('sesions.index', compact('table'));
     }
 
     /**
@@ -87,8 +77,9 @@ class SesionController extends Controller
     {
         //$sesion: es un usuario
         $user = $sesion;
+        $table = (new SesionTable($user->id))->setup();
         $sesions = Sesion::getSesions($user)->paginate(5);
-        return view('sesions.show', compact('user', 'sesions'));
+        return view('sesions.show', compact('user', 'sesions', 'table'));
     }
 
     public function confirm(Sesion $sesion, User $user)
