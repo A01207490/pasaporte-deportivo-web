@@ -48,7 +48,7 @@ Route::delete("/anuncios/{anuncio}/confirm", "AnuncioController@confirm")->name(
 Route::delete("/clases/{clase}/confirm", "ClaseController@confirm")->name('clases.confirm')->middleware(['auth', 'auth.admin']);
 Route::delete("/coaches/{coach}/confirm", "CoachController@confirm")->name('coaches.confirm')->middleware(['auth', 'auth.admin']);
 Route::delete("/cs/{user}/confirm", "UsersController@confirm")->name('users.confirm')->middleware(['auth', 'auth.admin']);
-Route::get("/sesions/{sesion}/confirm", "SesionController@confirm")->name('sesions.confirm')->middleware(['auth', 'auth.admin']);
+Route::delete("/sesions/{sesion}/confirm", "SesionController@confirm")->name('sesions.confirm')->middleware(['auth', 'auth.admin']);
 
 
 

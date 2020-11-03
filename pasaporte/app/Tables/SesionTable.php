@@ -5,9 +5,16 @@ namespace App\Tables;
 use App\Sesion;
 use Okipa\LaravelTable\Abstracts\AbstractTable;
 use Okipa\LaravelTable\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class SesionTable extends AbstractTable
 {
+    protected int $user_id;
+
+    public function __construct(int $user_id)
+    {
+        $this->user_id = $user_id;
+    }
     /**
      * Configure the table itself.
      *
@@ -17,15 +24,19 @@ class SesionTable extends AbstractTable
     protected function table(): Table
     {
         return (new Table)->model(Sesion::class)
-            ->routes([
-                'index'   => ['name' => 'sesions.index'],
-                'create'  => ['name' => 'sesion.create'],
-                'edit'    => ['name' => 'sesion.edit'],
-                'destroy' => ['name' => 'sesion.destroy'],
-            ])
-            ->destroyConfirmationHtmlAttributes(fn(Sesion $sesion) => [
-                'data-confirm' => __('Are you sure you want to delete the line ' . $sesion->database_attribute . ' ?'),
-            ]);
+        ->routes([
+            'index' => ['name' => 'sesions.show', 'params' => ['sesion' => $this->user_id]],
+            'create'  => ['name' => 'sesions.create', 'params' => ['user' => $this->user_id]],
+            'destroy' => ['name' => 'sesions.confirm'],
+        ])
+
+        ->query(function (Builder $query) {
+            $query->select('clase_user.id', 'clase_user.created_at', 'users.name', 'users.email', 'clases.clase_nombre', 'clases.clase_hora_inicio', 'clases.clase_hora_fin', 'coaches.coach_nombre', 'coaches.coach_nomina', 'coaches.coach_correo');
+            $query->join('clases', 'clase_user.clase_id', '=', 'clases.id');
+            $query->join('users', 'clase_user.user_id', '=', 'users.id');
+            $query->join('coaches', 'clases.coach_id', '=', 'coaches.id');
+            $query->where('user_id', $this->user_id);
+        });
     }
 
     /**
@@ -37,7 +48,11 @@ class SesionTable extends AbstractTable
      */
     protected function columns(Table $table): void
     {
-        $table->column('database_attribute')->sortable()->searchable();
+        $table->column('clase_nombre')->title(__('Class'))->sortable()->searchable('clases', ['clase_nombre']);
+        $table->column('created_at')->title(__('Registered'))->sortable()->searchable('users', ['email']);
+        $table->column('coach_nombre')->title(__('Coach'))->sortable()->searchable('coaches', ['coach_nombre']);
+        $table->column('clase_hora_inicio')->title(__('Start hour'))->sortable()->searchable('clases', ['clase_hora_inicio']);
+        $table->column('clase_hora_fin')->title(__('End hour'))->sortable()->searchable('clases', ['clase_hora_fin']);
     }
 
     /**
