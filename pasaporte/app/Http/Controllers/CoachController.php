@@ -113,6 +113,11 @@ class CoachController extends Controller
      */
     public function destroy(Coach $coach)
     {
+        $coach_nomina = $coach->coach_nomina;
+        $qr_code_file = storage_path('app/public/qr_codes/' . $coach_nomina . '.svg');
+        if (file_exists($qr_code_file)) {
+            unlink($qr_code_file);
+        }
         Coach::destroy($coach->id);
         return view('coaches.success');
     }

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="card-header">
-    Coaches
+    {{ __('Coaches') }}
 </div>
 
 <div class="card-body">

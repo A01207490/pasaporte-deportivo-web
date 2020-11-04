@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card-header">
-    Alumnos
+    {{ __('Students') }}
 </div>
 
 <div class="card-body">
@@ -12,7 +12,7 @@
             <a href="{{route('users.confirmDestroyAll')}}">
                 <button class="btn btn-primary">
                     <img src="{{ asset('img/icons/delete.svg')}}" class="icon-white" alt="search">
-                    Borrar
+                    {{ __('Delete') }}
                 </button>
             </a>
         </div>

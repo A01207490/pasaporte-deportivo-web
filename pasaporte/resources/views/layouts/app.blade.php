@@ -50,19 +50,19 @@
                                 @endhasRoles
                                 @hasRole('admin')
                                 <li class="nav-item mr-2 ml-2">
-                                    <a class="nav-link {{ Request::path() === 'users' ? 'active' : '' }}" href="{{ route('users.index') }}">Alumnos</a>
+                                    <a class="nav-link {{ Request::path() === 'users' ? 'active' : '' }}" href="{{ route('users.index') }}">{{ __('Students') }}</a>
                                 </li>
                                 <li class="nav-item mr-2 ml-2">
-                                    <a class="nav-link {{ Request::path() === 'sesiones' ? 'active' : '' }}" href="{{ route('sesions.index') }}">Pasaportes</a>
+                                    <a class="nav-link {{ Request::path() === 'sesiones' ? 'active' : '' }}" href="{{ route('sesions.index') }}">{{ __('Pasports') }}</a>
                                 </li>
                                 <li class="nav-item mr-2 ml-2">
-                                    <a class="nav-link {{ Request::path() === 'clases' ? 'active' : '' }}" href="{{ route('clases.index') }}">Clases</a>
+                                    <a class="nav-link {{ Request::path() === 'clases' ? 'active' : '' }}" href="{{ route('clases.index') }}">{{ __('Classes') }}</a>
                                 </li>
                                 <li class="nav-item mr-2 ml-2">
-                                    <a class="nav-link {{ Request::path() === 'coaches' ? 'active' : '' }}" href="{{ route('coaches.index') }}">Coaches</a>
+                                    <a class="nav-link {{ Request::path() === 'coaches' ? 'active' : '' }}" href="{{ route('coaches.index') }}">{{ __('Coaches') }}</a>
                                 </li>
                                 <li class="nav-item mr-2 ml-2">
-                                    <a class="nav-link {{ Request::path() === 'anuncios' ? 'active' : '' }}" href="{{ route('anuncios.index') }}">Anuncios</a>
+                                    <a class="nav-link {{ Request::path() === 'anuncios' ? 'active' : '' }}" href="{{ route('anuncios.index') }}">{{ __('Announcements') }}</a>
                                 </li>
                                 @endhasRole
                             </ul>
