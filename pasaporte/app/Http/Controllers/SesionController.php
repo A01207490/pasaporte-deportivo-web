@@ -47,7 +47,7 @@ class SesionController extends Controller
      */
     public function create(User $user)
     {
-        $clases = Clase::all();
+        $clases = Clase::orderBy('clase_nombre')->get();
         return view('sesions.create', compact('clases', 'user'));
     }
 
