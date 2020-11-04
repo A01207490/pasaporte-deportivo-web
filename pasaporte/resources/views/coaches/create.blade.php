@@ -37,7 +37,7 @@
         <div class="form-group row">
             <label for="coach_nomina" class="col-md-4 col-form-label text-md-right">{{ __('Employee Number') }}</label>
             <div class="col-md-6">
-                <input id="coach_nomina" type="text" class="form-control @error('coach_nomina') is-invalid error-input @enderror" name="coach_nomina" value="{{ old('coach_nomina') }}" required autocomplete="coach_nomina" autofocus placeholder="L00000000">
+                <input id="coach_nomina" type="text" class="form-control @error('coach_nomina') is-invalid error-input @enderror" name="coach_nomina" value="{{ old('coach_nomina') }}" required autocomplete="coach_nomina" autofocus placeholder="Lxxxxxxxx">
                 @error('coach_nomina')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

@@ -26,7 +26,7 @@
         <div class="form-group row">
             <label for="clase_hora_inicio" class="col-md-4 col-form-label text-md-right">{{ __('Start hour') }}</label>
             <div class="col-md-6">
-                <input id="clase_hora_inicio" type="time" class="form-control @error('clase_hora_inicio') is-invalid error-input @enderror" name="clase_hora_inicio" value="{{ $clase->clase_hora_inicio }}" required autocomplete="clase_hora_inicio" autofocus>
+                <input id="clase_hora_inicio" type="time" class="form-control @error('clase_hora_inicio') is-invalid error-input @enderror" name="clase_hora_inicio" value="{{ \Carbon\Carbon::parse($clase->clase_hora_inicio)->format('h:i') }}" required autocomplete="clase_hora_inicio" autofocus>
                 @error('clase_hora_inicio')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -39,7 +39,7 @@
         <div class="form-group row">
             <label for="clase_hora_fin" class="col-md-4 col-form-label text-md-right">{{ __('End hour') }}</label>
             <div class="col-md-6">
-                <input id="clase_hora_fin" type="time" class="form-control @error('clase_hora_fin') is-invalid error-input @enderror" name="clase_hora_fin" value="{{ $clase->clase_hora_fin }}" required autocomplete="clase_hora_fin" autofocus>
+                <input id="clase_hora_fin" type="time" class="form-control @error('clase_hora_fin') is-invalid error-input @enderror" name="clase_hora_fin" value="{{ \Carbon\Carbon::parse($clase->clase_hora_fin)->format('h:i') }}" required autocomplete="clase_hora_fin" autofocus>
                 @error('clase_hora_fin')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

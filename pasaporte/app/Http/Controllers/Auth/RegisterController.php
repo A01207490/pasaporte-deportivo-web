@@ -62,13 +62,20 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:18', 'min:18', 'unique:users', 'regex:/A+[0-9]+@itesm.mx/'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'carrera_id' => ['required'],
-            'semestre' => ['required'],
-        ]);
+        return Validator::make(
+            $data,
+            [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'regex:/^A{1}[0-9]{8}@itesm.mx$/', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'carrera_id' => ['required'],
+                'semestre' => ['required'],
+            ],
+            [
+                'email.regex' => 'El correo institucional debe tener el siguiente formato: Axxxxxxxx@itesm.mx, donde x es un dígito.',
+                'email.unique' => 'Ya existe una cuenta asignada a este correo.',
+            ]
+        );
     }
 
     /**

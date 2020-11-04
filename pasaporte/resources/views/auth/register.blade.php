@@ -13,7 +13,7 @@
             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
             <div class="col-md-6">
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Juan Hernández López ">
+                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Juan Hernández López">
 
                 @error('name')
                 <span class="invalid-feedback" role="alert">
@@ -27,7 +27,7 @@
             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Institutional email') }}</label>
 
             <div class="col-md-6">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="A00000000@itesm.mx" min=18 max=18 pattern="A+[0-9]+@itesm+\.mx">
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Axxxxxxxx@itesm.mx">
 
                 @error('email')
                 <span class="invalid-feedback" role="alert">
