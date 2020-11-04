@@ -50,7 +50,8 @@ class CoachController extends Controller
         $qr_code = new Generator;
         $encrypted_coach_nomina = Crypt::encryptString($coach_nomina);
         $qr_code->generate($encrypted_coach_nomina,  storage_path('app/public/qr_codes/' . $coach_nomina . '.svg'));
-        return view('coaches.success');
+        $index = 'coaches.index';
+        return view('components.success', compact('index'));
     }
 
     public function download(Coach $coach)
@@ -74,7 +75,10 @@ class CoachController extends Controller
 
     public function confirm(Coach $coach)
     {
-        return view('coaches.confirm', compact('coach'));
+        $type = $coach;
+        $index = 'coaches.index';
+        $destroy = 'coaches.destroy';
+        return view('components.confirm', compact('type', 'index', 'destroy'));
     }
 
     /**
@@ -102,7 +106,8 @@ class CoachController extends Controller
         $qr_code = new Generator;
         $encrypted_coach_nomina = Crypt::encryptString($coach_nomina);
         $qr_code->generate($encrypted_coach_nomina,  storage_path('app/public/qr_codes/' . $coach_nomina . '.svg'));
-        return view('coaches.success');
+        $index = 'coaches.index';
+        return view('components.success', compact('index'));
     }
 
     /**
@@ -119,7 +124,8 @@ class CoachController extends Controller
             unlink($qr_code_file);
         }
         Coach::destroy($coach->id);
-        return view('coaches.success');
+        $index = 'coaches.index';
+        return view('components.success', compact('index'));
     }
 
     public function validateCoach(Coach $coach)
