@@ -8,7 +8,7 @@
     <div class="row p-2 d-flex justify-content-end align-items-center">
         <a class="pl-1" href="{{route('sesions.index')}}">
             <button class="btn btn-primary p-2">
-                Regresar
+                {{ __('Go Back') }}
             </button>
         </a>
     </div>

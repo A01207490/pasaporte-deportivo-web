@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card-header">
-    Clases
+    {{ __('Classes') }}
 </div>
 
 <div class="card-body">

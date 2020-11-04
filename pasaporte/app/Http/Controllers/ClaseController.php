@@ -50,7 +50,8 @@ class ClaseController extends Controller
             'coach_id' => $request->coach_id,
         ]));
         $clase->dias()->attach(request('dias'));
-        return view('clases.success');
+        $index = 'clases.index';
+        return view('components.success', compact('index'));
     }
 
     /**
@@ -68,7 +69,10 @@ class ClaseController extends Controller
 
     public function confirm(Clase $clase)
     {
-        return view('clases.confirm', compact('clase'));
+        $type = $clase;
+        $index = 'clases.index';
+        $destroy = 'clases.destroy';
+        return view('components.confirm', compact('type', 'index', 'destroy'));
     }
 
     /**
@@ -101,7 +105,8 @@ class ClaseController extends Controller
             'coach_id' => $request->coach_id,
         ]);
         $clase->dias()->sync(request('dias'));
-        return view('clases.success');
+        $index = 'clases.index';
+        return view('components.success', compact('index'));
     }
 
     /**
@@ -113,7 +118,8 @@ class ClaseController extends Controller
     public function destroy(Clase $clase)
     {
         Clase::destroy($clase->id);
-        return view('clases.success');
+        $index = 'clases.index';
+        return view('components.success', compact('index'));
     }
     public function validateClase()
     {

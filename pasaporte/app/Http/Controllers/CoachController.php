@@ -50,13 +50,15 @@ class CoachController extends Controller
         $qr_code = new Generator;
         $encrypted_coach_nomina = Crypt::encryptString($coach_nomina);
         $qr_code->generate($encrypted_coach_nomina,  storage_path('app/public/qr_codes/' . $coach_nomina . '.svg'));
-        return view('coaches.success');
+        $index = 'coaches.index';
+        return view('components.success', compact('index'));
     }
 
     public function download(Coach $coach)
     {
         $coach_nomina = $coach->coach_nomina;
-        return response()->download(public_path('storage/qr_codes/' . $coach_nomina . '.svg'));
+        return response()->download(storage_path('app/public/qr_codes/' . $coach_nomina . '.svg'));
+        //return response()->download(public_path('storage/qr_codes/' . $coach_nomina . '.svg'));
     }
 
     /**
@@ -74,7 +76,10 @@ class CoachController extends Controller
 
     public function confirm(Coach $coach)
     {
-        return view('coaches.confirm', compact('coach'));
+        $type = $coach;
+        $index = 'coaches.index';
+        $destroy = 'coaches.destroy';
+        return view('components.confirm', compact('type', 'index', 'destroy'));
     }
 
     /**
@@ -97,12 +102,16 @@ class CoachController extends Controller
      */
     public function update(Request $request, Coach $coach)
     {
+
+        $coach_nomina = Coach::find($coach->id)->coach_nomina;
         $coach->update($this->validateCoach($coach));
+        $this->destroy_qr_code($coach_nomina);
         $coach_nomina = $coach->coach_nomina;
         $qr_code = new Generator;
         $encrypted_coach_nomina = Crypt::encryptString($coach_nomina);
         $qr_code->generate($encrypted_coach_nomina,  storage_path('app/public/qr_codes/' . $coach_nomina . '.svg'));
-        return view('coaches.success');
+        $index = 'coaches.index';
+        return view('components.success', compact('index'));
     }
 
     /**
@@ -113,16 +122,27 @@ class CoachController extends Controller
      */
     public function destroy(Coach $coach)
     {
+        $coach_nomina = $coach->coach_nomina;
+        $this->destroy_qr_code($coach_nomina);
         Coach::destroy($coach->id);
-        return view('coaches.success');
+        $index = 'coaches.index';
+        return view('components.success', compact('index'));
+    }
+
+    public function destroy_qr_code(String $coach_nomina)
+    {
+        $qr_code_file = storage_path('app/public/qr_codes/' . $coach_nomina . '.svg');
+        if (file_exists($qr_code_file)) {
+            unlink($qr_code_file);
+        }
     }
 
     public function validateCoach(Coach $coach)
     {
         $rules = [
-            'coach_nombre' => ['required', 'string', 'regex:/[a-zA-Z]/'],
-            'coach_nomina' => ['required', 'min:9', 'max:9', 'regex:/L+[0-9]/', Rule::unique('coaches')->ignore($coach->id)],
-            'coach_correo' => ['required', 'email', 'regex:/[a-zA-Z0-9._%+-]+@tec.mx/'],
+            'coach_nombre' => ['required', 'string'],
+            'coach_nomina' => ['required', 'string', 'min:9', 'max:9', 'regex:/^L{1}[0-9]{8}$/', Rule::unique('coaches')->ignore($coach->id)],
+            'coach_correo' => ['required', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@tec.mx$/'],
         ];
         $custom_messages = [
             'required' => 'El campo :attribute es requerido.',
@@ -131,7 +151,6 @@ class CoachController extends Controller
             'coach_nomina.max' => 'La nómina debe de ser de exactamente 9 caracteres.',
             'coach_nomina.regex' => 'La nómina debe de tener el siguiente formato: LXXXXXXXX, donde X es un dígito.',
             'coach_correo.regex' => 'El dominio del correo debe de ser @tec.mx',
-            'coach_nombre.regex' => 'El nombre solo puede tener letras',
             'coach_nomina.unique' => 'Esta nomina ya se encuentra registrada',
             'coach_correo.unique' => 'Este correo ya se encuentra registrado'
         ];

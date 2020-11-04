@@ -34,7 +34,6 @@ class ClaseTable extends AbstractTable
                 $query->join('dias', 'dias.id', '=', 'clase_dia.dia_id');
                 $query->groupByRaw('clase_nombre, coach_nombre, clase_hora_inicio, clase_hora_fin, clases.id, clases.coach_id, clases.created_at, clases.updated_at');
             });
-           
     }
 
     /**
@@ -47,7 +46,8 @@ class ClaseTable extends AbstractTable
     protected function columns(Table $table): void
     {
         $table->column('clase_nombre')->title(__('Name'))->sortable()->searchable();
-        $table->column('created_at')->title(__('Created'))->sortable()->searchable();
+        $table->column('clase_hora_inicio')->title(__('Start hour'))->dateTimeFormat('g:i A')->sortable()->searchable();
+        $table->column('clase_hora_fin')->title(__('End hour'))->dateTimeFormat('g:i A')->sortable()->searchable();
         $table->column('coach')->title(__('Coach'))->sortable()->searchable('coaches', ['coach_nombre']);
         $table->column('dias')->title(__('Days'))->sortable();
     }

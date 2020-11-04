@@ -11,23 +11,23 @@
 
         <li class="list-group-item">
             <label>
-                Correo: <b>{{$user->email}}</b>
+                {{ __('Email') }}: <b>{{$user->email}}</b>
             </label>
         </li>
         <li class="list-group-item">
             <label>
-                Semestre: <b> {{$user->semestre . '°'}}</b>
+                {{ __('Semester') }}: <b> {{$user->semestre . '°'}}</b>
             </label>
         </li>
         <li class="list-group-item">
             <label>
-                Carrera: <b> {{$user->carrera->carrera_nombre}}</b>
+                {{ __('Career') }}: <b> {{$user->carrera->carrera_nombre}}</b>
             </label>
         </li>
         <li class="list-group-item">
             <a href="{{route('users.index')}}" class="card-link">
                 <button class="btn btn-primary">
-                    Regresar
+                    {{ __('Go Back') }}
                 </button>
             </a>
         </li>

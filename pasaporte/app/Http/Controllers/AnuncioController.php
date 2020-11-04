@@ -20,16 +20,6 @@ class AnuncioController extends Controller
         return view('anuncios.index', compact('table'));
     }
 
-    public function search()
-    {
-        $value = '%' . request('query') . '%';
-        $anuncios = Anuncio::where('anuncio_titulo', 'LIKE', $value)
-            ->orWhere('anuncio_cuerpo', 'LIKE', $value)
-            ->orWhere('created_at', 'LIKE', $value)
-            ->orWhere('updated_at', 'LIKE', $value);
-        return $anuncios;
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -49,7 +39,8 @@ class AnuncioController extends Controller
     public function store(Request $request)
     {
         Anuncio::create($this->validateAnuncio());
-        return view('anuncios.success');
+        $index = 'anuncios.index';
+        return view('components.success', compact('index'));
     }
 
     /**
@@ -66,7 +57,10 @@ class AnuncioController extends Controller
 
     public function confirm(Anuncio $anuncio)
     {
-        return view('anuncios.confirm', compact('anuncio'));
+        $type = $anuncio;
+        $index = 'anuncios.index';
+        $destroy = 'anuncios.destroy';
+        return view('components.confirm', compact('type', 'index', 'destroy'));
     }
 
     /**
@@ -90,7 +84,8 @@ class AnuncioController extends Controller
     public function update(Request $request, Anuncio $anuncio)
     {
         $anuncio->update($this->validateAnuncio());
-        return view('anuncios.success');
+        $index = 'anuncios.index';
+        return view('components.success', compact('index'));
     }
 
     /**
@@ -102,7 +97,8 @@ class AnuncioController extends Controller
     public function destroy(Anuncio $anuncio)
     {
         Anuncio::destroy($anuncio->id);
-        return view('anuncios.success');
+        $index = 'anuncios.index';
+        return view('components.success', compact('index'));
     }
 
     public function validateAnuncio()

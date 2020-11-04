@@ -2,9 +2,7 @@
 
 @section('content')
 <div class="card-header">
-    <h4>
-        {{ __('Reset password') }}
-    </h4>
+    {{ __('Reset password') }}
 </div>
 
 <div class="card-body">

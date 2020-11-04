@@ -14,7 +14,7 @@ class CreateClaseUser extends Migration
     public function up()
     {
         Schema::create('clase_user', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('clase_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

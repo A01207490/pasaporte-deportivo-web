@@ -13,7 +13,7 @@
             <ul class="list-group list-group-flush w-100">
                 <li class="list-group-item">
                     <label>
-                        Nómina
+                        {{ __('Employee Number') }}
                     </label>
                     <h6 class="font-weight-bold">
                         {{$coach->coach_nomina}}
@@ -22,7 +22,7 @@
                 </li>
                 <li class="list-group-item">
                     <label>
-                        Correo
+                        {{ __('Email') }}
                     </label>
                     <h6 class="font-weight-bold">
                         {{$coach->coach_correo}}
@@ -41,7 +41,7 @@
                 </div>
                 <a href="{{route('qr.download', $coach)}}" class="card-link pt-3 w-100">
                     <button class="btn btn-primary w-100">
-                        Descargar
+                        {{ __('Download') }}
                     </button>
                 </a>
             </div>
@@ -52,7 +52,7 @@
 
         <a class="p-2" href="{{route('coaches.index')}}">
             <button class="btn btn-primary">
-                Regresar
+                {{ __('Go Back') }}
             </button>
         </a>
 

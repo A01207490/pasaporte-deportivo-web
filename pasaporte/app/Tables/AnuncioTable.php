@@ -18,13 +18,13 @@ class AnuncioTable extends AbstractTable
     protected function table(): Table
     {
         return (new Table)->model(Anuncio::class)
-        ->routes([
-            'index'   => ['name' => 'anuncios.index'],
-            'show' => ['name' => 'anuncios.show'],
-            'create'  => ['name' => 'anuncios.create'],
-            'edit'    => ['name' => 'anuncios.edit'],
-            'destroy' => ['name' => 'anuncios.confirm'],
-        ]);
+            ->routes([
+                'index'   => ['name' => 'anuncios.index'],
+                'show' => ['name' => 'anuncios.show'],
+                'create'  => ['name' => 'anuncios.create'],
+                'edit'    => ['name' => 'anuncios.edit'],
+                'destroy' => ['name' => 'anuncios.confirm'],
+            ]);
     }
 
     /**
@@ -37,7 +37,8 @@ class AnuncioTable extends AbstractTable
     protected function columns(Table $table): void
     {
         $table->column('anuncio_titulo')->title(__('Title'))->sortable()->searchable();
-        $table->column('created_at')->title(__('Created'))->sortable()->searchable();
+        $table->column('created_at')->title(__('Registered'))->dateTimeFormat('j-M-y')->sortable()->searchable();
+        $table->column('updated_at')->title(__('Updated'))->dateTimeFormat('j-M-y')->sortable()->searchable();
     }
 
     /**

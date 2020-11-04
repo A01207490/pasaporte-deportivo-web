@@ -25,7 +25,6 @@ class CoachTable extends AbstractTable
                 'edit'    => ['name' => 'coaches.edit'],
                 'destroy' => ['name' => 'coaches.confirm'],
             ]);
-      
     }
 
     /**
@@ -38,7 +37,7 @@ class CoachTable extends AbstractTable
     protected function columns(Table $table): void
     {
         $table->column('coach_nombre')->title(__('Name'))->sortable()->searchable();
-        $table->column('coach_nomina')->title(__('Id'))->sortable()->searchable();
+        $table->column('coach_nomina')->title(__('Employee Number'))->sortable()->searchable();
         $table->column('coach_correo')->title(__('Email'))->sortable()->searchable();
     }
 

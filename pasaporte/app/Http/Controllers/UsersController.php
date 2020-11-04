@@ -41,23 +41,8 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-
-        User::create($this->validateUser());
-
-        /*
-        $user = User::create(([
-          
-        ]));
-        $carrera_user = ([
-            'user_id' => $user->id, 
-            'carrera_id' => $request->carrera_id,
-            'user_semestre' => $request->user_semestre,
-            'created_at' => NOW(),
-            'updated_at' => NOW()
-        ]);
-        DB::table('carrera_user')->insert($carrera_user);
-        */
-        return view('users.success');
+        $index = 'users.index';
+        return view('components.success', compact('index'));
     }
 
     /**
@@ -74,11 +59,15 @@ class UsersController extends Controller
 
     public function confirm(User $user)
     {
-        return view('users.confirm', compact('user'));
+        $type = $user;
+        $index = 'users.index';
+        $destroy = 'users.destroy';
+        return view('components.confirm', compact('type', 'index', 'destroy'));
     }
 
     public function confirmDestroyAll()
     {
+
         return view('users.confirmDestroyAll');
     }
 
@@ -104,7 +93,8 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $user->update($this->validateUser());
-        return view('users.success');
+        $index = 'users.index';
+        return view('components.success', compact('index'));
     }
 
     /**
@@ -116,14 +106,16 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         User::destroy($user->id);
-        return view('users.success');
+        $index = 'users.index';
+        return view('components.success', compact('index'));
     }
 
     public function destroyAll()
     {
         $students = User::where('role_id', 2)
             ->join('role_user', 'users.id', '=', 'role_user.user_id')->delete();
-        return view('users.success');
+        $index = 'users.index';
+        return view('components.success', compact('index'));
     }
 
     public function validateUser()

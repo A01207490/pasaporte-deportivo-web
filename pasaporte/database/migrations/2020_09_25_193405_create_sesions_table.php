@@ -15,7 +15,7 @@ class CreateSesionsTable extends Migration
     {
         //clase_user
         Schema::create('sesions', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('clase_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
