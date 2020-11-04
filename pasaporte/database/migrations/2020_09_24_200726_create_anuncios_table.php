@@ -14,7 +14,7 @@ class CreateAnunciosTable extends Migration
     public function up()
     {
         Schema::create('anuncios', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('anuncio_titulo');
             $table->text('anuncio_cuerpo');
             $table->timestamps();

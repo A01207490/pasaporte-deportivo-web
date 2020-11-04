@@ -14,7 +14,7 @@ class CreateCoachesTable extends Migration
     public function up()
     {
         Schema::create('coaches', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('coach_nomina');
             $table->string('coach_nombre');
             $table->string('coach_correo');
