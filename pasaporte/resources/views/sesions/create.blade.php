@@ -16,7 +16,7 @@
                 <select id="clase_id" type="text" class="custom-select @error('clase_id') is-invalid error-input @enderror" name="clase_id" value="{{ old('clase_id') }}" required autocomplete="clase_id" autofocus>
                     @foreach($clases as $clase)
                     <option value="{{$clase->id}}">
-                        {{$clase->clase_nombre}}, {{$clase->coach->coach_nombre}}, Hora inicio: {{$clase->clase_hora_inicio}}
+                        {{$clase->clase_nombre}}, {{$clase->coach->coach_nombre}}, Inicio: {{ \Carbon\Carbon::parse($clase->clase_hora_inicio)->format('g:i A')}}
                     </option>
                     @endforeach
                 </select>

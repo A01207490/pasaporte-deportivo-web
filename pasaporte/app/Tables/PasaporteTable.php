@@ -18,21 +18,25 @@ class PasaporteTable extends AbstractTable
     protected function table(): Table
     {
         return (new Table)->model(User::class)
-        ->routes([
-            'index'   => ['name' => 'sesions.index'],
-            'show' => ['name' => 'sesions.show'],
-        ])
+            ->routes([
+                'index'   => ['name' => 'sesions.index'],
+                'show' => ['name' => 'sesions.show'],
+            ])
 
-        ->query(function (Builder $query) {
-            $query->select('name');
-            $query->addSelect('users.id as id');
-            $query->addSelect('users.email as email');
-            $query->selectRaw('count(clase_user.user_id) as sesion_completed');
-            $query->leftJoin('clase_user', 'clase_user.user_id', '=', 'users.id');
-            $query->join('role_user', 'role_user.user_id', '=', 'users.id');
-            $query->where('role_id', 2);
-            $query->groupByRaw('name, users.id, users.email');
-        });
+            ->query(function (Builder $query) {
+                $query->select('name');
+                $query->addSelect('users.id as id');
+                $query->addSelect('users.email as email');
+                $query->selectRaw('count(clase_user.user_id) as sesion_completed');
+                $query->leftJoin('clase_user', 'clase_user.user_id', '=', 'users.id');
+                $query->join('role_user', 'role_user.user_id', '=', 'users.id');
+                $query->where('role_id', 2);
+                $query->groupByRaw('name, users.id, users.email');
+            })
+            ->rowsConditionalClasses(
+                fn (User $user) => $user->clases->count() >= 30,
+                ['highlighted', 'bg-green-accent-1']
+            );
     }
 
     /**
