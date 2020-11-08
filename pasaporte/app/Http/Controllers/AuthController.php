@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Clase;
-
 use App\Sesion;
 
 use Illuminate\Http\Request;
@@ -31,16 +30,15 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        $token = null;
         if (!$token = JWTAuth::attempt($credentials)) {
             return response()->json([
-                'status' => 'invalid_credentials',
-                'message' => 'Invalid email or password'
+                'error' => 'Unauthorized',
+                'message' => 'Incorrect email or password'
             ], 401);
         }
         return response()->json([
-            'status' => 'ok',
-            'token' => $token
+            'access_token' => $token,
+            'token_type' => 'bearer',
         ], 200);
     }
 
@@ -92,20 +90,18 @@ class AuthController extends Controller
         ]);
     }
 
-    public function getSessions(Request $request)
+    public function getSession()
     {
-        $this->validate($request, [
-            'token' => 'required'
-        ]);
         $user = auth()->user();
         $sesions = Sesion::getSesions($user)->get();
         return response()->json($sesions);
     }
 
-    public function registerSession(Request $request)
+    public function createSession(Request $request)
     {
         $this->validate($request, [
-            'token' => 'required'
+            'clase_id' => 'required',
+            'coach_nomina' => 'required',
         ]);
         $user = auth()->user();
         $clase = Clase::find($request->clase_id);
