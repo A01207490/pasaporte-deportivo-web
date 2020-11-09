@@ -114,6 +114,21 @@ class CoachController extends Controller
         return view('components.success', compact('index'));
     }
 
+    public function destroyAll()
+    {
+        $coaches = Coach::all();
+        $coaches_keys = $coaches->modelKeys();
+        Coach::destroy($coaches_keys);
+        $index = 'coaches.index';
+        return view('components.success', compact('index'));
+    }
+
+    public function confirmDestroyAll()
+    {
+
+        return view('coaches.confirmDestroyAll');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
