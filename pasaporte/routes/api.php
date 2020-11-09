@@ -47,11 +47,11 @@ Route::group([
         return response()->json($anuncios, 200);
     });
     Route::get('getClass', function () {
-        return $clases = Clase::getAllClasses();
+        return $clases = Clase::getClass();
         $clases = response()->json($clases, 200);
     });
     Route::get('getClassCurrent', function () {
-        $clases = Clase::getCurrentClasses();
+        $clases = Clase::getClassCurrent();
         return response()->json($clases, 200);
     });
 });

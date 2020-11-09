@@ -93,7 +93,7 @@ class AuthController extends Controller
     public function getSession()
     {
         $user = auth()->user();
-        $sesions = Sesion::getSesions($user)->get();
+        $sesions = Sesion::getSession($user)->get();
         return response()->json($sesions);
     }
 
