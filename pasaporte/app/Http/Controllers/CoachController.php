@@ -117,6 +117,10 @@ class CoachController extends Controller
     public function destroyAll()
     {
         $coaches = Coach::all();
+        //Se obtienen todos los archivos de qr_codes y se proceden a eliminarse
+         $files = Storage::allFiles('public/qr_codes');
+         Storage::delete($files);
+         //Se obtienen todos los id de coaches para posteriormente eliminar todo el modelo
         $coaches_keys = $coaches->modelKeys();
         Coach::destroy($coaches_keys);
         $index = 'coaches.index';
