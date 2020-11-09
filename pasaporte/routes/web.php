@@ -22,9 +22,12 @@ Route::view('/', "inicio");
 
 Route::get("/users/destroyAll", "UsersController@destroyAll")->name('users.destroyAll')->middleware(['auth', 'auth.admin']);
 Route::get("/users/confirmDestroyAll", "UsersController@confirmDestroyAll")->name('users.confirmDestroyAll')->middleware(['auth', 'auth.admin']);
-
+//Rutas para eliminar todos los coaches
 Route::get("/coaches/destroyAll", "CoachController@destroyAll")->name('coaches.destroyAll')->middleware(['auth', 'auth.admin']);
 Route::get("/coaches/confirmDestroyAll", "CoachController@confirmDestroyAll")->name('coaches.confirmDestroyAll')->middleware(['auth', 'auth.admin']);
+//Rutas para eliminar todos los anuncios
+Route::get("/anuncios/destroyAll", "AnuncioController@destroyAll")->name('anuncios.destroyAll')->middleware(['auth', 'auth.admin']);
+Route::get("/anuncios/confirmDestroyAll", "AnuncioController@confirmDestroyAll")->name('anuncios.confirmDestroyAll')->middleware(['auth', 'auth.admin']);
 
 Route::get('sesions/create/{user}', [
     'as' => 'sesions.create',

@@ -101,6 +101,22 @@ class AnuncioController extends Controller
         return view('components.success', compact('index'));
     }
 
+     public function destroyAll()
+    {
+        $anuncios = Anuncio::all();
+        //Se obtienen todos los id de anuncios para posteriormente eliminar todo el modelo
+        $anuncios_keys = $anuncios->modelKeys();
+        Anuncio::destroy($anuncios_keys);
+        $index = 'anuncios.index';
+        return view('components.success', compact('index'));
+    }
+
+    public function confirmDestroyAll()
+    {
+        //Regresa el view de confirmación
+        return view('anuncios.confirmDestroyAll');
+    }
+
     public function validateAnuncio()
     {
         $rules = [
