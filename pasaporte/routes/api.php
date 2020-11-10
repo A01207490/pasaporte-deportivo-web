@@ -6,6 +6,8 @@ use App\Sesion;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,18 +40,18 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::get('me', 'AuthController@me');
-    Route::post('getSessions', 'AuthController@getSessions');
-    Route::post('registerSession', 'AuthController@registerSession');
-    Route::get('getAnuncios', function () {
+    Route::get('getSession', 'AuthController@getSession');
+    Route::post('createSession', 'AuthController@createSession');
+    Route::get('getAnnouncement', function () {
         $anuncios = Anuncio::all();
         return response()->json($anuncios, 200);
     });
-    Route::get('getCurrentClasses', function () {
-        $clases = Clase::getCurrentClasses();
-        return response()->json($clases, 200);
-    });
-    Route::get('getAllClasses', function () {
-        return Clase::getAllClasses();
+    Route::get('getClass', function () {
+        return $clases = Clase::getClass();
         $clases = response()->json($clases, 200);
+    });
+    Route::get('getClassCurrent', function () {
+        $clases = Clase::getClassCurrent();
+        return response()->json($clases, 200);
     });
 });

@@ -75,11 +75,10 @@ class SesionController extends Controller
      */
     public function show(User $sesion)
     {
-        //$sesion: es un usuario
+        //$sesion es un usuario
         $user = $sesion;
         $table = (new SesionTable($user->id))->setup();
-        $sesions = Sesion::getSesions($user)->paginate(5);
-        return view('sesions.show', compact('user', 'sesions', 'table'));
+        return view('sesions.show', compact('user', 'table'));
     }
 
     public function confirm(Sesion $sesion, User $user)
