@@ -3,25 +3,18 @@
 @section('content')
 
 <div class="card-header">
-    {{ __('Announcements') }}
+    <div class="d-flex justify-content-between align-items-center">
+        {{ __('Announcements') }}
+        <a href="{{route('anuncios.confirmDestroyAll')}}" title=" {{ __('Destroy all') }}">
+            <button type="button" class="btn btn-red-destroy btn-circle btn-sm">
+                <img src="{{ asset('img/icons/delete.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
+            </button>
+        </a>
+    </div>
 </div>
 
 <div class="card-body">
-    <div class="row p-2 d-flex justify-content-end align-items-end">
-
-        <div class="mt-1">
-            <a href="{{route('anuncios.confirmDestroyAll')}}">
-                <button class="btn btn-primary">
-                    <img src="{{ asset('img/icons/delete.svg')}}" class="icon-white" alt="search">
-                    {{ __('Delete') }}
-                </button>
-            </a>
-        </div>
-
-    </div>
-    <div class="row p-2 d-flex justify-content-center">
-        {{ $table }}
-    </div>
+    {{ $table }}
 </div>
 
 @endsection

@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="card-header">
-    {{$user->name}}
-</div>
-<div class="card-body">
-    <div class="row p-2 d-flex justify-content-end align-items-center">
-        <a class="pl-1" href="{{route('sesions.index')}}">
-            <button class="btn btn-primary p-2">
-                {{ __('Go Back') }}
+    <div class="d-flex justify-content-between align-items-center">
+        {{$user->name}}
+        <a href="{{route('sesions.index')}}" title=" {{ __('Go Back') }}">
+            <button type="button" class="btn btn-primary btn-circle btn-sm">
+                <img src="{{ asset('img/icons/arrow_back.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
             </button>
         </a>
     </div>
-    <div class="row p-2 d-flex justify-content-center">
-        {{$table}}
-    </div>
+</div>
+
+<div class="card-body">
+    {{$table}}
 </div>
 @endsection

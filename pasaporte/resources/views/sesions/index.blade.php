@@ -2,23 +2,17 @@
 
 @section('content')
 <div class="card-header">
-    {{ __('Pasports') }}
+    <div class="d-flex justify-content-between align-items-center">
+        {{ __('Pasports') }}
+        <a href="{{route('pasaportes.export')}}" title=" {{ __('Download') }}">
+            <button type="button" class="btn btn-green-create btn-circle btn-sm">
+                <img src="{{ asset('img/icons/download.svg')}}" class="icon-white" alt="search" width="15px" height="15px">
+            </button>
+        </a>
+    </div>
 </div>
 
 <div class="card-body">
-    <div class="row p-2 d-flex justify-content-end align-items-end">
-
-        <div class="mt-1">
-            <a href="{{route('pasaportes.export')}}">
-                <button class="btn btn-primary">
-                    <img src="{{ asset('img/icons/download.svg')}}" height="15" class="icon-white" alt="search">
-                    {{ __('Download') }}
-                </button>
-            </a>
-        </div>
-    </div>
-    <div class="row p-2 d-flex justify-content-center">
-        {{ $table }}
-    </div>
+    {{ $table }}
 </div>
 @endsection
