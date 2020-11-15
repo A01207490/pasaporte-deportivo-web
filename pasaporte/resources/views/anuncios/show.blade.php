@@ -32,6 +32,14 @@
                 {{$anuncio->anuncio_cuerpo}}
             </p>
         </li>
+        <li class="list-group-item">
+            <label class="font-weight-bold">
+                {{ __('Image') }}:
+            </label>
+            <p class="card-text">
+                <img src="{{asset('storage/anuncios/'. $anuncio->id .'.png')}}" alt="No image for this announcement" class="img-thumbnail imgfit">
+            </p>
+        </li>
     </ul>
     <div class="card-body">
         <a href="{{route('anuncios.index')}}" class="card-link">
