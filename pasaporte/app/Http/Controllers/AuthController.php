@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -107,19 +108,24 @@ class AuthController extends Controller
         $clase = Clase::find($request->clase_id);
         $decrypted_coach_nomina = Crypt::decryptString($request->coach_nomina);
         if ($decrypted_coach_nomina == $clase->coach->coach_nomina) {
-            Sesion::create([
-                'user_id' => $user->id,
-                'clase_id' => $request->clase_id,
-            ]);
-            return response()->json([
-                'status' => 'ok',
-                'message' => 'Session registered successfully'
-            ], 200);
+            $entry = DB::select(DB::raw("select * from clase_user cu where user_id = 2 and date (created_at) = current_date()"));
+            if ($entry == null) {
+                Sesion::create(['user_id' => $user->id, 'clase_id' => $request->clase_id,]);
+                return response()->json([
+                    'status' => 'ok',
+                    'message' => 'Session registered successfully'
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Cannot register more that one session a day'
+                ], 405);
+            }
         } else {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Incorrect id'
-            ], 401);
+                'message' => 'Incorrect coach id'
+            ], 403);
         }
     }
 }

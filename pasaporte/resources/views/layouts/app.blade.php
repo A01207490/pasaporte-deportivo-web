@@ -25,6 +25,8 @@
     <link href="/css/buttons.css" rel="stylesheet">
     <link href="/css/smart_table.css" rel="stylesheet">
     <link href="/css/layout.css" rel="stylesheet">
+    <link href="/css/landing-page.min.css" rel="stylesheet">
+
 </head>
 
 <body>

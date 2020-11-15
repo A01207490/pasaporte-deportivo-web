@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Anuncio;
 use Illuminate\Http\Request;
 use \App\Tables\AnuncioTable;
+use Illuminate\Support\Facades\Storage;
 
 
 class AnuncioController extends Controller
@@ -38,7 +39,9 @@ class AnuncioController extends Controller
      */
     public function store(Request $request)
     {
-        Anuncio::create($this->validateAnuncio());
+        $this->validateAnuncio();
+        $anuncio = Anuncio::create((['anuncio_titulo' => $request->anuncio_titulo, 'anuncio_cuerpo' => $request->anuncio_cuerpo,]));
+        ($request->file('anuncio_imagen') == null) ?: $request->file('anuncio_imagen')->storeAs('anuncios', $anuncio->id . '.png', 'public');
         $index = 'anuncios.index';
         return view('components.success', compact('index'));
     }
@@ -83,7 +86,9 @@ class AnuncioController extends Controller
      */
     public function update(Request $request, Anuncio $anuncio)
     {
-        $anuncio->update($this->validateAnuncio());
+        $this->validateAnuncio();
+        $anuncio->update((['anuncio_titulo' => $request->anuncio_titulo, 'anuncio_cuerpo' => $request->anuncio_cuerpo,]));
+        ($request->file('anuncio_imagen') == null) ?: $request->file('anuncio_imagen')->storeAs('anuncios', $anuncio->id . '.png', 'public');
         $index = 'anuncios.index';
         return view('components.success', compact('index'));
     }
@@ -96,15 +101,19 @@ class AnuncioController extends Controller
      */
     public function destroy(Anuncio $anuncio)
     {
+        $this->destroy_image($anuncio->id);
         Anuncio::destroy($anuncio->id);
         $index = 'anuncios.index';
         return view('components.success', compact('index'));
     }
 
-     public function destroyAll()
+    public function destroyAll()
     {
         $anuncios = Anuncio::all();
-        //Se obtienen todos los id de anuncios para posteriormente eliminar todo el modelo
+        //Se obtienen todos los archivos de qr_codes y se proceden a eliminarse
+        $files = Storage::allFiles('public/anuncios');
+        Storage::delete($files);
+        //Se obtienen todos los id de anuncios para posteriormente eliminar todo el modelo.
         $anuncios_keys = $anuncios->modelKeys();
         Anuncio::destroy($anuncios_keys);
         $index = 'anuncios.index';
@@ -113,15 +122,24 @@ class AnuncioController extends Controller
 
     public function confirmDestroyAll()
     {
-        //Regresa el view de confirmación
         return view('anuncios.confirmDestroyAll');
+    }
+
+    public function destroy_image(String $anuncio_id)
+    {
+        $anuncio_imagen = storage_path('app/public/anuncios/' . $anuncio_id . '.png');
+        if (file_exists($anuncio_imagen)) {
+            unlink($anuncio_imagen);
+        }
     }
 
     public function validateAnuncio()
     {
         $rules = [
             'anuncio_titulo' => ['required'],
-            'anuncio_cuerpo' => ['required']
+            'anuncio_cuerpo' => ['required'],
+            'anuncio_imagen' => ['mimes:png,jpg,jpeg'],
+
         ];
         $custom_messages = [
             'anuncio_titulo.required' => 'El título es requerido.',

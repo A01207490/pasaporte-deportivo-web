@@ -38,8 +38,8 @@ class Clase extends Model
 
     static public function getClassCurrent()
     {
-        $minutes_tolerance = 20;
-        return DB::select(DB::raw("select * from clases c inner join clase_dia cd on cd.clase_id = c.id where dayofweek(current_date()) = dia_id and current_time between date_sub(clase_hora_fin, interval " . $minutes_tolerance . " minute) and date_add(clase_hora_fin, interval " . $minutes_tolerance . " minute)"));
+        $minutes_tolerance = 200;
+        return DB::select(DB::raw("select clase_id, coach_nombre, clase_nombre, clase_hora_inicio, clase_hora_fin from clases c inner join clase_dia cd on cd.clase_id = c.id inner join coaches c2 on c2.id = c.coach_id where dayofweek(current_date()) = dia_id and current_time between date_sub(clase_hora_fin, interval " . $minutes_tolerance . " minute) and date_add(clase_hora_fin, interval " . $minutes_tolerance . " minute)"));
     }
 
     static public function getClass()
