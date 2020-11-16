@@ -7,12 +7,12 @@
         {{ __('Classes') }}
         <div>
             <a href="{{route('clases.export')}}" title=" {{ __('Download') }}">
-                <button type="button" class="btn btn-green-create btn-circle btn-sm">
+                <button type="button" class="btn btn-green-accent-4 btn-circle btn-sm">
                     <img src="{{ asset('img/icons/download.svg')}}" class="icon-white" alt="search" width="15px" height="15px">
                 </button>
             </a>
             <a href="{{route('clases.confirmDestroyAll')}}" title=" {{ __('Destroy all') }}">
-                <button type="button" class="btn btn-red-destroy btn-circle btn-sm">
+                <button type="button" class="btn btn-red-darken-1 btn-circle btn-sm">
                     <img src="{{ asset('img/icons/delete.svg')}}" class="icon-white" alt="search" width="20px" height="20px">
                 </button>
             </a>
