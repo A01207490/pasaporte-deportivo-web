@@ -100,15 +100,15 @@ class AuthController extends Controller
 
     public function createSession(Request $request)
     {
+
         $this->validate($request, [
             'clase_id' => 'required',
             'coach_nomina' => 'required',
         ]);
         $user = auth()->user();
         $clase = Clase::find($request->clase_id);
-        $decrypted_coach_nomina = Crypt::decryptString($request->coach_nomina);
-        if ($decrypted_coach_nomina == $clase->coach->coach_nomina) {
-            $entry = DB::select(DB::raw("select * from clase_user cu where user_id = 2 and date (created_at) = current_date()"));
+        if ($clase->clase_nombre == "Pista") {
+            $entry = DB::select(DB::raw("select * from clase_user cu where user_id = " . $user->id . " and date (created_at) = current_date()"));
             if ($entry == null) {
                 Sesion::create(['user_id' => $user->id, 'clase_id' => $request->clase_id,]);
                 return response()->json([
@@ -122,10 +122,27 @@ class AuthController extends Controller
                 ], 405);
             }
         } else {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Incorrect coach id'
-            ], 403);
+            $decrypted_coach_nomina = Crypt::decryptString($request->coach_nomina);
+            if ($decrypted_coach_nomina == $clase->coach->coach_nomina) {
+                $entry = DB::select(DB::raw("select * from clase_user cu where user_id = " . $user->id . " and date (created_at) = current_date()"));
+                if ($entry == null) {
+                    Sesion::create(['user_id' => $user->id, 'clase_id' => $request->clase_id,]);
+                    return response()->json([
+                        'status' => 'ok',
+                        'message' => 'Session registered successfully'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Cannot register more that one session a day'
+                    ], 405);
+                }
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Incorrect coach id'
+                ], 403);
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ class Sesion extends Model
 
     static public function getSession(User $user)
     {
-        return Sesion::where('user_id', $user->id)->join('clases', 'clase_user.clase_id', '=', 'clases.id')->join('users', 'clase_user.user_id', '=', 'users.id')->join('coaches', 'clases.coach_id', '=', 'coaches.id')->selectRaw('clase_user.id, clase_user.created_at fecha_registro, users.name, users.email, clases.clase_nombre, date_format(clase_hora_inicio, "%h:%i %p") as clase_hora_inicio, date_format(clase_hora_fin, "%h:%i %p") as clase_hora_fin, coaches.coach_nombre, coaches.coach_nomina, coaches.coach_correo');
+        return Sesion::where('user_id', $user->id)->join('clases', 'clase_user.clase_id', '=', 'clases.id')->join('users', 'clase_user.user_id', '=', 'users.id')->join('coaches', 'clases.coach_id', '=', 'coaches.id')->selectRaw('clase_user.id, clase_user.created_at fecha_registro, users.name, users.email, clases.clase_nombre, date_format(clase_hora_inicio, "%h:%i %p") as clase_hora_inicio, date_format(clase_hora_fin, "%h:%i %p") as clase_hora_fin, coaches.coach_nombre, coaches.coach_nomina, coaches.coach_correo')->orderBy('clases.created_at', 'asc');
     }
 
     static public function getAllSesions()

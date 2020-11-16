@@ -43,7 +43,7 @@ Route::group([
     Route::get('getSession', 'AuthController@getSession');
     Route::post('createSession', 'AuthController@createSession');
     Route::get('getAnnouncement', function () {
-        $anuncios = Anuncio::all();
+        $anuncios = Anuncio::getAnnouncement()->get();
         return response()->json($anuncios, 200);
     });
     Route::get('getClass', function () {
