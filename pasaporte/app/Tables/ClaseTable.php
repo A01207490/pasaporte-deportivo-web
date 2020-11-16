@@ -29,7 +29,7 @@ class ClaseTable extends AbstractTable
                 $query->select('clases.*');
                 $query->addSelect('coaches.coach_nombre as coach');
                 $query->join('coaches', 'coaches.id', '=', 'clases.coach_id');
-                $query->selectRaw('GROUP_CONCAT( dia_nombre separator ", ") as "dias"');
+                $query->selectRaw('GROUP_CONCAT(dia_nombre ORDER BY dias.id ASC separator ", ") as "dias"');
                 $query->join('clase_dia', 'clase_dia.clase_id', '=', 'clases.id');
                 $query->join('dias', 'dias.id', '=', 'clase_dia.dia_id');
                 $query->groupByRaw('clase_nombre, coach_nombre, clase_hora_inicio, clase_hora_fin, clases.id, clases.coach_id, clases.created_at, clases.updated_at');
