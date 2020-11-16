@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Coach;
+use App\Exports\CoachesExport;
+use \App\Tables\CoachTable;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use SimpleSoftwareIO\QrCode\Facade;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Crypt;
 use SimpleSoftwareIO\QrCode\Generator;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\ServiceProvider;
-use \App\Tables\CoachTable;
 
 
 class CoachController extends Controller
@@ -154,6 +156,11 @@ class CoachController extends Controller
         if (file_exists($qr_code_file)) {
             unlink($qr_code_file);
         }
+    }
+
+    public function export()
+    {
+        return Excel::download(new CoachesExport, 'coaches.xlsx');
     }
 
     public function validateCoach(Coach $coach)

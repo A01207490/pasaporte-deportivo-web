@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Carrera;
+use App\Exports\UsersExport;
+use \App\Tables\UsersTable;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use \App\Tables\UsersTable;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsersController extends Controller
 {
@@ -116,6 +118,11 @@ class UsersController extends Controller
             ->join('role_user', 'users.id', '=', 'role_user.user_id')->delete();
         $index = 'users.index';
         return view('components.success', compact('index'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'alumnos.xlsx');
     }
 
     public function validateUser()

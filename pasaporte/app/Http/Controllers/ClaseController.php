@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Clase;
 use App\Dia;
+use App\Clase;
 use App\Coach;
-use Illuminate\Http\Request;
+use App\Exports\ClasesExport;
 use \App\Tables\ClaseTable;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class ClaseController extends Controller
@@ -121,6 +123,26 @@ class ClaseController extends Controller
         $index = 'clases.index';
         return view('components.success', compact('index'));
     }
+
+    public function destroyAll()
+    {
+        Clase::destroy(Clase::all()->modelKeys());
+        $index = 'clases.index';
+        return view('components.success', compact('index'));
+    }
+
+    public function confirmDestroyAll()
+    {
+        $index = 'clases.index';
+        $destroy = 'clases.destroyAll';
+        return view('components.confirmDestroyAll', compact('index', 'destroy'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new ClasesExport, 'clases.xlsx');
+    }
+
     public function validateClase()
     {
         $rules = [

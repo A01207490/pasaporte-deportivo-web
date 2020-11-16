@@ -8,12 +8,12 @@
             <p>¿Está seguro de borrar el registro?</p>
             <hr>
             <div class="d-flex justify-content-end align-items-center">
-                <a href="{{route('anuncios.index')}}" class="pl-2 ">
+                <a href="{{route($index)}}" class="pl-2 ">
                     <button class="btn btn-primary">
                         Cancelar
                     </button>
                 </a>
-                <a class="pl-2 " href="{{route('anuncios.destroyAll')}}">
+                <a class="pl-2 " href="{{route($destroy)}}">
                     <button class="btn btn-primary">
                         Aceptar
                     </button>

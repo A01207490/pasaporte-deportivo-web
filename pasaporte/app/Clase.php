@@ -64,4 +64,15 @@ class Clase extends Model
     {
         return DB::select(DB::raw("select clase_nombre, coach_nombre, date_format(clase_hora_inicio, '%h:%i %p') as clase_hora_inicio, date_format(clase_hora_fin, '%h:%i %p') as clase_hora_fin, GROUP_CONCAT(dia_nombre ORDER BY d.id ASC separator ', ') as 'dias' FROM clases ca, coaches co, clase_dia cd, dias d where ca.coach_id = co.id and ca.id = cd.clase_id and cd.dia_id = d.id group by clase_nombre, coach_nombre, clase_hora_inicio, clase_hora_fin"));
     }
+
+    static public function getClassExport()
+    {
+        return Clase::select('clase_nombre')
+            ->addSelect('coaches.coach_nombre as coach')
+            ->join('coaches', 'coaches.id', '=', 'clases.coach_id')
+            ->selectRaw('date_format(clase_hora_inicio, "%h:%i %p") as clase_hora_inicio, date_format(clase_hora_fin, "%h:%i %p") as clase_hora_fin, GROUP_CONCAT(dia_nombre ORDER BY dias.id ASC separator ", ") as "dias"')
+            ->join('clase_dia', 'clase_dia.clase_id', '=', 'clases.id')
+            ->join('dias', 'dias.id', '=', 'clase_dia.dia_id')
+            ->groupByRaw('clase_nombre, coach_nombre, clase_hora_inicio, clase_hora_fin')->get();
+    }
 }

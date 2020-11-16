@@ -17,4 +17,9 @@ class Anuncio extends Model
     {
         return Anuncio::selectRaw('id, anuncio_titulo, anuncio_cuerpo, created_at fecha_registro')->orderBy('anuncios.created_at', 'desc');
     }
+
+    static public function getAnnouncementExport()
+    {
+        return Anuncio::selectRaw('anuncio_titulo, anuncio_cuerpo, date_format(created_at, "%d-%M-%y") fecha_registro')->orderBy('anuncios.created_at', 'desc')->get();
+    }
 }

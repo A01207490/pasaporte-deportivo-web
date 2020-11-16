@@ -27,6 +27,15 @@ class User extends Authenticatable implements JWTSubject
         'name', 'email', 'password', 'semestre', 'carrera_id'
     ];
 
+    static public function getUserExport()
+    {
+        return User::selectRaw('name, email, semestre')
+            ->addSelect('carreras.carrera_nombre as carrera')
+            ->join('carreras', 'carreras.id', '=', 'users.carrera_id')
+            ->join('role_user', 'users.id', '=', 'role_user.user_id')
+            ->where('role_id', 2)->get();
+    }
+
     public function carrera_nombreSortable($query, $direction)
     {
         return $query->join('carreras', 'users.carrera_id', '=', 'carreras.id')

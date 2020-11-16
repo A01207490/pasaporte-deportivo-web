@@ -24,4 +24,9 @@ class Coach extends Model
     {
         return $this->hasMany(Clase::class);
     }
+
+    static public function getCoachExport()
+    {
+        return Coach::selectRaw('coach_nombre, coach_nomina, coach_correo')->orderBy('coach_nombre', 'asc')->get();
+    }
 }

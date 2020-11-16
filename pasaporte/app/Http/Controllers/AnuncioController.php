@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Anuncio;
+use App\Exports\AnunciosExport;
 use Illuminate\Http\Request;
 use \App\Tables\AnuncioTable;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -131,6 +133,11 @@ class AnuncioController extends Controller
         if (file_exists($anuncio_imagen)) {
             unlink($anuncio_imagen);
         }
+    }
+
+    public function export()
+    {
+        return Excel::download(new AnunciosExport, 'anuncios.xlsx');
     }
 
     public function validateAnuncio()

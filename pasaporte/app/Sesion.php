@@ -35,6 +35,14 @@ class Sesion extends Model
             ->select('clase_user.created_at', 'users.name', 'users.email', 'clases.clase_nombre', 'clases.clase_hora_inicio', 'clases.clase_hora_fin', 'coaches.coach_nombre', 'coaches.coach_nomina', 'coaches.coach_correo');
     }
 
+    static public function getSesionExport()
+    {
+        return Sesion::join('clases', 'clase_user.clase_id', '=', 'clases.id')
+            ->join('users', 'clase_user.user_id', '=', 'users.id')
+            ->join('coaches', 'clases.coach_id', '=', 'coaches.id')
+            ->selectRaw('date_format(clase_user.created_at, "%d-%M-%y") fecha_registro, users.name, users.email, clases.clase_nombre, date_format(clase_hora_inicio, "%h:%i %p"), date_format(clase_hora_fin, "%h:%i %p"), coaches.coach_nombre, coaches.coach_nomina, coaches.coach_correo');
+    }
+
     static public function getSessionClassCount(String $clase_nombre, int $user_id)
     {
         $sessions_count = DB::select(DB::raw("
