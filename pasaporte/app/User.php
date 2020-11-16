@@ -8,7 +8,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Illuminate\Contracts\Auth\CanResetPassword;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -26,6 +26,15 @@ class User extends Authenticatable implements JWTSubject
     public $sortable = [
         'name', 'email', 'password', 'semestre', 'carrera_id'
     ];
+
+    static public function getUserExport()
+    {
+        return User::selectRaw('name, email, semestre')
+            ->addSelect('carreras.carrera_nombre as carrera')
+            ->join('carreras', 'carreras.id', '=', 'users.carrera_id')
+            ->join('role_user', 'users.id', '=', 'role_user.user_id')
+            ->where('role_id', 2)->get();
+    }
 
     public function carrera_nombreSortable($query, $direction)
     {

@@ -1,47 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card-header">
-    {{$clase->clase_nombre}}
-</div>
-<div class="card-body">
+<div class="card m-2" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{$clase->clase_nombre}}</h5>
+    </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
-            <label class="font-weight-bold">
-                {{ __('Start hour') }}:
-            </label>
-            {{ \Carbon\Carbon::parse($clase->clase_hora_inicio)->format('g:i A')}}
+            {{ __('Coach') }}: {{$coach->coach_nombre}}
         </li>
         <li class="list-group-item">
-            <label class="font-weight-bold">
-                {{ __('End hour') }}:
-            </label>
-            {{ \Carbon\Carbon::parse($clase->clase_hora_fin)->format('g:i A')}}
-
+            {{ __('Days') }}: {{ implode(', ', $clase->dias()->get()->pluck('dia_nombre')->toArray()) }}
         </li>
         <li class="list-group-item">
-            <label class="font-weight-bold">
-                {{ __('Coach') }}:
-            </label>
-            {{$coach->coach_nombre}}
+            {{ __('Start hour') }}: {{ \Carbon\Carbon::parse($clase->clase_hora_inicio)->format('g:i A')}}
         </li>
         <li class="list-group-item">
-            <label class="font-weight-bold">
-                {{ __('Days') }}:
-            </label>
-            @foreach($clase->dias as $dia)
-            <ul>
-                <li>
-                    {{ $dia->dia_nombre }}
-                </li>
-            </ul>
-            @endforeach
+            {{ __('End hour') }}: {{ \Carbon\Carbon::parse($clase->clase_hora_fin)->format('g:i A')}}
         </li>
     </ul>
     <div class="card-body">
         <a href="{{route('clases.index')}}" class="card-link">
             <button class="btn btn-primary">
-                Regresar
+                {{ __('Go Back') }}
             </button>
         </a>
     </div>

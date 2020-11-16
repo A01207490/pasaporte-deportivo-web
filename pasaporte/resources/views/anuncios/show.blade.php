@@ -1,53 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card-header">
-    {{$anuncio->anuncio_titulo}}
-</div>
 <div class="card-body">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <p class="card-text">
-                <label class="font-weight-bold">
-                    {{ __('Registered') }}:
-
-                </label>
-                {{ \Carbon\Carbon::parse($anuncio->created_at)->format('j-M-y')}}
-            </p>
-        </li>
-        <li class="list-group-item">
-            <p class="card-text">
-                <label class="font-weight-bold">
-                    {{ __('Updated') }}:
-
-                </label>
-                {{ \Carbon\Carbon::parse($anuncio->updated_at)->format('j-M-y')}}
-            </p>
-        </li>
-        <li class="list-group-item">
-            <label class="font-weight-bold">
-                {{ __('Body') }}:
-            </label>
+    <div class="card w-100" style="width: 18rem;">
+        <img class="card-img-top imgfit-lg" src="{{asset('storage/anuncios/'. $anuncio->id .'.png')}}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{$anuncio->anuncio_titulo}}</h5>
             <p class="card-text">
                 {{$anuncio->anuncio_cuerpo}}
             </p>
-        </li>
-        <li class="list-group-item">
-            <label class="font-weight-bold">
-                {{ __('Image') }}:
-            </label>
-            <p class="card-text">
-                <img src="{{asset('storage/anuncios/'. $anuncio->id .'.png')}}" alt="No image for this announcement" class="img-thumbnail imgfit">
-            </p>
-        </li>
-    </ul>
-    <div class="card-body">
-        <a href="{{route('anuncios.index')}}" class="card-link">
-            <button class="btn btn-primary">
-                {{ __('Go Back') }}
-            </button>
-        </a>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                {{ __('Registered') }}: {{ \Carbon\Carbon::parse($anuncio->created_at)->format('j-M-y')}}
+            </li>
+            <li class="list-group-item">
+                {{ __('Updated') }}: {{ \Carbon\Carbon::parse($anuncio->updated_at)->format('j-M-y')}}
+            </li>
+        </ul>
+        <div class="card-body">
+            <a href="{{route('anuncios.index')}}" class="card-link">
+                <button class="btn btn-primary">
+                    {{ __('Go Back') }}
+                </button>
+            </a>
+        </div>
     </div>
 </div>
-
 @endsection

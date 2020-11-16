@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Clase;
-use App\Sesion;
+use Throwable;
 
+use App\Sesion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -100,32 +101,57 @@ class AuthController extends Controller
 
     public function createSession(Request $request)
     {
-        $this->validate($request, [
-            'clase_id' => 'required',
-            'coach_nomina' => 'required',
-        ]);
+        $sessions_count_max = 15;
+        $this->validate($request, ['clase_id' => 'required', 'coach_nomina' => 'required']);
         $user = auth()->user();
         $clase = Clase::find($request->clase_id);
-        $decrypted_coach_nomina = Crypt::decryptString($request->coach_nomina);
-        if ($decrypted_coach_nomina == $clase->coach->coach_nomina) {
-            $entry = DB::select(DB::raw("select * from clase_user cu where user_id = 2 and date (created_at) = current_date()"));
-            if ($entry == null) {
-                Sesion::create(['user_id' => $user->id, 'clase_id' => $request->clase_id,]);
+        $coach_nomina = $request->coach_nomina;
+        if ($clase->clase_nombre == "Pista") {
+            $sessions_count = Sesion::getSessionClassCount("Pista", $user->id);
+            if ($sessions_count >= $sessions_count_max) {
                 return response()->json([
-                    'status' => 'ok',
-                    'message' => 'Session registered successfully'
-                ], 200);
+                    'status' => 'error',
+                    'message' => 'cannot register more track sessions'
+                ], 406);
+            }
+            return $this->insertSession($user->id, $clase->id);
+        } else {
+            $coach_nomina_decrypted = $this->decryptCoachNomina($coach_nomina);
+            if ($coach_nomina_decrypted == $clase->coach->coach_nomina) {
+                return $this->insertSession($user->id, $clase->id);
             } else {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Cannot register more that one session a day'
-                ], 405);
+                    'message' => 'incorrect coach id'
+                ], 403);
             }
+        }
+    }
+
+    public function insertSession(int $user_id, int $clase_id)
+    {
+        $hasInsertToday = DB::select(DB::raw("select * from clase_user cu where user_id = " . $user_id . " and date (created_at) = current_date()"));
+        if ($hasInsertToday == null) {
+            Sesion::create(['user_id' => $user_id, 'clase_id' => $clase_id,]);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'session registered successfully'
+            ], 200);
         } else {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Incorrect coach id'
-            ], 403);
+                'message' => 'cannot register more than one session a day'
+            ], 405);
+        }
+    }
+
+    public function decryptCoachNomina(String $coach_nomina)
+    {
+        try {
+            return Crypt::decryptString($coach_nomina);
+        } catch (Throwable $e) {
+            report($e);
+            return null;
         }
     }
 }

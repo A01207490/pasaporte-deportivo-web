@@ -1,37 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card-header">
-    {{$user->name}}
-</div>
 
-<div class="card-body">
-
+<div class="card m-2" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{$user->name}}</h5>
+    </div>
     <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            {{ __('Email') }}: {{$user->email}}
+        </li>
+        <li class="list-group-item">
+            {{ __('Semester') }}: {{$user->semestre . '°'}}
+        </li>
+        <li class="list-group-item">
+            {{ __('Career') }}: {{$user->carrera->carrera_nombre}}
+        </li>
 
-        <li class="list-group-item">
-            <label>
-                {{ __('Email') }}: <b>{{$user->email}}</b>
-            </label>
-        </li>
-        <li class="list-group-item">
-            <label>
-                {{ __('Semester') }}: <b> {{$user->semestre . '°'}}</b>
-            </label>
-        </li>
-        <li class="list-group-item">
-            <label>
-                {{ __('Career') }}: <b> {{$user->carrera->carrera_nombre}}</b>
-            </label>
-        </li>
-        <li class="list-group-item">
-            <a href="{{route('users.index')}}" class="card-link">
-                <button class="btn btn-primary">
-                    {{ __('Go Back') }}
-                </button>
-            </a>
-        </li>
     </ul>
+    <div class="card-body">
+        <a href="{{route('users.index')}}" class="card-link">
+            <button class="btn btn-primary">
+                {{ __('Go Back') }}
+            </button>
+        </a>
+    </div>
 </div>
+
 
 @endsection

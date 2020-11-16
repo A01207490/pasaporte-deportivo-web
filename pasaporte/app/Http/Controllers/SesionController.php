@@ -121,4 +121,18 @@ class SesionController extends Controller
         Sesion::destroy($sesion->id);
         return view('sesions.success', compact('user'));
     }
+
+    public function destroyAll()
+    {
+        Sesion::destroy(Sesion::all()->modelKeys());
+        $index = 'sesions.index';
+        return view('components.success', compact('index'));
+    }
+
+    public function confirmDestroyAll()
+    {
+        $index = 'sesions.index';
+        $destroy = 'sesions.destroyAll';
+        return view('components.confirmDestroyAll', compact('index', 'destroy'));
+    }
 }
