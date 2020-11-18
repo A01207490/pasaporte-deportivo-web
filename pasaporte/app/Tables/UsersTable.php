@@ -21,8 +21,8 @@ class UsersTable extends AbstractTable
             ->routes([
                 'index'   => ['name' => 'users.index'],
                 'show' => ['name' => 'users.show'],
-                //'create'  => ['name' => 'user.create'],
-                //'edit'    => ['name' => 'user.edit'],
+                //'create'  => ['name' => 'users.create'],
+                'edit'    => ['name' => 'users.edit'],
                 'destroy' => ['name' => 'users.confirm'],
             ])
             ->query(function (Builder $query) {

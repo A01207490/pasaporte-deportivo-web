@@ -129,18 +129,9 @@ class UsersController extends Controller
     {
         $rules = [
             'name' => ['required', 'string', 'regex:/[a-zA-Z]/'],
-            'email' => ['required', 'email', 'regex:/[a-zA-Z0-9._%+-]+@itesm.mx/'],
-            'password' => ['required'],
             'carrera_id' => ['required'],
             'semestre' => ['required']
         ];
-        $custom_messages = [
-            'name.required' => 'El campo nombre es requerido.',
-            'email.required' => 'El campo correo es requerido.',
-            'password.required' => 'El campo contraseña es requerido.',
-            'email.regex' => 'El dominio del correo debe de ser @itesm.mx',
-            'name.regex' => 'El nombre solo puede tener letras'
-        ];
-        return request()->validate($rules, $custom_messages);
+        return request()->validate($rules);
     }
 }

@@ -14,10 +14,16 @@
             <label for="clase_id" class="col-md-4 col-form-label text-md-right">{{ __('Class') }}</label>
             <div class="col-md-6">
                 <select id="clase_id" type="text" class="custom-select @error('clase_id') is-invalid error-input @enderror" name="clase_id" value="{{ old('clase_id') }}" required autocomplete="clase_id" autofocus>
-                    @foreach($clases as $clase)
-                    <option value="{{$clase->id}}">
-                        {{$clase->clase_nombre}}, {{$clase->coach->coach_nombre}}, Inicio: {{ \Carbon\Carbon::parse($clase->clase_hora_inicio)->format('g:i A')}}
-                    </option>
+                    @foreach($clases_optgroup as $optgroup)
+                    <optgroup label="{{ $optgroup->clase_nombre }}">
+                        @foreach($clases as $clase)
+                        @if($clase->clase_nombre == $optgroup->clase_nombre)
+                        <option value="{{$clase->id}}">
+                            {{$clase->clase_nombre}}, {{$clase->coach->coach_nombre}}, Inicio: {{ \Carbon\Carbon::parse($clase->clase_hora_inicio)->format('g:i A')}}
+                        </option>
+                        @endif
+                        @endforeach
+                    </optgroup>
                     @endforeach
                 </select>
                 @error('clase_id')
