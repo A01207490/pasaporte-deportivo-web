@@ -19,6 +19,8 @@ class ClaseSeeder extends Seeder
         $miercoles = Dia::where('dia_nombre', 'Miércoles')->first();
         $jueves = Dia::where('dia_nombre', 'Jueves')->first();
         $viernes = Dia::where('dia_nombre', 'Viernes')->first();
+        $sabado = Dia::where('dia_nombre', 'Sábado')->first();
+        $domingo = Dia::where('dia_nombre', 'Domingo')->first();
 
         $tenis = Clase::create([
             'clase_nombre' => 'Tenis',
@@ -62,6 +64,13 @@ class ClaseSeeder extends Seeder
             'coach_id' => '6'
         ]);
 
+        $pista = Clase::create([
+            'clase_nombre' => 'Pista',
+            'clase_hora_inicio' => NOW(),
+            'clase_hora_fin' => NOW(),
+            'coach_id' => '1'
+        ]);
+
         $tenis->dias()->attach($lunes);
         $tenis->dias()->attach($miercoles);
         $tenis->dias()->attach($viernes);
@@ -77,10 +86,20 @@ class ClaseSeeder extends Seeder
         $futbol->dias()->attach($jueves);
 
         $gimnasio->dias()->attach($lunes);
+        $gimnasio->dias()->attach($martes);
         $gimnasio->dias()->attach($miercoles);
+        $gimnasio->dias()->attach($jueves);
         $gimnasio->dias()->attach($viernes);
 
         $baloncesto->dias()->attach($martes);
         $baloncesto->dias()->attach($jueves);
+
+        $pista->dias()->attach($lunes);
+        $pista->dias()->attach($martes);
+        $pista->dias()->attach($miercoles);
+        $pista->dias()->attach($jueves);
+        $pista->dias()->attach($viernes);
+        $pista->dias()->attach($sabado);
+        $pista->dias()->attach($domingo);
     }
 }

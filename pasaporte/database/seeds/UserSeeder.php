@@ -23,16 +23,22 @@ class UserSeeder extends Seeder
         $gimnasio = Clase::where('clase_nombre', 'Gimnasio')->first();
         $baloncesto = Clase::where('clase_nombre', 'Baloncesto')->first();
 
-        $admin = User::create([
-            'name' => 'admin',
+        $admin1 = User::create([
+            'name' => 'Pablo Gómez Pérez',
+            'email' => 'pgomezp@tec.mx',
+            'password' => bcrypt('pgomezp'),
+        ]);
+
+        $admin2 = User::create([
+            'name' => 'Administrador',
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin'),
         ]);
 
         $student1 = User::create([
             'name' => 'student1',
-            'email' => 'A00000001@itesm.mx',
-            'password' => bcrypt('student1'),
+            'email' => '1',
+            'password' => bcrypt('1'),
             'semestre' => 1,
             'carrera_id' => 1
         ]);
@@ -77,7 +83,8 @@ class UserSeeder extends Seeder
             'carrera_id' => 6
         ]);
 
-        $admin->roles()->attach($adminRole);
+        $admin1->roles()->attach($adminRole);
+        $admin2->roles()->attach($adminRole);
         $student1->roles()->attach($studentRole);
         $student1->clases()->attach($tenis);
         $student1->clases()->attach($atletismo);
