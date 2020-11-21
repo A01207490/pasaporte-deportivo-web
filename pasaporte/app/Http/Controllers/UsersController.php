@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use App\User;
 use App\Carrera;
-use App\Exports\UsersExport;
 use \App\Tables\UsersTable;
 use Illuminate\Support\Str;
+use App\Exports\UsersExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UsersController extends Controller
@@ -20,7 +22,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $table = (new UsersTable)->setup();
+        $auth_user_id = auth()->user()->id;
+        $table = (new UsersTable($auth_user_id))->setup();
         return view('users.index', compact('table'));
     }
 
@@ -31,7 +34,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $carreras = Carrera::all();
+        $carreras = Carrera::orderBy('carrera_nombre', 'asc')->get();
         return view('users.create', compact('carreras'));
     }
 
@@ -43,6 +46,16 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateUserCreate();
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'semestre' => $request->semestre,
+            'carrera_id' => $request->carrera_id,
+        ]);
+        $role = Role::where('name', $request->role)->first();
+        $user->roles()->attach($role);
         $index = 'users.index';
         return view('components.success', compact('index'));
     }
@@ -81,7 +94,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        $carreras = Carrera::all();
+        $carreras = Carrera::orderBy('carrera_nombre', 'asc')->get();
         return view('users.edit', compact('user', 'carreras'));
     }
 
@@ -95,6 +108,8 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $user->update($this->validateUser());
+        $role = Role::where('name', $request->role)->first();
+        $user->roles()->sync($role);
         $index = 'users.index';
         return view('components.success', compact('index'));
     }
@@ -130,7 +145,21 @@ class UsersController extends Controller
         $rules = [
             'name' => ['required', 'string', 'regex:/[a-zA-Z]/'],
             'carrera_id' => ['required'],
-            'semestre' => ['required']
+            'semestre' => ['required'],
+            'role' => ['required']
+        ];
+        return request()->validate($rules);
+    }
+
+    public function validateUserCreate()
+    {
+        $rules = [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'carrera_id' => ['required'],
+            'semestre' => ['required'],
+            'role' => ['required'],
         ];
         return request()->validate($rules);
     }
