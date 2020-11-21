@@ -50,9 +50,6 @@
 
         <div class="form-group row">
             <label for="coach_id" class="col-md-4 col-form-label text-md-right">{{ __('Coach') }}
-                @foreach($coaches as $coach)
-
-                @endforeach
             </label>
             <div class="col-md-6">
                 <select id="coach_id" type="text" class="custom-select @error('coach_id') is-invalid error-input @enderror" name="coach_id" value="{{ $clase->coach_id }}" required autocomplete="coach_id" autofocus>

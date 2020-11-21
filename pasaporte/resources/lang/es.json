@@ -13,10 +13,12 @@
     "Showing results <b>:start</b> to <b>:stop</b> on <b>:total</b>": "Mostrando resultados <b>:start</b> a <b>:stop</b> de <b>:total</b>",
 
     "Students": "Alumnos",
+    "Users": "Usuarios",
     "Name": "Nombre",
     "Email": "Correo",
     "Career": "Carrera",
     "Semester": "Semestre",
+    "Role": "Rol",
 
     "Start hour": "Hora inicio",
     "End hour": "Hora fin",

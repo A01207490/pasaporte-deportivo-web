@@ -75,4 +75,9 @@ class Clase extends Model
             ->join('dias', 'dias.id', '=', 'clase_dia.dia_id')
             ->groupByRaw('clase_nombre, coach_nombre, clase_hora_inicio, clase_hora_fin')->get();
     }
+
+    static public function getClassOptgroup()
+    {
+        return DB::select(DB::raw("select distinct clase_nombre from clases order by clase_nombre"));
+    }
 }

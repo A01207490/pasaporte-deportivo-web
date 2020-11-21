@@ -1,9 +1,12 @@
 <?php
 
+use App\Role;
+use App\User;
 use App\Exports\SesionsExport;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,3 +77,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/migrate', function () {
+    Artisan::call('migrate:fresh --seed');
+    return Artisan::output();
+});
+
+Route::get('/status', function () {
+    Artisan::call('migrate:status');
+    return Artisan::output();
+});
+
+Route::get('/crear_administrador', function () {
+    include $_SERVER['DOCUMENT_ROOT'] . '/crear_administrador.php';
+});

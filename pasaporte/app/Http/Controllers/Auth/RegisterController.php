@@ -50,7 +50,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        $carreras = Carrera::all();
+        $carreras = Carrera::orderBy('carrera_nombre', 'asc')->get();
         return view('auth.register', compact('carreras'));
     }
 
@@ -73,7 +73,7 @@ class RegisterController extends Controller
             ],
             [
                 'email.regex' => 'El correo institucional debe tener el siguiente formato: Axxxxxxxx@itesm.mx, donde x es un dígito.',
-                'email.unique' => 'Ya existe una cuenta asignada a este correo.',
+                //'email.unique' => 'Ya existe una cuenta asignada a este correo.',
             ]
         );
     }
@@ -93,7 +93,7 @@ class RegisterController extends Controller
             'semestre' => $data['semestre'],
             'carrera_id' => $data['carrera_id'],
         ]);
-        $studentRole = Role::where('name', 'student')->first();
+        $studentRole = Role::where('name', 'Alumno')->first();
         $user->roles()->attach($studentRole);
         return $user;
     }
