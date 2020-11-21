@@ -3,7 +3,7 @@
 use App\Role;
 use App\User;
 
-$adminRole = Role::where('name', 'admin')->first();
+$adminRole = Role::where('name', 'Administrador')->first();
 //Defina el nombre de usuario, su correo electrónico y contraseña.
 $nombre_de_usuario = "Nombre";
 $correo = "correo@tec.mx";

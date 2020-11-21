@@ -54,6 +54,7 @@
                     <option value="7" {{ $user->semestre == 7 ? 'selected' : '' }}>7°</option>
                     <option value="8" {{ $user->semestre == 8 ? 'selected' : '' }}>8°</option>
                     <option value="9" {{ $user->semestre == 9 ? 'selected' : '' }}>9°</option>
+                    <option value="N/A" {{ $user->semestre == "N/A" ? 'selected' : '' }}>N/A</option>
                 </select>
                 @error('semestre')
                 <span class="invalid-feedback" role="alert">
@@ -66,10 +67,10 @@
         <div class="form-group row">
             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
             <div class="col-md-6">
-                <input type="radio" id="student" name="role" value="student" required>
+                <input type="radio" id="student" name="role" value="Alumno" {{ $user->roles->first()->name == "Alumno" ? 'checked' : '' }} required>
                 <label for="student">Alumno</label><br>
-                <input type="radio" id="admin" name="role" value="admin" required>
-                <label for="admin">Administrador</label><br>
+                <input type="radio" id="Administrador" name="role" value="Administrador" {{ $user->roles->first()->name == "Administrador" ? 'checked' : '' }} required>
+                <label for="Administrador">Administrador</label><br>
                 @error('role')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

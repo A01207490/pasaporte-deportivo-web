@@ -58,5 +58,6 @@ class CarreraSeeder extends Seeder
         Carrera::create(['carrera_nombre' => 'Médico Cirujano Odontólogo', 'created_at' => NOW(), 'updated_at' => NOW()]);
         Carrera::create(['carrera_nombre' => 'Licenciado en Nutrición y Bienestar Integral', 'created_at' => NOW(), 'updated_at' => NOW()]);
         Carrera::create(['carrera_nombre' => 'Médico Cirujano', 'created_at' => NOW(), 'updated_at' => NOW()]);
+        Carrera::create(['carrera_nombre' => 'N/A', 'created_at' => NOW(), 'updated_at' => NOW()]);
     }
 }

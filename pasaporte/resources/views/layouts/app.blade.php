@@ -45,14 +45,14 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <!-- Left Side Of Navbar -->
                             <ul class="navbar-nav mr-auto">
-                                @hasRoles(['admin', 'student'])
+                                @hasRoles(['Administrador', 'Alumno'])
                                 <li class="nav-item mr-2 ml-2">
                                     <a class="nav-link {{ Request::path() === '/' ? 'active' : '' }}" href="{{ url('/home') }}">{{ __('Home') }}</a>
                                 </li>
                                 @endhasRoles
-                                @hasRole('admin')
+                                @hasRole('Administrador')
                                 <li class="nav-item mr-2 ml-2">
-                                    <a class="nav-link {{ Request::path() === 'users' ? 'active' : '' }}" href="{{ route('users.index') }}">{{ __('Students') }}</a>
+                                    <a class="nav-link {{ Request::path() === 'users' ? 'active' : '' }}" href="{{ route('users.index') }}">{{ __('Users') }}</a>
                                 </li>
                                 <li class="nav-item mr-2 ml-2">
                                     <a class="nav-link {{ Request::path() === 'sesiones' ? 'active' : '' }}" href="{{ route('sesions.index') }}">{{ __('Pasports') }}</a>

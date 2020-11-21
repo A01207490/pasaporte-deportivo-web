@@ -14,8 +14,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $adminRole = Role::where('name', 'admin')->first();
-        $studentRole = Role::where('name', 'student')->first();
+        $adminRole = Role::where('name', 'Administrador')->first();
+        $studentRole = Role::where('name', 'Alumno')->first();
         $tenis = Clase::where('clase_nombre', 'Tenis')->first();
         $atletismo = Clase::where('clase_nombre', 'Atletismo')->first();
         $natacion = Clase::where('clase_nombre', 'Natación')->first();
@@ -27,12 +27,16 @@ class UserSeeder extends Seeder
             'name' => 'Pablo Gómez Pérez',
             'email' => 'pgomezp@tec.mx',
             'password' => bcrypt('pgomezp'),
+            'semestre' => "N/A",
+            'carrera_id' => 47
         ]);
 
         $admin2 = User::create([
             'name' => 'Administrador',
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin'),
+            'semestre' => "N/A",
+            'carrera_id' => 47
         ]);
 
         $student1 = User::create([
