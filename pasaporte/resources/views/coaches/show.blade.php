@@ -14,12 +14,18 @@
             {{ __('Email') }}: {{$coach->coach_correo}}
         </li>
     </ul>
-    <div class="card-body">
+    <div class="card-body d-flex justify-content-between">
         <a href="{{route('coaches.index')}}" class="card-link">
             <button class="btn btn-primary">
                 {{ __('Go Back') }}
             </button>
         </a>
+        <a href="{{route('qr.download', $coach)}}" class="card-link">
+            <button class="btn btn-primary">
+                {{ __('Download') }}
+            </button>
+        </a>
     </div>
+
 </div>
 @endsection

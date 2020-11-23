@@ -15,9 +15,9 @@
             <div class="col-lg-4">
 
                 <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                    <img class="img-fluid rounded-circle mb-3 p-2" src="img/testimonials-1.jpg" alt="">
+                    <img class="img-fluid rounded-circle mb-3 p-2" src="img/logo.png" alt="">
                     <h1>Pasaporte Deportivo</h1>
-                    <p class="lead mb-0">!Entrena lo que quieras cuando quieras!</p>
+                    <p class="lead mb-0">!Entrena a tu tiempo y a tu ritmo!</p>
                 </div>
 
             </div>
@@ -30,10 +30,17 @@
 <section class="showcase">
     <div class="container-fluid p-0">
         <div class="row no-gutters">
+            <div class="col-lg-6 text-white showcase-img" style="background-image: url('img/bg-showcase-0.jpg');"></div>
+            <div class="col-lg-6 my-auto showcase-text">
+                <h2>Registra tu cuenta</h2>
+                <p class="lead mb-0">Crea una cuenta con tu correo institucional del Tec para inscribirte en el programa.</p>
+            </div>
+        </div>
+        <div class="row no-gutters">
             <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('img/bg-showcase-1.jpg');"></div>
             <div class="col-lg-6 order-lg-1 my-auto showcase-text">
                 <h2>Descarga la App</h2>
-                <p class="lead mb-0">Descarga la App para que puedas comenzar a registrar tus sesiones!</p>
+                <p class="lead mb-0">Descarga la App para que puedas comenzar a registrar tus sesiones.</p>
             </div>
         </div>
         <div class="row no-gutters">
