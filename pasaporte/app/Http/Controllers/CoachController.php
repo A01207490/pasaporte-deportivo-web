@@ -60,7 +60,6 @@ class CoachController extends Controller
     {
         $coach_nomina = $coach->coach_nomina;
         return response()->download(storage_path('app/public/qr_codes/' . $coach_nomina . '.svg'));
-        //return response()->download(public_path('storage/qr_codes/' . $coach_nomina . '.svg'));
     }
 
     /**

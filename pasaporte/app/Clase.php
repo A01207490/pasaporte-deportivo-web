@@ -38,7 +38,7 @@ class Clase extends Model
 
     static public function getClassCurrent()
     {
-        $minutes_tolerance = 200;
+        $minutes_tolerance = 20;
         return DB::select(DB::raw("
         select c.id clase_id, coach_nombre, clase_nombre, clase_hora_inicio, clase_hora_fin
         from clases c 
